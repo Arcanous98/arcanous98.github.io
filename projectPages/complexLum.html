@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>A Learned Radiance-field Representation for Complex Luminaires</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://kit.fontawesome.com/9e38703a07.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../assets/academicons-1.9.4/css/academicons.min.css"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: iPortfolio
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var copyButton = document.getElementById('copyButton');
+      var codeBox = document.getElementById('codeBox');
+
+      copyButton.addEventListener('click', function() {
+        var range = document.createRange();
+        range.selectNode(codeBox);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'Copied to clipboard!' : 'Copy failed. Please select the code and copy manually.';
+          alert(msg);
+        } catch(err) {
+          alert('Copy failed. Please select the code and copy manually.');
+        }
+
+        window.getSelection().removeAllRanges();
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+      <div class="profile">
+        <img src="../assets/img/DSC_0389-3.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Jorge Condor</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://github.com/Arcanous98" class="github"><i class="bx bxl-github"></i></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en" class="scholar"><i class="ai ai-google-scholar "></i></a>
+          <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
+          <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <!-- <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li> -->
+          <li><a href="../index.html#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="../index.html#publications" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Publications</span></a></li>
+          <li><a href="../index.html#workexperience" class="nav-link scrollto"><i class="bx bx-building"></i> <span>Experience</span></a></li>
+          <li><a href="../index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
+          <li><a href="../index.html#portfolio" class="nav-link scrollto"><i class="bx bx-camera"></i> <span>Photography</span></a></li>
+          <li><a href="../index.html#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Projects</h2>
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li>A Learned Radiance-field Representation for Complex Luminaires</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    
+    <section class="inner-page">
+      <div id="content" class="wrap">
+        <div class="paperTitle">
+            <h1>A Learned Radiance-Field Representation
+              for Complex Luminaires</h1>
+            <div class="conf-name">
+              EGSR 2022
+            </div>
+            <div class="authors">
+              <a href="https://arcanous98.github.io/">Jorge Condor</a><sup>1,2</sup><span class="space"></span>
+              <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a><sup>2</sup><span class="space"></span>
+            </div>
+<div class="universities">
+            <sup>1</sup><a href="https://www.usi.ch/en"> USI, Switzerland</a><span class="smallspace"></span>	
+            <sup>2</sup><a href="https://www.unizar.es/"> Universidad de Zaragoza, Spain</a><span class="smallspace">
+</div>
+        </div>
+        <img src="../assets/data/images/NeRFLum/tonemapped_reference_portica_32768spp.png" width="32%" />
+        <img src="../assets/data/images/NeRFLum/tonemapped_original_portica_64spp.png" width="32%" />
+        <img src="../assets/data/images/NeRFLum/tonemapped_ours_portica_32spp.png" width="32%" />
+        <br/><br/>
+  <fig_sub><strong>A living room scene containing a learned radiance field-based complex luminaire.</strong> From left to right: 
+    Reference path-traced scene with explicitly-modeled complex luminaire (32768 samples per pixel, 7.2h); the same scene rendered 
+    with 64 samples per pixel in 1.3 minutes; and our method with 32 samples per pixel, 52.1 seconds. We leverage learned 
+    volumetric radiance fields to obtain high quality representations of complex luminaires.</fig_sub>
+    <br/><br/>
+  <p style="text-align:justify">We propose an efficient method for rendering complex luminaires using a high quality 
+    octree-based representation of the luminaire emission. Complex luminaires are a particularly challenging problem
+     in rendering, due to their caustic light paths inside the luminaire. 
+    We reduce the geometric complexity of luminaires by using a simple proxy geometry, and encode the 
+    visually-complex emitted light field by using a neural radiance field. We tackle the multiple challenges of using NeRFs 
+    for representing luminaires, including their high dynamic range, high-frequency content and null-emission areas, by 
+    proposing a specialized loss function. For rendering, we distill our luminaires' NeRF into a plenoctree, which we can 
+    be easily integrated into traditional rendering systems. Our approach allows for speed-ups of up to 2 orders of magnitude
+     in scenes containing complex luminaires introducing minimal error. </p>
+        <br/><br/>
+        <h2p>Ours vs VPT</h2p>
+        <br/><br/>
+        <div class="c-compare" style="--value:50%;">
+          <img class="c-compare__left" src="../assets/data/images/NeRFLum/tonemapped_ours_portica_4096spp.png" alt="Color" />
+          <img class="c-compare__right" src="../assets/data/images/NeRFLum/tonemapped_original_portica_64spp.png" alt="B/W" />
+          <input type="range" class="c-rng c-compare__range" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
+          </div>
+        <div>
+        <h2p>Supplemental: Temporal Stability</h2p>
+        <br/><br/>
+        <div class="video-container">
+          <video controls>
+            <source src="../projects/ComplexLum/paper1014_MM_CRC2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <h2p>Downloads</h2p>
+        <br/><br/>
+        <div class="pdfdiv">
+            <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
+            Paper <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf">[PDF ~64 MB]</a>
+        </div>
+        <div class="pdfdiv">
+            <a href="https://diglib.eg.org/handle/10.2312/sr20221155"><img src="../projects/ColorGloss/images/website.png" height="40px" class="pdfico"/></a>
+           <a href="https://diglib.eg.org/handle/10.2312/sr20221155">Publisher Website</a>
+        </div>
+        <div>
+            <h2p>Citation</h2p>
+            <br/><br/>
+            Jorge Condor, Adrián Jarabo, <b>A Learned Radiance-field Representation for Complex Luminaires</b>, EGSR Conference Proceedings (2022)
+            
+            <br/><br/>
+            <div class="code-box">
+              <!-- <pre id="codeBox"></pre> -->
+                <button id="copyButton" class="copy-button" onclick="copyCode()">Copy</button>
+                <code>
+                  @inproceedings {Condor2022,<br/>
+                    &nbsp;&nbsp;booktitle = {Eurographics Symposium on Rendering},<br/>
+                    &nbsp;&nbsp;editor = {Ghosh, Abhijeet and Wei, Li-Yi},<br/>
+                    &nbsp;&nbsp;title = {{A Learned Radiance-Field Representation for Complex Luminaires}},<br/>
+                    &nbsp;&nbsp;author = {Condor, Jorge and Jarabo, Adrián},<br/>
+                    &nbsp;&nbsp;year = {2022},<br/>
+                    &nbsp;&nbsp;publisher = {The Eurographics Association},<br/>
+                    &nbsp;&nbsp;ISSN = {1727-3463},<br/>
+                    &nbsp;&nbsp;ISBN = {978-3-03868-187-8},<br/>
+                    &nbsp;&nbsp;DOI = {10.2312/sr.20221155}<br/>
+                    }
+                </code>
+            </div>
+        </div>
+        <br/><br/>
+  <h2p>Acknowledgements</h2p>
+  <br/><br/>
+  <div style="text-align:justify">We want to thank the authors of [Zhu21] for sharing their code with us.
+     This work has been partially supported by the European Research Council (ERC) under the EU Horizon 2020 research and 
+     innovation programme (project CHAMELEON, grant No 682080), the EU MSCA-ITN programme (project PRIME, grant No 956585) 
+     and the Spanish Ministry of Science and Innovation (project PID2019-105004GB-I00). Jorge Condor acknowledges support from a grant from the I3A Institute (Beca TFM + Practicas).</div>
+  <br/><br/>      
+  <h2p>Collaborations</h2p>
+        <br/><br/>
+        <div id="collaborations">
+            <a href="https://www.usi.ch/"><img src="../projects/ColorGloss/images/usi_logo.png"/></a>
+            <a href="https://ist.ac.at/en/home/"><img src="../assets/data/logos/universidad-de-zaragoza.svg"/></a>
+        </div>
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer> -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/typed.js/typed.min.js"></script>
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

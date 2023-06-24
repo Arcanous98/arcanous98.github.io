@@ -1,117 +1,281 @@
-/*
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/**
+* Template Name: iPortfolio
+* Updated: Mar 10 2023 with Bootstrap v5.2.3
+* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
 */
+(function() {
+  "use strict";
 
-(function($) {
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
 
-	var $window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$footer = $('#footer'),
-		$main = $('#main'),
-		settings = {
+  /**
+   * Easy event listener function
+   */
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
 
-			// Parallax background effect?
-				parallax: true,
+  /**
+   * Easy on scroll event listener 
+   */
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
 
-			// Parallax factor (lower = more intense, higher = less intense).
-				parallaxFactor: 20
+  /**
+   * Navbar links active state on scroll
+   */
+  let navbarlinks = select('#navbar .scrollto', true)
+  const navbarlinksActive = () => {
+    let position = window.scrollY + 200
+    navbarlinks.forEach(navbarlink => {
+      if (!navbarlink.hash) return
+      let section = select(navbarlink.hash)
+      if (!section) return
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navbarlink.classList.add('active')
+      } else {
+        navbarlink.classList.remove('active')
+      }
+    })
+  }
+  window.addEventListener('load', navbarlinksActive)
+  onscroll(document, navbarlinksActive)
 
-		};
+  /**
+   * Scrolls to an element with header offset
+   */
+  const scrollto = (el) => {
+    let elementPos = select(el).offsetTop
+    window.scrollTo({
+      top: elementPos,
+      behavior: 'smooth'
+    })
+  }
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:  [ '1281px',  '1800px' ],
-			large:   [ '981px',   '1280px' ],
-			medium:  [ '737px',   '980px'  ],
-			small:   [ '481px',   '736px'  ],
-			xsmall:  [ null,      '480px'  ],
-		});
+  /**
+   * Back to top button
+   */
+  let backtotop = select('.back-to-top')
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+  }
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+  /**
+   * Mobile nav toggle
+   */
+  on('click', '.mobile-nav-toggle', function(e) {
+    select('body').classList.toggle('mobile-nav-active')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
 
-	// Touch?
-		if (browser.mobile) {
+  /**
+   * Scrool with ofset on links with a class name .scrollto
+   */
+  on('click', '.scrollto', function(e) {
+    if (select(this.hash)) {
+      e.preventDefault()
 
-			// Turn on touch mode.
-				$body.addClass('is-touch');
+      let body = select('body')
+      if (body.classList.contains('mobile-nav-active')) {
+        body.classList.remove('mobile-nav-active')
+        let navbarToggle = select('.mobile-nav-toggle')
+        navbarToggle.classList.toggle('bi-list')
+        navbarToggle.classList.toggle('bi-x')
+      }
+      scrollto(this.hash)
+    }
+  }, true)
 
-			// Height fix (mostly for iOS).
-				window.setTimeout(function() {
-					$window.scrollTop($window.scrollTop() + 1);
-				}, 0);
+  /**
+   * Scroll with ofset on page load with hash links in the url
+   */
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      if (select(window.location.hash)) {
+        scrollto(window.location.hash)
+      }
+    }
+  });
 
-		}
+  /**
+   * Hero type effect
+   */
+  const typed = select('.typed')
+  if (typed) {
+    let typed_strings = typed.getAttribute('data-typed-items')
+    typed_strings = typed_strings.split(',')
+    new Typed('.typed', {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000
+    });
+  }
 
-	// Footer.
-		breakpoints.on('<=medium', function() {
-			$footer.insertAfter($main);
-		});
+  /**
+   * Skills animation
+   */
+  let skilsContent = select('.skills-content');
+  if (skilsContent) {
+    new Waypoint({
+      element: skilsContent,
+      offset: '80%',
+      handler: function(direction) {
+        let progress = select('.progress .progress-bar', true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%'
+        });
+      }
+    })
+  }
 
-		breakpoints.on('>medium', function() {
-			$footer.appendTo($header);
-		});
+  /**
+   * Porfolio isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let portfolioContainer = select('.portfolio-container');
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.portfolio-item'
+      });
 
-	// Header.
+      let portfolioFilters = select('#portfolio-flters li', true);
 
-		// Parallax background.
+      on('click', '#portfolio-flters li', function(e) {
+        e.preventDefault();
+        portfolioFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
 
-			// Disable parallax on IE (smooth scrolling is jerky), and on mobile platforms (= better performance).
-				if (browser.name == 'ie'
-				||	browser.mobile)
-					settings.parallax = false;
+        portfolioIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        portfolioIsotope.on('arrangeComplete', function() {
+          AOS.refresh()
+        });
+      }, true);
+    }
 
-			if (settings.parallax) {
+  });
 
-				breakpoints.on('<=medium', function() {
+  /**
+   * Initiate portfolio lightbox 
+   */
+  const portfolioLightbox = GLightbox({
+    selector: '.portfolio-lightbox'
+  });
 
-					$window.off('scroll.strata_parallax');
-					$header.css('background-position', '');
+  /**
+   * Portfolio details slider
+   */
+  new Swiper('.portfolio-details-slider', {
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
 
-				});
+  /**
+   * Testimonials slider
+   */
+  new Swiper('.testimonials-slider', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
 
-				breakpoints.on('>medium', function() {
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 20
+      }
+    }
+  });
 
-					$header.css('background-position', 'left 0px');
+  /**
+   * Animation on scroll
+   */
+  window.addEventListener('load', () => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    })
+  });
 
-					$window.on('scroll.strata_parallax', function() {
-						$header.css('background-position', 'left ' + (-1 * (parseInt($window.scrollTop()) / settings.parallaxFactor)) + 'px');
-					});
+  /**
+   * Initiate Pure Counter 
+   */
+  new PureCounter();
 
-				});
+})()
 
-				$window.on('load', function() {
-					$window.triggerHandler('scroll');
-				});
+function copyCode() {
+  var codeBox = document.getElementById('codeBox');
+  var codeText = codeBox.innerText;
 
-			}
+  navigator.clipboard.writeText(codeText).then(function() {
+    var copyButton = document.getElementById('copyButton');
+    copyButton.classList.add('clicked');
+    copyButton.innerHTML = 'Copied!';
+    setTimeout(function() {
+      copyButton.classList.remove('clicked');
+      copyButton.innerHTML = 'Copy';
+    }, 2000);
 
-	// Main Sections: Two.
-
-		// Lightbox gallery.
-			$window.on('load', function() {
-
-				$('#two').poptrox({
-					caption: function($a) { return $a.next('h3').text(); },
-					overlayColor: '#2c2c2c',
-					overlayOpacity: 0.85,
-					popupCloserText: '',
-					popupLoaderText: '',
-					selector: '.work-item a.image',
-					usePopupCaption: true,
-					usePopupDefaultStyling: false,
-					usePopupEasyClose: false,
-					usePopupNav: true,
-					windowMargin: (breakpoints.active('<=small') ? 0 : 50)
-				});
-
-			});
-
-})(jQuery);
+    alert('Code copied to clipboard!');
+  }, function() {
+    alert('Copy failed. Please select the code and copy manually.');
+  });
+}
