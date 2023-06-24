@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 feel free to steal anything but the pictures. Ask permission for those :)
 =======
 Strata by HTML5 UP
@@ -35,3 +36,6 @@ Credits:
 		jQuery (jquery.com)
 		Responsive Tools (github.com/ajlkn/responsive-tools)
 >>>>>>> 02606ca (Strata template)
+=======
+feel free to steal anything but the pictures. Ask permission for those :)
+>>>>>>> 9b152d9 (Update README.txt)
