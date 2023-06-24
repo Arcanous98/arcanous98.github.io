@@ -10,7 +10,11 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+<<<<<<< HEAD
   <link href="../assets/data/images/NeRFLum/favicon.png" rel="icon">
+=======
+  <link href="../assets/img/favicon.png" rel="icon">
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <script src="https://kit.fontawesome.com/9e38703a07.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../assets/academicons-1.9.4/css/academicons.min.css"/>
@@ -22,6 +26,10 @@
   <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<<<<<<< HEAD
+=======
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
@@ -36,6 +44,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script>
+<<<<<<< HEAD
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelector('.copy-button').addEventListener('click', function() {
         const codeElement = document.getElementById('codeBox');
@@ -52,6 +61,27 @@
             alert('Unable to copy text');
             console.error('Unable to copy text', err);
           });
+=======
+    document.addEventListener('DOMContentLoaded', function() {
+      var copyButton = document.getElementById('copyButton');
+      var codeBox = document.getElementById('codeBox');
+
+      copyButton.addEventListener('click', function() {
+        var range = document.createRange();
+        range.selectNode(codeBox);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'Copied to clipboard!' : 'Copy failed. Please select the code and copy manually.';
+          alert(msg);
+        } catch(err) {
+          alert('Copy failed. Please select the code and copy manually.');
+        }
+
+        window.getSelection().removeAllRanges();
+>>>>>>> 2d5bf61 (complete overhaul. new page)
       });
     });
   </script>
@@ -66,6 +96,7 @@
   <header id="header">
     <div class="d-flex flex-column">
       <div class="profile">
+<<<<<<< HEAD
         <img src="../assets/img/Jorge-Condor.png" alt="" class="img-fluid rounded-circle">
         <h1 class="text-light"><a href="/index.html">Jorge Condor</a></h1>
         <div class="social-links mt-3 text-center">
@@ -76,18 +107,37 @@
           <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
           <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bi bi-linkedin"></i></a>
           <a href="https://twitter.com/Arcanous98" class="twitter"><i class="bi bi-twitter "></i></a>
+=======
+        <img src="../assets/img/DSC_0389-3.jpg" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Jorge Condor</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://github.com/Arcanous98" class="github"><i class="bx bxl-github"></i></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en" class="scholar"><i class="ai ai-google-scholar "></i></a>
+          <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
+          <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
         </div>
       </div>
 
       <nav id="navbar" class="nav-menu navbar">
         <ul>
           <!-- <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li> -->
+<<<<<<< HEAD
           <li><a href="/index.html#about" class="nav-link scrollto"><i class="bi bi-person-vcard"></i> <span>About</span></a></li>
           <li><a href="/index.html#publications" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Publications</span></a></li>
           <li><a href="/index.html#workexperience" class="nav-link scrollto"><i class="bi bi-building"></i> <span>Experience</span></a></li>
           <li><a href="/index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
           <li><a href="/index.html#portfolio" class="nav-link scrollto"><i class="bi bi-camera2"></i> <span>Photography</span></a></li>
           <li><a href="/index.html#contact" class="nav-link scrollto"><i class="bi bi-envelope-at"></i> <span>Contact</span></a></li>
+=======
+          <li><a href="../index.html#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="../index.html#publications" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Publications</span></a></li>
+          <li><a href="../index.html#workexperience" class="nav-link scrollto"><i class="bx bx-building"></i> <span>Experience</span></a></li>
+          <li><a href="../index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
+          <li><a href="../index.html#portfolio" class="nav-link scrollto"><i class="bx bx-camera"></i> <span>Photography</span></a></li>
+          <li><a href="../index.html#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
         </ul>
       </nav><!-- .nav-menu -->
     </div>
@@ -179,8 +229,14 @@
             
             <br/><br/>
             <div class="code-box">
+<<<<<<< HEAD
                 <button  class="copy-button">Copy</button>
                 <code id="codeBox">
+=======
+              <!-- <pre id="codeBox"></pre> -->
+                <button id="copyButton" class="copy-button" onclick="copyCode()">Copy</button>
+                <code>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
                   @inproceedings {Condor2022,<br/>
                     &nbsp;&nbsp;booktitle = {Eurographics Symposium on Rendering},<br/>
                     &nbsp;&nbsp;editor = {Ghosh, Abhijeet and Wei, Li-Yi},<br/>
@@ -207,7 +263,11 @@
         <br/><br/>
         <div id="collaborations">
             <a href="https://www.usi.ch/"><img src="../projects/ColorGloss/images/usi_logo.png"/></a>
+<<<<<<< HEAD
             <a href="https://ist.ac.at/en/home/"><img src="../assets/data/logos/university-of-zaragoza5206.png"/></a>
+=======
+            <a href="https://ist.ac.at/en/home/"><img src="../assets/data/logos/universidad-de-zaragoza.svg"/></a>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
         </div>
     </div>
     </section>
@@ -229,12 +289,21 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+<<<<<<< HEAD
+=======
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   <script src="../assets/vendor/aos/aos.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/typed.js/typed.min.js"></script>
+<<<<<<< HEAD
+=======
+  <script src="../assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>

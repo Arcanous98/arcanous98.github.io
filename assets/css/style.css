@@ -72,6 +72,7 @@ h6 {
 }
 
 .project-buttons a {
+<<<<<<< HEAD
   display: inline-block;
   padding: 1px 10px;
   border-radius: 2.5px;
@@ -98,6 +99,34 @@ h6 {
 .project-buttons a:hover {
   background-color: #fff;
   color: #000;
+=======
+display: inline-block;
+padding: 1px 10px;
+border-radius: 2.5px;
+text-align: center;
+text-decoration: none;
+font-size: 12px;
+font-weight: bold;
+color: #2c3e50;
+background-color: transparent;
+border: 2px solid #2c3e50;
+transition: background-color 0.3s ease;
+}
+
+.btn-pdf {
+background-color:  #2c3e50;
+margin-right: 10px;
+margin-top: 10px;
+}
+
+.btn-github {
+background-color: #2c3e50;
+margin-top: 10px;
+}
+.project-buttons a:hover {
+background-color: #fff;
+color: #000;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 .image-std {
   max-width: 30%;
@@ -110,6 +139,7 @@ h6 {
   --thumb-bgc: red;
   --thumb-bgc-focus: hsla(0, 70%, 70%, 0.8);
   --thumb-w: 0rem;
+<<<<<<< HEAD
 
   margin: var(--m);
   position: relative;
@@ -121,10 +151,24 @@ h6 {
 }
 .c-compare__left,
 .c-compare__right {
+=======
+  
+  margin: var(--m);
+  position: relative;
+  }
+  .c-compare::after {
+  content: "";
+  display: block;
+  padding-bottom: calc((var(--h) / var(--w)) * 100%);
+  }
+  .c-compare__left,
+  .c-compare__right {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   height: 100%;
   object-fit: cover;
   position: absolute;
   width: 100%;
+<<<<<<< HEAD
 }
 .c-compare__left {
   clip-path: polygon(0% 0%, var(--value) 0%, var(--value) 100%, 0% 100%);
@@ -133,6 +177,16 @@ h6 {
   clip-path: polygon(100% 0%, var(--value) 0%, var(--value) 100%, 100% 100%);
 }
 .c-compare__range {
+=======
+  }
+  .c-compare__left {
+  clip-path: polygon(0% 0%, var(--value) 0%, var(--value) 100%, 0% 100%);
+  }
+  .c-compare__right {
+  clip-path: polygon(100% 0%, var(--value) 0%, var(--value) 100%, 100% 100%);
+  }
+  .c-compare__range {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   background-color: transparent;
   box-sizing: border-box;
   font-family: inherit;
@@ -142,6 +196,7 @@ h6 {
   position: absolute;
   top: 0;
   width: 100%;
+<<<<<<< HEAD
 }
 .c-compare__range::-moz-range-thumb {
   background-color: var(--thumb-bgc);
@@ -169,10 +224,40 @@ h6 {
   box-sizing: border-box;
 }
 .c-compare__range::-webkit-slider-runnable-track {
+=======
+  }
+  .c-compare__range::-moz-range-thumb {
+  background-color: var(--thumb-bgc);
+  cursor: ew-resize;
+  height: 100%;  
+  width: var(--thumb-w);
+  }
+  .c-compare__range::-webkit-slider-thumb {
+  background-color: var(--thumb-bgc);
+  cursor: ew-resize;
+  height: 100%;  
+  width: var(--thumb-w);
+  }
+  .c-compare__range:focus::-webkit-slider-thumb {
+  background-color: var(--thumb-bgc-focus);
+  box-shadow: 0 0 0 3px var(--thumb-bgc);
+  }
+  .c-compare__range:focus::-moz-range-thumb {
+  background-color: var(--thumb-bgc-focus);
+  box-shadow: 0 0 0 3px var(--thumb-bgc);
+  }
+  .c-compare__range::-moz-range-track {
+  background: transparent;
+  background-size: 100%;
+  box-sizing: border-box;
+  }
+  .c-compare__range::-webkit-slider-runnable-track {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   background: transparent;
   background-size: 100%;
   box-sizing: border-box;
   height: 100%;
+<<<<<<< HEAD
 }
 .c-compare__range,
 .c-compare__range::-webkit-slider-runnable-track,
@@ -180,6 +265,15 @@ h6 {
   -webkit-appearance: none;
   appearance: none;
 }
+=======
+  }
+  .c-compare__range,
+  .c-compare__range::-webkit-slider-runnable-track,
+  .c-compare__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  }
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -232,7 +326,11 @@ h6 {
   text-align: center;
   width: 36px;
   height: 36px;
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 #header .profile .social-links a:hover {
@@ -269,7 +367,11 @@ h6 {
   list-style: none;
 }
 
+<<<<<<< HEAD
 .nav-menu > ul > li {
+=======
+.nav-menu>ul>li {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   position: relative;
   white-space: nowrap;
 }
@@ -281,7 +383,11 @@ h6 {
   color: #a8a9b4;
   padding: 12px 15px;
   margin-bottom: 8px;
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   font-size: 15px;
 }
 
@@ -295,7 +401,11 @@ h6 {
 .nav-menu a:hover,
 .nav-menu .active,
 .nav-menu .active:focus,
+<<<<<<< HEAD
 .nav-menu li:hover > a {
+=======
+.nav-menu li:hover>a {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   text-decoration: none;
   color: #fff;
 }
@@ -303,7 +413,11 @@ h6 {
 .nav-menu a:hover i,
 .nav-menu .active i,
 .nav-menu .active:focus i,
+<<<<<<< HEAD
 .nav-menu li:hover > a i {
+=======
+.nav-menu li:hover>a i {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   color: #149ddd;
 }
 
@@ -452,6 +566,10 @@ section {
   font-weight: 700;
   font-size: 26px;
   color: #173b6c;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .about .content ul {
@@ -515,6 +633,10 @@ section {
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   color: #122f57;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .facts .count-box a {
@@ -524,7 +646,11 @@ section {
   color: #122f57;
   font-size: 15px;
   font-family: "Poppins", sans-serif;
+<<<<<<< HEAD
   transition: ease-in-out 0.2s;
+=======
+  transition: ease-in-out 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .facts .count-box a:hover {
@@ -656,7 +782,11 @@ section {
   text-transform: uppercase;
   color: #272829;
   margin-bottom: 5px;
+<<<<<<< HEAD
   transition: all 0.2s ease-in-out;
+=======
+  transition: all 0.3s ease-in-out;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .portfolio #portfolio-flters li:hover,
@@ -669,11 +799,16 @@ section {
 }
 
 .portfolio .portfolio-wrap {
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
+<<<<<<< HEAD
 .portfolio-wrap img {
   transition: all 0.2s ease-in-out;
 }
@@ -683,6 +818,8 @@ section {
 .text-center {
   text-align: center;
 }
+=======
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 
 .portfolio .portfolio-wrap::before {
   content: "";
@@ -692,7 +829,11 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
+<<<<<<< HEAD
   transition: all ease-in-out 0.2s;
+=======
+  transition: all ease-in-out 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   z-index: 2;
   opacity: 0;
 }
@@ -704,7 +845,11 @@ section {
   bottom: -60px;
   z-index: 3;
   position: absolute;
+<<<<<<< HEAD
   transition: all ease-in-out 0.2s;
+=======
+  transition: all ease-in-out 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   display: flex;
   justify-content: center;
 }
@@ -714,7 +859,11 @@ section {
   font-size: 28px;
   text-align: center;
   background: rgba(20, 157, 221, 0.75);
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   width: 50%;
 }
 
@@ -722,7 +871,11 @@ section {
   background: rgba(20, 157, 221, 0.95);
 }
 
+<<<<<<< HEAD
 .portfolio .portfolio-wrap .portfolio-links a + a {
+=======
+.portfolio .portfolio-wrap .portfolio-links a+a {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   border-left: 1px solid #37b3ed;
 }
 
@@ -746,6 +899,11 @@ section {
   padding-top: 40px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
@@ -755,10 +913,14 @@ section {
   position: relative;
 }
 
+<<<<<<< HEAD
 .portfolio-details
   .portfolio-details-slider
   .swiper-pagination
   .swiper-pagination-bullet {
+=======
+.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   width: 12px;
   height: 12px;
   background-color: #fff;
@@ -766,10 +928,14 @@ section {
   border: 1px solid #149ddd;
 }
 
+<<<<<<< HEAD
 .portfolio-details
   .portfolio-details-slider
   .swiper-pagination
   .swiper-pagination-bullet-active {
+=======
+.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   background-color: #149ddd;
 }
 
@@ -784,6 +950,10 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .portfolio-details .portfolio-info ul {
@@ -792,7 +962,11 @@ section {
   font-size: 15px;
 }
 
+<<<<<<< HEAD
 .portfolio-details .portfolio-info ul li + li {
+=======
+.portfolio-details .portfolio-info ul li+li {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   margin-top: 10px;
 }
 
@@ -982,7 +1156,11 @@ section {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+<<<<<<< HEAD
   transition: all 0.2s ease-in-out;
+=======
+  transition: all 0.3s ease-in-out;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .contact .info h4 {
@@ -1019,7 +1197,11 @@ section {
   text-align: center;
   width: 36px;
   height: 36px;
+<<<<<<< HEAD
   transition: 0.2s;
+=======
+  transition: 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   margin-right: 10px;
 }
 
@@ -1063,7 +1245,11 @@ section {
   font-weight: 600;
 }
 
+<<<<<<< HEAD
 .contact .php-email-form .error-message br + br {
+=======
+.contact .php-email-form .error-message br+br {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   margin-top: 25px;
 }
 
@@ -1118,7 +1304,11 @@ section {
   padding: 10px 15px;
 }
 
+<<<<<<< HEAD
 .contact .php-email-form button[type="submit"] {
+=======
+.contact .php-email-form button[type=submit] {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   background: #149ddd;
   border: 0;
   padding: 10px 24px;
@@ -1127,7 +1317,11 @@ section {
   border-radius: 4px;
 }
 
+<<<<<<< HEAD
 .contact .php-email-form button[type="submit"]:hover {
+=======
+.contact .php-email-form button[type=submit]:hover {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   background: #37b3ed;
 }
 
@@ -1163,11 +1357,19 @@ section {
   font-size: 15px;
 }
 
+<<<<<<< HEAD
 .breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
 .breadcrumbs ol li + li::before {
+=======
+.breadcrumbs ol li+li {
+  padding-left: 10px;
+}
+
+.breadcrumbs ol li+li::before {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   display: inline-block;
   padding-right: 10px;
   color: #0e2442;
@@ -1289,7 +1491,11 @@ section {
   background-color: #ddd;
   text-decoration: none;
   color: #333;
+<<<<<<< HEAD
   transition: background-color 0.2s ease-in-out;
+=======
+  transition: background-color 0.3s ease-in-out;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .links a:hover {
@@ -1298,12 +1504,20 @@ section {
 }
 
 .pdf-button {
+<<<<<<< HEAD
   background-color: #4caf50;
+=======
+  background-color: #4CAF50;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   color: white;
 }
 
 .project-button {
+<<<<<<< HEAD
   background-color: #2196f3;
+=======
+  background-color: #2196F3;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   color: white;
 }
 
@@ -1315,16 +1529,24 @@ section {
 /* Animation for glowing effect */
 @keyframes glow {
   from {
+<<<<<<< HEAD
     box-shadow: 0 0 5px #ffcc00;
   }
   to {
     box-shadow: 0 0 20px #ffcc00;
+=======
+      box-shadow: 0 0 5px #ffcc00;
+  }
+  to {
+      box-shadow: 0 0 20px #ffcc00;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   }
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
   .publication-box {
+<<<<<<< HEAD
     flex-direction: column;
     align-items: stretch;
   }
@@ -1341,6 +1563,25 @@ section {
   }
 }
 
+=======
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  .image {
+      flex: none;
+      width: 100%;
+      max-width: 100%;
+  }
+
+  .details {
+      padding-left: 0;
+      width: 100%;
+  }
+}
+
+
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 .resume-item-new {
   margin-bottom: 20px;
 }
@@ -1352,7 +1593,11 @@ section {
   border-radius: 5px;
   padding: 10px;
   margin: 0 10px; /* Add side margins as desired */
+<<<<<<< HEAD
   transition: all 0.2s;
+=======
+  transition: all 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .box:hover {
@@ -1369,7 +1614,11 @@ section {
 .compressed-image {
   width: 150px;
   height: auto;
+<<<<<<< HEAD
   transition: all 0.2s;
+=======
+  transition: all 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .box:hover .compressed-image {
@@ -1391,7 +1640,11 @@ section {
   display: none;
   margin-top: 10px;
   opacity: 0;
+<<<<<<< HEAD
   transition: opacity 0.2s;
+=======
+  transition: opacity 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .box:hover .details-new {
@@ -1411,7 +1664,11 @@ h5 {
 }
 h5date {
   font-weight: normal;
+<<<<<<< HEAD
   color: rgba(20, 157, 221, 0.95);
+=======
+  color:rgba(20, 157, 221, 0.95)
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 @media screen and (max-width: 768px) {
@@ -1434,7 +1691,11 @@ h5date {
 
 .slide {
   flex: 0 0 200px;
+<<<<<<< HEAD
   transition: transform 0.2s;
+=======
+  transition: transform 0.3s;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .slide img {
@@ -1482,14 +1743,20 @@ h5date {
 /***********************************************/
 
 .wrap {
+<<<<<<< HEAD
   position: relative;
   margin: 0 50px;
+=======
+  position:relative;
+  margin:0 50px;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 .paperTitle {
   text-align: center;
   padding-bottom: 3em;
 }
 .project {
+<<<<<<< HEAD
   position: relative;
   height: 200px;
   margin-bottom: 3em;
@@ -1563,6 +1830,81 @@ h5date {
 
 .projectPlace {
   font-variant: small-caps;
+=======
+	position: relative;
+	height: 200px;
+	margin-bottom: 3em;
+}
+
+.project iframe {
+    vertical-align: top;
+    width: 300px;
+    height: 200px;
+    
+    float: left;
+}
+
+.project img {
+    vertical-align: top;
+    width: 300px;
+    height: 200px;
+    
+    float: left;
+}
+
+.project div {
+    width: 465px;
+    float: right;
+	height: 200px;
+}
+
+.dissertation {
+	position: relative;
+	height: 118px;
+	margin-bottom: 3em;
+}
+
+.dissertation iframe {
+    vertical-align: top;
+    width: 300px;
+    height: 118px;
+    
+    float: left;
+}
+
+.dissertation img {
+    vertical-align: top;
+    width: 300px;
+    height: 118px;
+    
+    float: left;
+}
+
+.dissertation div {
+    width: 465px;
+    float: right;
+	height: 118px;
+}
+
+.spacer {
+	width: 800px;
+	height: 2em;
+}
+
+.projectAuthors {
+    font-size: 90%;
+    margin-bottom: 0.7em;
+}
+
+.projectTitle {
+    font-size: 130%;
+    font-weight: 500;
+    margin-bottom: 0.7em;
+}
+
+.projectPlace {
+    font-variant: small-caps;
+>>>>>>> 2d5bf61 (complete overhaul. new page)
 }
 
 .pdfico {
@@ -1590,12 +1932,16 @@ h5date {
   height: 50px;
 }
 
+<<<<<<< HEAD
 h1p,
 h2p,
 h3p,
 h4p,
 h5p,
 h6p {
+=======
+h1p, h2p, h3p, h4p, h5p, h6p {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   font-weight: 600;
   line-height: 1.3em;
 }
@@ -1632,8 +1978,12 @@ fig_sub {
   margin: 0em 0.4em;
 }
 
+<<<<<<< HEAD
 bp,
 strongp {
+=======
+bp, strongp {
+>>>>>>> 2d5bf61 (complete overhaul. new page)
   font-weight: 600;
 }
 
