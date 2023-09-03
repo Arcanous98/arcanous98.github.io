@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 (function () {
   var slides = Array.from(document.querySelectorAll('.slide'));
 
@@ -39,24 +40,39 @@
 (function() {
     var carousel = document.querySelector('.carousel');
     var slides = Array.from(document.querySelectorAll('.slide'));
+=======
+(function () {
+  var slides = Array.from(document.querySelectorAll('.slide'));
+>>>>>>> e815a4f (Fix loading issues:)
 
-    var slideWidth = slides[0].getBoundingClientRect().width;
-    var currentIndex = 0;
+  var slideWidth = slides[0].getBoundingClientRect().width;
+  var currentIndex = 0;
 
-    function setSlidePosition() {
-      slides.forEach(function(slide, index) {
-        var slideOffset = index - currentIndex;
-        slide.style.transform = 'translateX(' + slideWidth * slideOffset + 'px)';
-      });
-    }
+  function setSlidePosition() {
+    slides.forEach(function (slide, index) {
+      var slideOffset = index - currentIndex;
+      slide.style.transform = 'translateX(' + slideWidth * slideOffset + 'px)';
+    });
+  }
 
+  setSlidePosition();
+
+  function moveToSlide(targetIndex) {
+    currentIndex = targetIndex;
     setSlidePosition();
+  }
 
-    function moveToSlide(targetIndex) {
-      currentIndex = targetIndex;
-      setSlidePosition();
+  // Add event listeners for previous and next buttons
+  var prevButton = document.querySelector('.prev-button');
+  var nextButton = document.querySelector('.next-button');
+
+  prevButton.addEventListener('click', function () {
+    if (currentIndex > 0) {
+      moveToSlide(currentIndex - 1);
     }
+  });
 
+<<<<<<< HEAD
     // Add event listeners for previous and next buttons
     var prevButton = document.querySelector('.prev-button');
     var nextButton = document.querySelector('.next-button');
@@ -75,3 +91,11 @@
   })();
   
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  nextButton.addEventListener('click', function () {
+    if (currentIndex < slides.length - 1) {
+      moveToSlide(currentIndex + 1);
+    }
+  });
+})();
+>>>>>>> e815a4f (Fix loading issues:)

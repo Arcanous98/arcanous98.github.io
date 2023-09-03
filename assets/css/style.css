@@ -73,6 +73,9 @@ h6 {
 
 .project-buttons a {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e815a4f (Fix loading issues:)
   display: inline-block;
   padding: 1px 10px;
   border-radius: 2.5px;
@@ -83,6 +86,7 @@ h6 {
   color: #2c3e50;
   background-color: transparent;
   border: 2px solid #2c3e50;
+<<<<<<< HEAD
   transition: background-color 0.2s ease;
 }
 
@@ -111,22 +115,30 @@ color: #2c3e50;
 background-color: transparent;
 border: 2px solid #2c3e50;
 transition: background-color 0.3s ease;
+=======
+  transition: background-color 0.3s ease;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .btn-pdf {
-background-color:  #2c3e50;
-margin-right: 10px;
-margin-top: 10px;
+  background-color: #2c3e50;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .btn-github {
-background-color: #2c3e50;
-margin-top: 10px;
+  background-color: #2c3e50;
+  margin-top: 10px;
 }
 .project-buttons a:hover {
+<<<<<<< HEAD
 background-color: #fff;
 color: #000;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  background-color: #fff;
+  color: #000;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 .image-std {
   max-width: 30%;
@@ -139,6 +151,7 @@ color: #000;
   --thumb-bgc: red;
   --thumb-bgc-focus: hsla(0, 70%, 70%, 0.8);
   --thumb-w: 0rem;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   margin: var(--m);
@@ -153,21 +166,31 @@ color: #000;
 .c-compare__right {
 =======
   
+=======
+
+>>>>>>> e815a4f (Fix loading issues:)
   margin: var(--m);
   position: relative;
-  }
-  .c-compare::after {
+}
+.c-compare::after {
   content: "";
   display: block;
   padding-bottom: calc((var(--h) / var(--w)) * 100%);
+<<<<<<< HEAD
   }
   .c-compare__left,
   .c-compare__right {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+}
+.c-compare__left,
+.c-compare__right {
+>>>>>>> e815a4f (Fix loading issues:)
   height: 100%;
   object-fit: cover;
   position: absolute;
   width: 100%;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 .c-compare__left {
@@ -180,13 +203,22 @@ color: #000;
 =======
   }
   .c-compare__left {
+=======
+}
+.c-compare__left {
+>>>>>>> e815a4f (Fix loading issues:)
   clip-path: polygon(0% 0%, var(--value) 0%, var(--value) 100%, 0% 100%);
-  }
-  .c-compare__right {
+}
+.c-compare__right {
   clip-path: polygon(100% 0%, var(--value) 0%, var(--value) 100%, 100% 100%);
+<<<<<<< HEAD
   }
   .c-compare__range {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+}
+.c-compare__range {
+>>>>>>> e815a4f (Fix loading issues:)
   background-color: transparent;
   box-sizing: border-box;
   font-family: inherit;
@@ -196,6 +228,7 @@ color: #000;
   position: absolute;
   top: 0;
   width: 100%;
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 .c-compare__range::-moz-range-thumb {
@@ -227,41 +260,54 @@ color: #000;
 =======
   }
   .c-compare__range::-moz-range-thumb {
+=======
+}
+.c-compare__range::-moz-range-thumb {
+>>>>>>> e815a4f (Fix loading issues:)
   background-color: var(--thumb-bgc);
   cursor: ew-resize;
-  height: 100%;  
+  height: 100%;
   width: var(--thumb-w);
-  }
-  .c-compare__range::-webkit-slider-thumb {
+}
+.c-compare__range::-webkit-slider-thumb {
   background-color: var(--thumb-bgc);
   cursor: ew-resize;
-  height: 100%;  
+  height: 100%;
   width: var(--thumb-w);
-  }
-  .c-compare__range:focus::-webkit-slider-thumb {
+}
+.c-compare__range:focus::-webkit-slider-thumb {
   background-color: var(--thumb-bgc-focus);
   box-shadow: 0 0 0 3px var(--thumb-bgc);
-  }
-  .c-compare__range:focus::-moz-range-thumb {
+}
+.c-compare__range:focus::-moz-range-thumb {
   background-color: var(--thumb-bgc-focus);
   box-shadow: 0 0 0 3px var(--thumb-bgc);
-  }
-  .c-compare__range::-moz-range-track {
+}
+.c-compare__range::-moz-range-track {
   background: transparent;
   background-size: 100%;
   box-sizing: border-box;
+<<<<<<< HEAD
   }
   .c-compare__range::-webkit-slider-runnable-track {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+}
+.c-compare__range::-webkit-slider-runnable-track {
+>>>>>>> e815a4f (Fix loading issues:)
   background: transparent;
   background-size: 100%;
   box-sizing: border-box;
   height: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 }
 .c-compare__range,
 .c-compare__range::-webkit-slider-runnable-track,
 .c-compare__range::-webkit-slider-thumb {
+<<<<<<< HEAD
   -webkit-appearance: none;
   appearance: none;
 }
@@ -274,6 +320,11 @@ color: #000;
   appearance: none;
   }
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  -webkit-appearance: none;
+  appearance: none;
+}
+>>>>>>> e815a4f (Fix loading issues:)
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -368,10 +419,14 @@ color: #000;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-menu > ul > li {
 =======
 .nav-menu>ul>li {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.nav-menu > ul > li {
+>>>>>>> e815a4f (Fix loading issues:)
   position: relative;
   white-space: nowrap;
 }
@@ -402,10 +457,14 @@ color: #000;
 .nav-menu .active,
 .nav-menu .active:focus,
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-menu li:hover > a {
 =======
 .nav-menu li:hover>a {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.nav-menu li:hover > a {
+>>>>>>> e815a4f (Fix loading issues:)
   text-decoration: none;
   color: #fff;
 }
@@ -414,10 +473,14 @@ color: #000;
 .nav-menu .active i,
 .nav-menu .active:focus i,
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-menu li:hover > a i {
 =======
 .nav-menu li:hover>a i {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.nav-menu li:hover > a i {
+>>>>>>> e815a4f (Fix loading issues:)
   color: #149ddd;
 }
 
@@ -567,9 +630,12 @@ section {
   font-size: 26px;
   color: #173b6c;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .about .content ul {
@@ -634,9 +700,12 @@ section {
   font-size: 14px;
   color: #122f57;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .facts .count-box a {
@@ -809,8 +878,13 @@ section {
   z-index: 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .portfolio-wrap img {
   transition: all 0.2s ease-in-out;
+=======
+.portfolio-wrap img {
+  transition: all 0.3s ease-in-out;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 .portfolio-wrap:hover img {
   transform: scale(1.1);
@@ -818,8 +892,11 @@ section {
 .text-center {
   text-align: center;
 }
+<<<<<<< HEAD
 =======
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 
 .portfolio .portfolio-wrap::before {
   content: "";
@@ -872,10 +949,14 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .portfolio .portfolio-wrap .portfolio-links a + a {
 =======
 .portfolio .portfolio-wrap .portfolio-links a+a {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.portfolio .portfolio-wrap .portfolio-links a + a {
+>>>>>>> e815a4f (Fix loading issues:)
   border-left: 1px solid #37b3ed;
 }
 
@@ -900,10 +981,13 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
@@ -914,13 +998,19 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 .portfolio-details
   .portfolio-details-slider
   .swiper-pagination
   .swiper-pagination-bullet {
+<<<<<<< HEAD
 =======
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
   width: 12px;
   height: 12px;
   background-color: #fff;
@@ -929,13 +1019,19 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 .portfolio-details
   .portfolio-details-slider
   .swiper-pagination
   .swiper-pagination-bullet-active {
+<<<<<<< HEAD
 =======
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
   background-color: #149ddd;
 }
 
@@ -951,9 +1047,12 @@ section {
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .portfolio-details .portfolio-info ul {
@@ -963,10 +1062,14 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .portfolio-details .portfolio-info ul li + li {
 =======
 .portfolio-details .portfolio-info ul li+li {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.portfolio-details .portfolio-info ul li + li {
+>>>>>>> e815a4f (Fix loading issues:)
   margin-top: 10px;
 }
 
@@ -1246,10 +1349,14 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .contact .php-email-form .error-message br + br {
 =======
 .contact .php-email-form .error-message br+br {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.contact .php-email-form .error-message br + br {
+>>>>>>> e815a4f (Fix loading issues:)
   margin-top: 25px;
 }
 
@@ -1305,10 +1412,14 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .contact .php-email-form button[type="submit"] {
 =======
 .contact .php-email-form button[type=submit] {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.contact .php-email-form button[type="submit"] {
+>>>>>>> e815a4f (Fix loading issues:)
   background: #149ddd;
   border: 0;
   padding: 10px 24px;
@@ -1318,10 +1429,14 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .contact .php-email-form button[type="submit"]:hover {
 =======
 .contact .php-email-form button[type=submit]:hover {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.contact .php-email-form button[type="submit"]:hover {
+>>>>>>> e815a4f (Fix loading issues:)
   background: #37b3ed;
 }
 
@@ -1358,6 +1473,7 @@ section {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .breadcrumbs ol li + li {
   padding-left: 10px;
 }
@@ -1370,6 +1486,13 @@ section {
 
 .breadcrumbs ol li+li::before {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+.breadcrumbs ol li + li {
+  padding-left: 10px;
+}
+
+.breadcrumbs ol li + li::before {
+>>>>>>> e815a4f (Fix loading issues:)
   display: inline-block;
   padding-right: 10px;
   color: #0e2442;
@@ -1505,19 +1628,27 @@ section {
 
 .pdf-button {
 <<<<<<< HEAD
+<<<<<<< HEAD
   background-color: #4caf50;
 =======
   background-color: #4CAF50;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  background-color: #4caf50;
+>>>>>>> e815a4f (Fix loading issues:)
   color: white;
 }
 
 .project-button {
 <<<<<<< HEAD
+<<<<<<< HEAD
   background-color: #2196f3;
 =======
   background-color: #2196F3;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  background-color: #2196f3;
+>>>>>>> e815a4f (Fix loading issues:)
   color: white;
 }
 
@@ -1530,6 +1661,7 @@ section {
 @keyframes glow {
   from {
 <<<<<<< HEAD
+<<<<<<< HEAD
     box-shadow: 0 0 5px #ffcc00;
   }
   to {
@@ -1540,12 +1672,19 @@ section {
   to {
       box-shadow: 0 0 20px #ffcc00;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+    box-shadow: 0 0 5px #ffcc00;
+  }
+  to {
+    box-shadow: 0 0 20px #ffcc00;
+>>>>>>> e815a4f (Fix loading issues:)
   }
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
   .publication-box {
+<<<<<<< HEAD
 <<<<<<< HEAD
     flex-direction: column;
     align-items: stretch;
@@ -1566,22 +1705,29 @@ section {
 =======
       flex-direction: column;
       align-items: stretch;
+=======
+    flex-direction: column;
+    align-items: stretch;
+>>>>>>> e815a4f (Fix loading issues:)
   }
 
   .image {
-      flex: none;
-      width: 100%;
-      max-width: 100%;
+    flex: none;
+    width: 100%;
+    max-width: 100%;
   }
 
   .details {
-      padding-left: 0;
-      width: 100%;
+    padding-left: 0;
+    width: 100%;
   }
 }
 
+<<<<<<< HEAD
 
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 .resume-item-new {
   margin-bottom: 20px;
 }
@@ -1665,10 +1811,14 @@ h5 {
 h5date {
   font-weight: normal;
 <<<<<<< HEAD
+<<<<<<< HEAD
   color: rgba(20, 157, 221, 0.95);
 =======
   color:rgba(20, 157, 221, 0.95)
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  color: rgba(20, 157, 221, 0.95);
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 @media screen and (max-width: 768px) {
@@ -1744,18 +1894,24 @@ h5date {
 
 .wrap {
 <<<<<<< HEAD
+<<<<<<< HEAD
   position: relative;
   margin: 0 50px;
 =======
   position:relative;
   margin:0 50px;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  position: relative;
+  margin: 0 50px;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 .paperTitle {
   text-align: center;
   padding-bottom: 3em;
 }
 .project {
+<<<<<<< HEAD
 <<<<<<< HEAD
   position: relative;
   height: 200px;
@@ -1834,77 +1990,86 @@ h5date {
 	position: relative;
 	height: 200px;
 	margin-bottom: 3em;
+=======
+  position: relative;
+  height: 200px;
+  margin-bottom: 3em;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .project iframe {
-    vertical-align: top;
-    width: 300px;
-    height: 200px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 200px;
+
+  float: left;
 }
 
 .project img {
-    vertical-align: top;
-    width: 300px;
-    height: 200px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 200px;
+
+  float: left;
 }
 
 .project div {
-    width: 465px;
-    float: right;
-	height: 200px;
+  width: 465px;
+  float: right;
+  height: 200px;
 }
 
 .dissertation {
-	position: relative;
-	height: 118px;
-	margin-bottom: 3em;
+  position: relative;
+  height: 118px;
+  margin-bottom: 3em;
 }
 
 .dissertation iframe {
-    vertical-align: top;
-    width: 300px;
-    height: 118px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 118px;
+
+  float: left;
 }
 
 .dissertation img {
-    vertical-align: top;
-    width: 300px;
-    height: 118px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 118px;
+
+  float: left;
 }
 
 .dissertation div {
-    width: 465px;
-    float: right;
-	height: 118px;
+  width: 465px;
+  float: right;
+  height: 118px;
 }
 
 .spacer {
-	width: 800px;
-	height: 2em;
+  width: 800px;
+  height: 2em;
 }
 
 .projectAuthors {
-    font-size: 90%;
-    margin-bottom: 0.7em;
+  font-size: 90%;
+  margin-bottom: 0.7em;
 }
 
 .projectTitle {
-    font-size: 130%;
-    font-weight: 500;
-    margin-bottom: 0.7em;
+  font-size: 130%;
+  font-weight: 500;
+  margin-bottom: 0.7em;
 }
 
 .projectPlace {
+<<<<<<< HEAD
     font-variant: small-caps;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  font-variant: small-caps;
+>>>>>>> e815a4f (Fix loading issues:)
 }
 
 .pdfico {
@@ -1933,15 +2098,21 @@ h5date {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e815a4f (Fix loading issues:)
 h1p,
 h2p,
 h3p,
 h4p,
 h5p,
 h6p {
+<<<<<<< HEAD
 =======
 h1p, h2p, h3p, h4p, h5p, h6p {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+>>>>>>> e815a4f (Fix loading issues:)
   font-weight: 600;
   line-height: 1.3em;
 }
@@ -1979,11 +2150,16 @@ fig_sub {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bp,
 strongp {
 =======
 bp, strongp {
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+bp,
+strongp {
+>>>>>>> e815a4f (Fix loading issues:)
   font-weight: 600;
 }
 
