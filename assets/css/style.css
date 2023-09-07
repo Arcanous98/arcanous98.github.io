@@ -72,32 +72,32 @@ h6 {
 }
 
 .project-buttons a {
-display: inline-block;
-padding: 1px 10px;
-border-radius: 2.5px;
-text-align: center;
-text-decoration: none;
-font-size: 12px;
-font-weight: bold;
-color: #2c3e50;
-background-color: transparent;
-border: 2px solid #2c3e50;
-transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 2.5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #2c3e50;
+  background-color: transparent;
+  border: 2px solid #2c3e50;
+  transition: background-color 0.3s ease;
 }
 
 .btn-pdf {
-background-color:  #2c3e50;
-margin-right: 10px;
-margin-top: 10px;
+  background-color: #2c3e50;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .btn-github {
-background-color: #2c3e50;
-margin-top: 10px;
+  background-color: #2c3e50;
+  margin-top: 10px;
 }
 .project-buttons a:hover {
-background-color: #fff;
-color: #000;
+  background-color: #fff;
+  color: #000;
 }
 .image-std {
   max-width: 30%;
@@ -110,29 +110,29 @@ color: #000;
   --thumb-bgc: red;
   --thumb-bgc-focus: hsla(0, 70%, 70%, 0.8);
   --thumb-w: 0rem;
-  
+
   margin: var(--m);
   position: relative;
-  }
-  .c-compare::after {
+}
+.c-compare::after {
   content: "";
   display: block;
   padding-bottom: calc((var(--h) / var(--w)) * 100%);
-  }
-  .c-compare__left,
-  .c-compare__right {
+}
+.c-compare__left,
+.c-compare__right {
   height: 100%;
   object-fit: cover;
   position: absolute;
   width: 100%;
-  }
-  .c-compare__left {
+}
+.c-compare__left {
   clip-path: polygon(0% 0%, var(--value) 0%, var(--value) 100%, 0% 100%);
-  }
-  .c-compare__right {
+}
+.c-compare__right {
   clip-path: polygon(100% 0%, var(--value) 0%, var(--value) 100%, 100% 100%);
-  }
-  .c-compare__range {
+}
+.c-compare__range {
   background-color: transparent;
   box-sizing: border-box;
   font-family: inherit;
@@ -142,44 +142,44 @@ color: #000;
   position: absolute;
   top: 0;
   width: 100%;
-  }
-  .c-compare__range::-moz-range-thumb {
+}
+.c-compare__range::-moz-range-thumb {
   background-color: var(--thumb-bgc);
   cursor: ew-resize;
-  height: 100%;  
+  height: 100%;
   width: var(--thumb-w);
-  }
-  .c-compare__range::-webkit-slider-thumb {
+}
+.c-compare__range::-webkit-slider-thumb {
   background-color: var(--thumb-bgc);
   cursor: ew-resize;
-  height: 100%;  
+  height: 100%;
   width: var(--thumb-w);
-  }
-  .c-compare__range:focus::-webkit-slider-thumb {
+}
+.c-compare__range:focus::-webkit-slider-thumb {
   background-color: var(--thumb-bgc-focus);
   box-shadow: 0 0 0 3px var(--thumb-bgc);
-  }
-  .c-compare__range:focus::-moz-range-thumb {
+}
+.c-compare__range:focus::-moz-range-thumb {
   background-color: var(--thumb-bgc-focus);
   box-shadow: 0 0 0 3px var(--thumb-bgc);
-  }
-  .c-compare__range::-moz-range-track {
+}
+.c-compare__range::-moz-range-track {
   background: transparent;
   background-size: 100%;
   box-sizing: border-box;
-  }
-  .c-compare__range::-webkit-slider-runnable-track {
+}
+.c-compare__range::-webkit-slider-runnable-track {
   background: transparent;
   background-size: 100%;
   box-sizing: border-box;
   height: 100%;
-  }
-  .c-compare__range,
-  .c-compare__range::-webkit-slider-runnable-track,
-  .c-compare__range::-webkit-slider-thumb {
+}
+.c-compare__range,
+.c-compare__range::-webkit-slider-runnable-track,
+.c-compare__range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  }
+}
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -269,7 +269,7 @@ color: #000;
   list-style: none;
 }
 
-.nav-menu>ul>li {
+.nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
 }
@@ -295,7 +295,7 @@ color: #000;
 .nav-menu a:hover,
 .nav-menu .active,
 .nav-menu .active:focus,
-.nav-menu li:hover>a {
+.nav-menu li:hover > a {
   text-decoration: none;
   color: #fff;
 }
@@ -303,7 +303,7 @@ color: #000;
 .nav-menu a:hover i,
 .nav-menu .active i,
 .nav-menu .active:focus i,
-.nav-menu li:hover>a i {
+.nav-menu li:hover > a i {
   color: #149ddd;
 }
 
@@ -452,7 +452,6 @@ section {
   font-weight: 700;
   font-size: 26px;
   color: #173b6c;
-  
 }
 
 .about .content ul {
@@ -516,7 +515,6 @@ section {
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   color: #122f57;
-  
 }
 
 .facts .count-box a {
@@ -676,6 +674,15 @@ section {
   overflow: hidden;
   z-index: 1;
 }
+.portfolio-wrap img {
+  transition: all 0.3s ease-in-out;
+}
+.portfolio-wrap:hover img {
+  transform: scale(1.1);
+}
+.text-center {
+  text-align: center;
+}
 
 .portfolio .portfolio-wrap::before {
   content: "";
@@ -715,7 +722,7 @@ section {
   background: rgba(20, 157, 221, 0.95);
 }
 
-.portfolio .portfolio-wrap .portfolio-links a+a {
+.portfolio .portfolio-wrap .portfolio-links a + a {
   border-left: 1px solid #37b3ed;
 }
 
@@ -739,8 +746,6 @@ section {
   padding-top: 40px;
 }
 
-
-
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
 }
@@ -750,7 +755,10 @@ section {
   position: relative;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   background-color: #fff;
@@ -758,7 +766,10 @@ section {
   border: 1px solid #149ddd;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet-active {
   background-color: #149ddd;
 }
 
@@ -773,7 +784,6 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
-  
 }
 
 .portfolio-details .portfolio-info ul {
@@ -782,7 +792,7 @@ section {
   font-size: 15px;
 }
 
-.portfolio-details .portfolio-info ul li+li {
+.portfolio-details .portfolio-info ul li + li {
   margin-top: 10px;
 }
 
@@ -1053,7 +1063,7 @@ section {
   font-weight: 600;
 }
 
-.contact .php-email-form .error-message br+br {
+.contact .php-email-form .error-message br + br {
   margin-top: 25px;
 }
 
@@ -1108,7 +1118,7 @@ section {
   padding: 10px 15px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
   background: #149ddd;
   border: 0;
   padding: 10px 24px;
@@ -1117,7 +1127,7 @@ section {
   border-radius: 4px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form button[type="submit"]:hover {
   background: #37b3ed;
 }
 
@@ -1153,11 +1163,11 @@ section {
   font-size: 15px;
 }
 
-.breadcrumbs ol li+li {
+.breadcrumbs ol li + li {
   padding-left: 10px;
 }
 
-.breadcrumbs ol li+li::before {
+.breadcrumbs ol li + li::before {
   display: inline-block;
   padding-right: 10px;
   color: #0e2442;
@@ -1288,12 +1298,12 @@ section {
 }
 
 .pdf-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
 .project-button {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
 }
 
@@ -1305,32 +1315,31 @@ section {
 /* Animation for glowing effect */
 @keyframes glow {
   from {
-      box-shadow: 0 0 5px #ffcc00;
+    box-shadow: 0 0 5px #ffcc00;
   }
   to {
-      box-shadow: 0 0 20px #ffcc00;
+    box-shadow: 0 0 20px #ffcc00;
   }
 }
 
 /* Responsive layout */
 @media (max-width: 768px) {
   .publication-box {
-      flex-direction: column;
-      align-items: stretch;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .image {
-      flex: none;
-      width: 100%;
-      max-width: 100%;
+    flex: none;
+    width: 100%;
+    max-width: 100%;
   }
 
   .details {
-      padding-left: 0;
-      width: 100%;
+    padding-left: 0;
+    width: 100%;
   }
 }
-
 
 .resume-item-new {
   margin-bottom: 20px;
@@ -1402,7 +1411,7 @@ h5 {
 }
 h5date {
   font-weight: normal;
-  color:rgba(20, 157, 221, 0.95)
+  color: rgba(20, 157, 221, 0.95);
 }
 
 @media screen and (max-width: 768px) {
@@ -1473,87 +1482,87 @@ h5date {
 /***********************************************/
 
 .wrap {
-  position:relative;
-  margin:0 50px;
+  position: relative;
+  margin: 0 50px;
 }
 .paperTitle {
   text-align: center;
   padding-bottom: 3em;
 }
 .project {
-	position: relative;
-	height: 200px;
-	margin-bottom: 3em;
+  position: relative;
+  height: 200px;
+  margin-bottom: 3em;
 }
 
 .project iframe {
-    vertical-align: top;
-    width: 300px;
-    height: 200px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 200px;
+
+  float: left;
 }
 
 .project img {
-    vertical-align: top;
-    width: 300px;
-    height: 200px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 200px;
+
+  float: left;
 }
 
 .project div {
-    width: 465px;
-    float: right;
-	height: 200px;
+  width: 465px;
+  float: right;
+  height: 200px;
 }
 
 .dissertation {
-	position: relative;
-	height: 118px;
-	margin-bottom: 3em;
+  position: relative;
+  height: 118px;
+  margin-bottom: 3em;
 }
 
 .dissertation iframe {
-    vertical-align: top;
-    width: 300px;
-    height: 118px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 118px;
+
+  float: left;
 }
 
 .dissertation img {
-    vertical-align: top;
-    width: 300px;
-    height: 118px;
-    
-    float: left;
+  vertical-align: top;
+  width: 300px;
+  height: 118px;
+
+  float: left;
 }
 
 .dissertation div {
-    width: 465px;
-    float: right;
-	height: 118px;
+  width: 465px;
+  float: right;
+  height: 118px;
 }
 
 .spacer {
-	width: 800px;
-	height: 2em;
+  width: 800px;
+  height: 2em;
 }
 
 .projectAuthors {
-    font-size: 90%;
-    margin-bottom: 0.7em;
+  font-size: 90%;
+  margin-bottom: 0.7em;
 }
 
 .projectTitle {
-    font-size: 130%;
-    font-weight: 500;
-    margin-bottom: 0.7em;
+  font-size: 130%;
+  font-weight: 500;
+  margin-bottom: 0.7em;
 }
 
 .projectPlace {
-    font-variant: small-caps;
+  font-variant: small-caps;
 }
 
 .pdfico {
@@ -1581,7 +1590,12 @@ h5date {
   height: 50px;
 }
 
-h1p, h2p, h3p, h4p, h5p, h6p {
+h1p,
+h2p,
+h3p,
+h4p,
+h5p,
+h6p {
   font-weight: 600;
   line-height: 1.3em;
 }
@@ -1618,7 +1632,8 @@ fig_sub {
   margin: 0em 0.4em;
 }
 
-bp, strongp {
+bp,
+strongp {
   font-weight: 600;
 }
 
