@@ -189,9 +189,9 @@ h6 {
   left: 0;
   bottom: 0;
   width: 300px;
-  transition: all ease-in-out 0.5s;
+  transition: all ease-in-out 0.05s;
   z-index: 9997;
-  transition: all 0.5s;
+  transition: all 0.05s;
   padding: 0 15px;
   background: #040b14;
   overflow-y: auto;
