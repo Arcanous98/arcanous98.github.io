@@ -87,6 +87,9 @@ h6 {
   background-color: transparent;
   border: 2px solid #2c3e50;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 95fa5e9 (slide fade fix)
   transition: background-color 0.2s ease;
 }
 
@@ -334,9 +337,9 @@ color: #000;
   left: 0;
   bottom: 0;
   width: 300px;
-  transition: all ease-in-out 0.05s;
+  transition: all ease-in-out 0.5s;
   z-index: 9997;
-  transition: all 0.05s;
+  transition: all 0.5s;
   padding: 0 15px;
   background: #040b14;
   overflow-y: auto;
@@ -378,10 +381,14 @@ color: #000;
   width: 36px;
   height: 36px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: 0.2s;
 =======
   transition: 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 #header .profile .social-links a:hover {
@@ -439,10 +446,14 @@ color: #000;
   padding: 12px 15px;
   margin-bottom: 8px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: 0.2s;
 =======
   transition: 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   font-size: 15px;
 }
 
@@ -716,10 +727,14 @@ section {
   font-size: 15px;
   font-family: "Poppins", sans-serif;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: ease-in-out 0.2s;
 =======
   transition: ease-in-out 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: ease-in-out 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .facts .count-box a:hover {
@@ -852,10 +867,14 @@ section {
   color: #272829;
   margin-bottom: 5px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all 0.2s ease-in-out;
 =======
   transition: all 0.3s ease-in-out;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all 0.2s ease-in-out;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .portfolio #portfolio-flters li:hover,
@@ -869,10 +888,14 @@ section {
 
 .portfolio .portfolio-wrap {
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: 0.2s;
 =======
   transition: 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -883,8 +906,12 @@ section {
   transition: all 0.2s ease-in-out;
 =======
 .portfolio-wrap img {
+<<<<<<< HEAD
   transition: all 0.3s ease-in-out;
 >>>>>>> e815a4f (Fix loading issues:)
+=======
+  transition: all 0.2s ease-in-out;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 .portfolio-wrap:hover img {
   transform: scale(1.1);
@@ -907,10 +934,14 @@ section {
   top: 0;
   bottom: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all ease-in-out 0.2s;
 =======
   transition: all ease-in-out 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all ease-in-out 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   z-index: 2;
   opacity: 0;
 }
@@ -923,10 +954,14 @@ section {
   z-index: 3;
   position: absolute;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all ease-in-out 0.2s;
 =======
   transition: all ease-in-out 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all ease-in-out 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   display: flex;
   justify-content: center;
 }
@@ -937,10 +972,14 @@ section {
   text-align: center;
   background: rgba(20, 157, 221, 0.75);
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: 0.2s;
 =======
   transition: 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   width: 50%;
 }
 
@@ -1260,10 +1299,14 @@ section {
   align-items: center;
   border-radius: 50px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all 0.2s ease-in-out;
 =======
   transition: all 0.3s ease-in-out;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all 0.2s ease-in-out;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .contact .info h4 {
@@ -1301,10 +1344,14 @@ section {
   width: 36px;
   height: 36px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: 0.2s;
 =======
   transition: 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
   margin-right: 10px;
 }
 
@@ -1615,10 +1662,14 @@ section {
   text-decoration: none;
   color: #333;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: background-color 0.2s ease-in-out;
 =======
   transition: background-color 0.3s ease-in-out;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: background-color 0.2s ease-in-out;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .links a:hover {
@@ -1740,10 +1791,14 @@ section {
   padding: 10px;
   margin: 0 10px; /* Add side margins as desired */
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all 0.2s;
 =======
   transition: all 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .box:hover {
@@ -1761,10 +1816,14 @@ section {
   width: 150px;
   height: auto;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: all 0.2s;
 =======
   transition: all 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: all 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .box:hover .compressed-image {
@@ -1787,10 +1846,14 @@ section {
   margin-top: 10px;
   opacity: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: opacity 0.2s;
 =======
   transition: opacity 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: opacity 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .box:hover .details-new {
@@ -1842,10 +1905,14 @@ h5date {
 .slide {
   flex: 0 0 200px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transition: transform 0.2s;
 =======
   transition: transform 0.3s;
 >>>>>>> 2d5bf61 (complete overhaul. new page)
+=======
+  transition: transform 0.2s;
+>>>>>>> 95fa5e9 (slide fade fix)
 }
 
 .slide img {
