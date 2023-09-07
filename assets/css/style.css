@@ -82,7 +82,7 @@ h6 {
   color: #2c3e50;
   background-color: transparent;
   border: 2px solid #2c3e50;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .btn-pdf {
@@ -189,9 +189,9 @@ h6 {
   left: 0;
   bottom: 0;
   width: 300px;
-  transition: all ease-in-out 0.05s;
+  transition: all ease-in-out 0.5s;
   z-index: 9997;
-  transition: all 0.05s;
+  transition: all 0.5s;
   padding: 0 15px;
   background: #040b14;
   overflow-y: auto;
@@ -232,7 +232,7 @@ h6 {
   text-align: center;
   width: 36px;
   height: 36px;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 #header .profile .social-links a:hover {
@@ -281,7 +281,7 @@ h6 {
   color: #a8a9b4;
   padding: 12px 15px;
   margin-bottom: 8px;
-  transition: 0.3s;
+  transition: 0.2s;
   font-size: 15px;
 }
 
@@ -524,7 +524,7 @@ section {
   color: #122f57;
   font-size: 15px;
   font-family: "Poppins", sans-serif;
-  transition: ease-in-out 0.3s;
+  transition: ease-in-out 0.2s;
 }
 
 .facts .count-box a:hover {
@@ -656,7 +656,7 @@ section {
   text-transform: uppercase;
   color: #272829;
   margin-bottom: 5px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .portfolio #portfolio-flters li:hover,
@@ -669,13 +669,13 @@ section {
 }
 
 .portfolio .portfolio-wrap {
-  transition: 0.3s;
+  transition: 0.2s;
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 .portfolio-wrap img {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .portfolio-wrap:hover img {
   transform: scale(1.1);
@@ -692,7 +692,7 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.2s;
   z-index: 2;
   opacity: 0;
 }
@@ -704,7 +704,7 @@ section {
   bottom: -60px;
   z-index: 3;
   position: absolute;
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.2s;
   display: flex;
   justify-content: center;
 }
@@ -714,7 +714,7 @@ section {
   font-size: 28px;
   text-align: center;
   background: rgba(20, 157, 221, 0.75);
-  transition: 0.3s;
+  transition: 0.2s;
   width: 50%;
 }
 
@@ -982,7 +982,7 @@ section {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .contact .info h4 {
@@ -1019,7 +1019,7 @@ section {
   text-align: center;
   width: 36px;
   height: 36px;
-  transition: 0.3s;
+  transition: 0.2s;
   margin-right: 10px;
 }
 
@@ -1289,7 +1289,7 @@ section {
   background-color: #ddd;
   text-decoration: none;
   color: #333;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .links a:hover {
@@ -1352,7 +1352,7 @@ section {
   border-radius: 5px;
   padding: 10px;
   margin: 0 10px; /* Add side margins as desired */
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .box:hover {
@@ -1369,7 +1369,7 @@ section {
 .compressed-image {
   width: 150px;
   height: auto;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .box:hover .compressed-image {
@@ -1391,7 +1391,7 @@ section {
   display: none;
   margin-top: 10px;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
 
 .box:hover .details-new {
@@ -1434,7 +1434,7 @@ h5date {
 
 .slide {
   flex: 0 0 200px;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
 
 .slide img {
