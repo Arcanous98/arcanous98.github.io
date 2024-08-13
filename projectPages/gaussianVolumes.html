@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
+    Modeling and Rendering Scattering and Emissive Medias</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../assets/data/images/NeRFLum/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://kit.fontawesome.com/9e38703a07.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../assets/academicons-1.9.4/css/academicons.min.css"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: iPortfolio
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector('.copy-button').addEventListener('click', function() {
+        const codeElement = document.getElementById('codeBox');
+        const textToCopy = codeElement.innerHTML.replace(/&nbsp;/g, ' ')
+                                                .replace(/<br\s*\/?>/mg, "\n")
+                                                .replace(/&amp;/g, "&")
+                                                .replace(/&lt;/g, "<")
+                                                .replace(/&gt;/g, ">");
+                navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert('Text successfully copied to clipboard');
+          })
+          .catch(err => {
+            alert('Unable to copy text');
+            console.error('Unable to copy text', err);
+          });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+      <div class="profile">
+        <img src="../assets/img/Jorge-Condor.png" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="/index.html">Jorge Condor</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://github.com/Arcanous98" class="github"><i class="bi bi-github"></i></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en" "><svg style=" margin-bottom: -10px; ;" xmlns="http://www.w3.org/2000/svg" aria-label="Google Scholar" role="img" viewBox="0 100 512 512" width="32px" height="32px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"></path></g></svg></a>
+          <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bi bi-instagram"></i></a>
+
+          <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
+          <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://twitter.com/Arcanous98" class="twitter"><i class="bi bi-twitter "></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <!-- <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li> -->
+          <li><a href="/index.html#about" class="nav-link scrollto"><i class="bi bi-person-vcard"></i> <span>About</span></a></li>
+          <li><a href="/index.html#publications" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Publications</span></a></li>
+          <li><a href="/index.html#workexperience" class="nav-link scrollto"><i class="bi bi-building"></i> <span>Experience</span></a></li>
+          <li><a href="/index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
+          <li><a href="/index.html#portfolio" class="nav-link scrollto"><i class="bi bi-camera2"></i> <span>Photography</span></a></li>
+          <li><a href="/index.html#contact" class="nav-link scrollto"><i class="bi bi-envelope-at"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Projects</h2>
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li>Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
+                Modeling and Rendering Scattering and Emissive Media</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    
+    <section class="inner-page">
+      <div id="content" class="wrap">
+        <div class="paperTitle">
+            <h1>Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
+                Modeling and Rendering Scattering and Emissive Media</h1>
+            <div class="conf-name">
+              ArXiv (May 2024)
+            </div>
+            <div class="authors">
+              <a href="https://arcanous98.github.io/">Jorge Condor</a><sup>1,2</sup><span class="space"></span>
+              <a href="https://speierers.github.io/">Sébastien Speierer</a><sup>1</sup><span class="space"></span>
+              <a href="https://scholar.google.com/citations?user=iXX3uNEAAAAJ&hl=de">Lukas Bode</a><sup>1</sup><span class="space"></span>
+              <a href="https://aljazbozic.github.io/">Aljaž Božič</a><sup>1</sup><span class="space"></span>
+              <a href="https://scholar.google.com/citations?user=VmHZtsEAAAAJ&hl=en">Simon Green</a><sup>1</sup><span class="space"></span>
+              <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a><sup>2</sup><span class="space"></span>
+              <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a><sup>1</sup><span class="space"></span>
+            </div>
+<div class="universities">
+            <sup>1</sup><a href="https://www.unizar.es/">Meta Reality Labs</a><span class="smallspace">
+            <sup>2</sup><a href="https://www.usi.ch/en"> USI Lugano, Switzerland</a><span class="smallspace"></span>	
+</div>
+        </div>
+        <img src="../projects/GaussianVolumes/figures/teaser.png" width="100%" />
+        <br/><br/>
+  <fig_sub><strong>We represent a complex volumetric cloud using traditional grid-based methods (left and right, 10243 voxel grid resolution, 4GBs) and our primitives-based
+    representation using Gaussian kernels (middle, 5.6k primitives, 224KBs), and render it with volumetric path tracing. Our method achieves substantial speedups
+    thanks to the analytical transmission estimation and sampling, our efficient rendering approach and its extremely compact representation. When compared to
+    the original asset, at a potential cost of detail (Figure 7), we provide large performance and memory compression benefits. Asset is part of the Walt Disney
+    Animation Studios cloud dataset (CC-BY-SA 3.0). Rendering times reported on a NVIDIA A6000.</fig_sub>
+    <br/><br/>
+  <p style="text-align:justify">Efficient scene representations are essential for many computer graphics applications.
+    A general unified representations that can handle both surfaces and volumes simultaneously, remains a research challenge.
+    Inspired by recent methods for scene reconstruction that leverage mixtures of 3D Gaussians to model radiance fields, 
+    we formalize and generalize the modeling of scattering and emissive media using mixtures of simple kernel-based volumetric 
+    primitives. We introduce closed-form solutions for transmittance and free-flight distance sampling for different kernels, 
+    and propose several optimizations to use our method efficiently within any off-the-shelf volumetric path tracer.
+    We demonstrate our method as a compact and efficient alternative to other forms of volume modeling for 
+    forward and inverse rendering of scattering media. Furthermore, we adapt and showcase our method in radiance 
+    field optimization and rendering, providing additional flexibility compared to current state of the art given 
+    its ray-tracing formulation. We also introduce the Epanechnikov kernel and demonstrate its potential as 
+    an efficient alternative to the traditionally-used Gaussian kernel in scene reconstruction tasks. 
+    The versatility and physically-based nature of our approach allows us to go beyond radiance fields and 
+    bring to kernel-based modeling and rendering any path-tracing enabled functionality such as scattering, 
+    relighting and complex camera models. </p>
+        <br/><br/>
+        <h2p>Ours vs VPT</h2p>
+        <br/><br/>
+        <div class="c-compare" style="--value:50%;">
+          <img class="c-compare__left" src="../assets/data/images/NeRFLum/tonemapped_ours_portica_4096spp.png" alt="Color" />
+          <img class="c-compare__right" src="../assets/data/images/NeRFLum/tonemapped_original_portica_64spp.png" alt="B/W" />
+          <input type="range" class="c-rng c-compare__range" min="0" max="100" value="50" oninput="this.parentNode.style.setProperty('--value', `${this.value}%`)" />
+          </div>
+        <div>
+        <h2p>Inverse tomographic reconstruction</h2p>
+        <br/><br/>
+        <div class="video-container">
+          <video controls>
+            <source src="../projects/ComplexLum/paper1014_MM_CRC2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <h2p>Downloads</h2p>
+        <br/><br/>
+        <div class="pdfdiv">
+            <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
+            Paper <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf">[PDF ~64 MB]</a>
+        </div>
+        <div class="pdfdiv">
+            <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
+            Supplemental Material <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf">[PDF ~64 MB]</a>
+        </div>
+        <div class="pdfdiv">
+            <a href="https://diglib.eg.org/handle/10.2312/sr20221155"><img src="../projects/ColorGloss/images/website.png" height="40px" class="pdfico"/></a>
+           <a href="https://diglib.eg.org/handle/10.2312/sr20221155">Publisher Website</a>
+        </div>
+        <div>
+            <h2p>Citation</h2p>
+            <br/><br/>
+            Jorge Condor, Sébastien Speierer, Lukas Bode, Aljaz Bozic, Simon Green, Piotr Didyk, Adrian Jarabo, 
+            <b>Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
+                Modeling and Rendering Scattering and Emissive Medias</b>, ArXiv (May'24)
+            
+            <br/><br/>
+            <div class="code-box">
+                <button  class="copy-button">Copy</button>
+                <code id="codeBox">
+                  @inproceedings {Condor2022,<br/>
+                    &nbsp;&nbsp;booktitle = {Eurographics Symposium on Rendering},<br/>
+                    &nbsp;&nbsp;editor = {Ghosh, Abhijeet and Wei, Li-Yi},<br/>
+                    &nbsp;&nbsp;title = {{A Learned Radiance-Field Representation for Complex Luminaires}},<br/>
+                    &nbsp;&nbsp;author = {Condor, Jorge and Jarabo, Adrián},<br/>
+                    &nbsp;&nbsp;year = {2022},<br/>
+                    &nbsp;&nbsp;publisher = {The Eurographics Association},<br/>
+                    &nbsp;&nbsp;ISSN = {1727-3463},<br/>
+                    &nbsp;&nbsp;ISBN = {978-3-03868-187-8},<br/>
+                    &nbsp;&nbsp;DOI = {10.2312/sr.20221155}<br/>
+                    }
+                </code>
+            </div>
+        </div>
+        <br/><br/>
+  <h2p>Acknowledgements</h2p>
+  <br/><br/>
+  <div style="text-align:justify"></div>
+  <br/><br/>      
+  <h2p>Collaborations</h2p>
+        <br/><br/>
+        <div id="collaborations">
+            <a href="https://www.usi.ch/"><img src="../projects/ColorGloss/images/usi_logo.png"/></a>
+            <a href="https://ist.ac.at/en/home/"><img src="../assets/data/logos/logo_meta_high.png"/></a>
+        </div>
+    </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer> -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/typed.js/typed.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>
