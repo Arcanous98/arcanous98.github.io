@@ -1330,7 +1330,7 @@ input, select, textarea {
 			opacity: 1.0 !important;
 		}
 
-		@media screen and (max-width: 980px) {
+		@media screen and (max-width: 240px) {
 
 			.poptrox-popup .closer {
 				background-size: 3em;
@@ -1343,7 +1343,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 240px) {
 
 			.poptrox-popup:before {
 				display: none;
