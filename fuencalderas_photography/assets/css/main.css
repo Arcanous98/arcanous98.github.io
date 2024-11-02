@@ -1584,6 +1584,9 @@ input, select, textarea {
 			}
 
 	}
+
+/* Main */
+
 	#main {
 		-moz-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -moz-filter 0.5s ease;
 		-webkit-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -webkit-filter 0.5s ease;
@@ -1610,7 +1613,6 @@ input, select, textarea {
 			opacity: 1;
 			overflow: hidden;
 			position: relative;
-    		aspect-ratio: 1 / 1; /* Maintains square shape; adjust as needed */
 		}
 
 			#main .thumb:after {
@@ -1640,7 +1642,6 @@ input, select, textarea {
 				position: absolute;
 				top: 0;
 				width: 100%;
-				object-fit: cover;
 			}
 
 			#main .thumb > h2 {
