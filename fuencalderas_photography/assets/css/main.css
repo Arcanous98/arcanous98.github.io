@@ -1331,10 +1331,14 @@ input, select, textarea {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		@media screen and (max-width: 240px) {
 =======
 		@media screen and (max-width: 980px) {
 >>>>>>> b1c71f8 (Fuencalderas photography contest page)
+=======
+		@media screen and (max-width: 240px) {
+>>>>>>> 608d153 (fixed popup text)
 
 			.poptrox-popup .closer {
 				background-size: 3em;
@@ -1348,10 +1352,14 @@ input, select, textarea {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		@media screen and (max-width: 240px) {
 =======
 		@media screen and (max-width: 736px) {
 >>>>>>> b1c71f8 (Fuencalderas photography contest page)
+=======
+		@media screen and (max-width: 240px) {
+>>>>>>> 608d153 (fixed popup text)
 
 			.poptrox-popup:before {
 				display: none;
