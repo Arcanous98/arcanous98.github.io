@@ -1593,11 +1593,17 @@ input, select, textarea {
 
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 /* Main */
 
 =======
 >>>>>>> b1c71f8 (Fuencalderas photography contest page)
+=======
+
+/* Main */
+
+>>>>>>> 0d10684 (correct image visibility on photocontest)
 	#main {
 		-moz-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -moz-filter 0.5s ease;
 		-webkit-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -webkit-filter 0.5s ease;
@@ -1625,9 +1631,12 @@ input, select, textarea {
 			overflow: hidden;
 			position: relative;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     		aspect-ratio: 1 / 1; /* Maintains square shape; adjust as needed */
 >>>>>>> b1c71f8 (Fuencalderas photography contest page)
+=======
+>>>>>>> 0d10684 (correct image visibility on photocontest)
 		}
 
 			#main .thumb:after {
@@ -1658,9 +1667,12 @@ input, select, textarea {
 				top: 0;
 				width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 				object-fit: cover;
 >>>>>>> b1c71f8 (Fuencalderas photography contest page)
+=======
+>>>>>>> 0d10684 (correct image visibility on photocontest)
 			}
 
 			#main .thumb > h2 {
