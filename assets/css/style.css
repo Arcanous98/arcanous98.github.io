@@ -1238,6 +1238,15 @@ section {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow effect */
 }
 
+.publication-box-highlight {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #ffefc1;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow effect */
+}
+
 .image {
   flex: 0 0 30%;
   max-width: 30%;

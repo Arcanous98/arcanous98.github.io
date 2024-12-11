@@ -49,7 +49,7 @@
         <h1 class="text-light"><a href="index.html">Jorge Condor</a></h1>
         <div class="social-links mt-3 text-center">
           <a href="https://github.com/Arcanous98" class="github"><i class="bi bi-github"></i></a>
-          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en" "><svg style=" margin-bottom: -10px; ;" xmlns="http://www.w3.org/2000/svg" aria-label="Google Scholar" role="img" viewBox="0 100 512 512" width="32px" height="32px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"></path></g></svg></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en"><svg style=" margin-bottom: -10px; ;" xmlns="http://www.w3.org/2000/svg" aria-label="Google Scholar" role="img" viewBox="0 100 512 512" width="32px" height="32px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"></path></g></svg></a>
           <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bi bi-instagram"></i></a>
 
           <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
@@ -101,8 +101,9 @@
               I am a PhD Student on Computer Graphics at <a href="https://www.idsia.ch/">IDSIA-USI</a> (Lugano, Switzerland)
               under the supervision of <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>.
               My research focuses on leveraging inverse graphics to improve applications in vision, 
-              real-time rendering and fabrication. During my PhD I had the opportunity to intern at Meta Reality Labs and work alongside the talented Monaco Rendering Team, working on
+              rendering and fabrication. During my PhD I had the opportunity to intern at <a href="https://about.meta.com/realitylabs/">Meta Reality Labs</a> working alongside the talented Monaco Rendering Team, working on
               accelerating physically-based volume rendering for photorealistic avatars, under the supervision of <a href="https://www.linkedin.com/in/christophehery">Christophe Hery</a> and <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a>.
+              Starting from Summer 2025 I will be joining <a href="https://www.nvidia.com/en-us/research/">NVIDIA</a> as a Research Scientist Intern at the Toronto AI Lab, under the supervision of <a href="https://zgojcic.github.io/">Zan Gojcic</a>.
             <!-- Previously, I did a Master's in Graphics, Robotics and Computer Vision at <a href="https://www.unizar.es/">Universidad de Zaragoza</a>
             ,
             where I had the immense pleasure of working alongside the <a href="https://graphics.unizar.es/">Graphics and Imaging Lab</a>
@@ -146,12 +147,64 @@
         </div>
         <div class="publication-box">
           <div class="image">
+            <img src="projects/PuzzleSim/puzzlesim_teaser.png" alt="ArXiv24">
+          </div>
+          <div class="details">
+              <h2 class="title">Puzzle Similarity: A Perceptually-guided No-Reference Metric for Artifact Detection in 3D Scene Reconstructions</h2>
+              <p class="conference">ArXiv [Nov'24]</p>
+              <p class="abstract">A novel no-reference metric to spatially assess 3D reconstructed view quality
+                using perceptual embeddings, through an efficient patch-wise similarity computation between the
+                training dataset and the evaluated view. Surpasses even direct reference metrics in human assessment 
+                correlation tests. We leverage it in automatic, recursive in-painting for
+                artifact restoration.
+              </p>
+              <p class="authors"><a href="https://nihermann.github.io/">Nicolai Hermann</a>,
+                <strong>Jorge Condor</strong>,
+                <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>
+              <div class="links">
+                  <a href="https://nihermann.github.io/puzzlesim/data/Puzzle_Similarity_paper.pdf" class="pdf-button">Paper</a>
+                  <a href="https://nihermann.github.io/puzzlesim/index.html" class="pdf-button">Project Page</a>
+                  <a href="https://arxiv.org/abs/2411.17489" class="pdf-button">ArXiv Page</a>
+                  <a href="https://github.com/nihermann/PuzzleSim" class="pdf-button">Code</a>
+              </div>
+          </div>
+        </div>
+        <div class="publication-box">
+          <div class="image">
+            <img src="projects/HVSSR/hvssr.jpg" alt="ArXiv24">
+          </div>
+          <div class="details">
+              <h2 class="title">Perceptually Optimized Super Resolution</h2>
+              <p class="conference">ArXiv [Nov'24]</p>
+              <p class="abstract">We leverage low-level human vision models to drastically improve the 
+                efficiency of learned Super Resolution (SR) models. Our key insight is that compute
+                should be focused on areas that are perceptually significant to the human eye.
+                By parameterizing the upsampling capacity of any off-the-shelf 
+                SR model in the frequency domain, we can adaptively
+                upsample content based on the capacity of a human observer to perceive the difference
+                between cheap/simple upsampling (i.e. bicubic interpolation) and expensive learned models,
+                smoothly filling the gap in between through model branching and quantization strategies.
+              </p>
+              <p class="authors">
+                <a href="https://www.linkedin.com/in/karpev98/">Volodymir Karpenko</a>,
+                <a href="https://taimoor6864.github.io/">Taimoor Tariq</a>,
+                <strong>Jorge Condor</strong>,
+                <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>
+              </p>
+              <div class="links">
+                <a href="https://arxiv.org/pdf/2411.17513" class="pdf-button">Paper</a>
+                <a href="https://arxiv.org/abs/2411.17513" class="pdf-button">ArXiv Page</a>
+              </div>
+          </div>
+        </div>
+        <div class="publication-box">
+          <div class="image">
             <img src="projects/GaussianVolumes/figures/cloud_250kgmm_v2.png" alt="ArXiv24">
           </div>
           <div class="details">
               <h2 class="title">Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
                 Modeling and Rendering Scattering and Emissive Media</h2>
-              <p class="conference">ArXiv [May'24]</p>
+              <p class="conference">ACM Transactions on Graphics [TOG'24]</p>
               <p class="abstract">Banking on the popularity of rasterized 3D Gaussian Splatting methods,
                 we formalize the ray-tracing of volumes composed of kernel mixture models (Gaussian or otherwise). Our physically-based, 
                 path-traced formulation allows us to render and optimize both scattering and emissive volumes, as well as
@@ -166,11 +219,12 @@
                 <a href="https://scholar.google.com/citations?user=VmHZtsEAAAAJ&hl=en">Simon Green</a>,
                 <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>,
                 <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a>
-              <div class="links">
-                  <a href="projects/GaussianVolumes/traced_gaussians.pdf" class="pdf-button">Paper</a>
-                  <a href="projectPages/gaussianVolumes.html" class="pdf-button">Project Page</a>
-                  <a href="https://arxiv.org/abs/2405.15425" class="pdf-button">ArXiv Page</a>
-                </div>
+              </p>
+                <div class="links">
+                <a href="assets/data/papers/Gaussian_tracing_meta_TOG.pdf" class="pdf-button">Paper</a>
+                <a href="projectPages/gaussianVolumes.html" class="pdf-button">Project Page</a>
+                <a href="https://arxiv.org/abs/2405.15425" class="pdf-button">ArXiv Page</a>
+              </div>
           </div>
         </div>
         <div class="publication-box">
@@ -225,7 +279,8 @@
                 <p class="authors"><a href="https://perso.liris.cnrs.fr/johanna.delanoy/">Johanna Delanoy</a>,
                   <a href="http://giga.cps.unizar.es/~mlagunas/">Manuel Lagunas</a>, <strong>Jorge Condor</strong>,
                   <a href="http://webdiis.unizar.es/~bmasia/">Belén Masiá</a>,
-                  <a href="http://giga.cps.unizar.es/~diegog/">Diego Gutiérrez</a></p>
+                  <a href="http://giga.cps.unizar.es/~diegog/">Diego Gutiérrez</a>
+                </p>
                 <div class="links">
                     <a href="assets/data/papers/PerceptualMatEditing_EG2022.pdf" class="pdf-button">Paper</a>
                     <a href="https://perso.liris.cnrs.fr/johanna.delanoy/2022_materials_generative_editing/index.html" class="project-button">Project Page</a>
@@ -521,10 +576,12 @@
                   <h4>Master Thesis</h4>
                   <p><em>USI Lugano, Switzerland</em></p>
                   <ul>
-                    <li>Michele Chersich, Masters in Computer Science [<em>Feb 2023 - September 2024</em>] </li>
+                    <li>Michele Chersich, Masters in Computational Science [<em>Feb 2023 - September 2024</em>] </li>
                     <p>Reinforcement Learning for Importance Sampling of Neural Radiance Fields</p>
                     <li>Nicolai Hermann, Masters in AI [<em>Feb 2024 - September 2024</em>] </li>
                     <p>Perceptually-Driven Neural Inpainting for Seamless 3D Reconstructions</p>
+                    <li>Kacper Kramarz-Fernandez, Masters in High Performance Computing (EU4HPC Programme) [<em>November 2024 - Ongoing</em>] </li>
+                    <p>Efficient Physically-Based Rendering of Kernel-based Volumes</p>
                   </ul>
                 </div>
               </div>
@@ -591,7 +648,7 @@
               <img class="compressed-image" src="assets/data/logos/press-logo-statico-usi-orizzontale-web.png" alt="Institutional Icon">
             </div>
             <div class="content">
-              <h3>PhD Candidate</h3>
+              <h3>PhD in Computer Science</h3>
               <h4>IDSIA-USI Lugano, Switzerland</h4>
               <h5date>Feb 2022 - Feb 2026 (expected)</h5date>
               <div class="details-new">
@@ -619,7 +676,7 @@
                   <a href="https://es.linkedin.com/in/marcosfajardo">Marcos Fajardo</a>,
                   <a href="https://mattchiangvfx.com/">Matt Chiang</a>, and
                   <a href="https://cs.dartmouth.edu/wjarosz/">Wojciech Jarosz</a> (check my submission  <a href="assets/data/images/concursorender.png">here</a> )</p>
-                <p> University is Ranked #1 in Spain in Computer Graphics, Robotics and Computer Vision (<a href="https://edurank.org">edurank</a>)</p>
+                <p> University was Ranked #1 in Spain in Computer Graphics, Robotics and Computer Vision in 2020-2022(<a href="https://edurank.org">edurank</a>)</p>
               </div>
             </div>
           </div>
@@ -1258,13 +1315,6 @@
                 <h4>Email:</h4>
                 <p>jorge.condor@usi.ch</p>
               </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+41 07822470977</p>
-              </div>
-
               
             </div>
 
