@@ -1330,15 +1330,7 @@ input, select, textarea {
 			opacity: 1.0 !important;
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		@media screen and (max-width: 240px) {
-=======
-		@media screen and (max-width: 980px) {
->>>>>>> b1c71f8 (Fuencalderas photography contest page)
-=======
-		@media screen and (max-width: 240px) {
->>>>>>> 608d153 (fixed popup text)
 
 			.poptrox-popup .closer {
 				background-size: 3em;
@@ -1351,15 +1343,7 @@ input, select, textarea {
 
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		@media screen and (max-width: 240px) {
-=======
-		@media screen and (max-width: 736px) {
->>>>>>> b1c71f8 (Fuencalderas photography contest page)
-=======
-		@media screen and (max-width: 240px) {
->>>>>>> 608d153 (fixed popup text)
 
 			.poptrox-popup:before {
 				display: none;
@@ -1600,18 +1584,9 @@ input, select, textarea {
 			}
 
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 /* Main */
 
-=======
->>>>>>> b1c71f8 (Fuencalderas photography contest page)
-=======
-
-/* Main */
-
->>>>>>> 0d10684 (correct image visibility on photocontest)
 	#main {
 		-moz-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -moz-filter 0.5s ease;
 		-webkit-transition: -moz-filter 0.5s ease, -webkit-filter 0.5s ease, -ms-filter 0.5s ease, -webkit-filter 0.5s ease;
@@ -1638,13 +1613,6 @@ input, select, textarea {
 			opacity: 1;
 			overflow: hidden;
 			position: relative;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    		aspect-ratio: 1 / 1; /* Maintains square shape; adjust as needed */
->>>>>>> b1c71f8 (Fuencalderas photography contest page)
-=======
->>>>>>> 0d10684 (correct image visibility on photocontest)
 		}
 
 			#main .thumb:after {
@@ -1674,13 +1642,6 @@ input, select, textarea {
 				position: absolute;
 				top: 0;
 				width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-				object-fit: cover;
->>>>>>> b1c71f8 (Fuencalderas photography contest page)
-=======
->>>>>>> 0d10684 (correct image visibility on photocontest)
 			}
 
 			#main .thumb > h2 {
