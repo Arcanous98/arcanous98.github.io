@@ -139,41 +139,67 @@
     </section><!-- End About Section -->
 
     <!-- ======= Facts Section ======= -->
+
     <section id="publications" class="facts">
       <div class="container">
         <div class="section-title">
           <h2>Publications</h2>
-        </div>
+        </div><p class="fst-italic">Representative works are highlighted</p>
+        
         <div class="publication-box">
+          <div class="image">
+            <img src="projects/PuzzleSim/puzzlesim_teaser.png" alt="ArXiv24">
+          </div>
+          <div class="details">
+              <h2 class="title">Puzzle Similarity: A Perceptually-guided No-Reference Metric for Artifact Detection in 3D Scene Reconstructions</h2>
+              <p class="conference">International Conference on Computer Vision [ICCV'25]</p>
+              <p class="abstract">A novel no-reference metric to spatially assess 3D reconstructed view quality
+                using perceptual embeddings, through an efficient patch-wise similarity computation between the
+                training dataset and the evaluated view. Surpasses even direct reference metrics in human assessment 
+                correlation tests. We leverage it in automatic, recursive in-painting for
+                artifact restoration.
+              </p>
+              <p class="authors"><a href="https://nihermann.github.io/">Nicolai Hermann</a>,
+                <strong>Jorge Condor</strong>,
+                <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>
+              <div class="links">
+                  <a href="https://nihermann.github.io/puzzlesim/data/Puzzle_Similarity_paper.pdf" class="pdf-button">Paper</a>
+                  <a href="https://nihermann.github.io/puzzlesim/index.html" class="pdf-button">Project Page</a>
+                  <a href="https://arxiv.org/abs/2411.17489" class="pdf-button">ArXiv Page</a>
+                  <a href="https://github.com/nihermann/PuzzleSim" class="pdf-button">Code</a>
+              </div>
+          </div>
+        </div>
+        <div class="publication-box highlighted-publication-box">
           <div class="image">
             <img src="projects/GaussianVolumes/figures/cloud_250kgmm_v2.png" alt="ArXiv24">
           </div>
           <div class="details">
-              <h2 class="title">Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
-                Modeling and Rendering Scattering and Emissive Media</h2>
-              <p class="conference">ACM Transactions on Graphics (to be presented at SIGGRAPH'25)</p>
-              <p class="abstract">Banking on the popularity of rasterized 3D Gaussian Splatting methods,
-                we formalize the ray-tracing of volumes composed of kernel mixture models (Gaussian or otherwise). Our physically-based, 
-                path-traced formulation allows us to render and optimize both scattering and emissive volumes, as well as
-                radiance fields, in an extremely efficient and compact manner. We also introduce the Epanechnikov kernel as an efficient
-                alternative for the Gaussian kernel in radiance field rendering, and showcase the advantages of a ray-traced framework, while
-                maintaining real-time performance.
-              </p>
-              <p class="authors"><strong>Jorge Condor</strong>,
-                <a href="https://speierers.github.io/">Sébastien Speierer</a>,
-                <a href="https://scholar.google.com/citations?user=iXX3uNEAAAAJ&hl=de">Lukas Bode</a>,
-                <a href="https://aljazbozic.github.io/">Aljaž Božič</a>,
-                <a href="https://scholar.google.com/citations?user=VmHZtsEAAAAJ&hl=en">Simon Green</a>,
-                <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>,
-                <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a>
-              </p>
-                <div class="links">
-                <a href="assets/data/papers/Gaussian_tracing_meta_TOG-compressed.pdf" class="pdf-button">Paper (compressed)</a>
-                <a href="projectPages/gaussianVolumes.html" class="pdf-button">Project Page</a>
-                <a href="https://github.com/facebookresearch/volumetric_primitives" class="pdf-button">Code</a>
-                <a href="https://dl.acm.org/doi/10.1145/3711853" class="pdf-button">Publisher's Page</a>
-                <a href="https://arxiv.org/abs/2405.15425" class="pdf-button">ArXiv Page</a>
-              </div>
+            <h2 class="title">Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
+              Modeling and Rendering Scattering and Emissive Media</h2>
+            <p class="conference">ACM Transactions on Graphics (to be presented at SIGGRAPH'25)</p>
+            <p class="abstract">Banking on the popularity of rasterized 3D Gaussian Splatting methods,
+              we formalize the ray-tracing of volumes composed of kernel mixture models (Gaussian or otherwise). Our physically-based, 
+              path-traced formulation allows us to render and optimize both scattering and emissive volumes, as well as
+              radiance fields, in an extremely efficient and compact manner. We also introduce the Epanechnikov kernel as an efficient
+              alternative for the Gaussian kernel in radiance field rendering, and showcase the advantages of a ray-traced framework, while
+              maintaining real-time performance.
+            </p>
+            <p class="authors"><strong>Jorge Condor</strong>,
+              <a href="https://speierers.github.io/">Sébastien Speierer</a>,
+              <a href="https://scholar.google.com/citations?user=iXX3uNEAAAAJ&hl=de">Lukas Bode</a>,
+              <a href="https://aljazbozic.github.io/">Aljaž Božič</a>,
+              <a href="https://scholar.google.com/citations?user=VmHZtsEAAAAJ&hl=en">Simon Green</a>,
+              <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>,
+              <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a>
+            </p>
+              <div class="links">
+              <a href="assets/data/papers/Gaussian_tracing_meta_TOG-compressed.pdf" class="pdf-button">Paper (compressed)</a>
+              <a href="projectPages/gaussianVolumes.html" class="pdf-button">Project Page</a>
+              <a href="https://github.com/facebookresearch/volumetric_primitives" class="pdf-button">Code</a>
+              <a href="https://dl.acm.org/doi/10.1145/3711853" class="pdf-button">Publisher's Page</a>
+              <a href="https://arxiv.org/abs/2405.15425" class="pdf-button">ArXiv Page</a>
+            </div>
           </div>
         </div>
         <div class="publication-box">
@@ -199,35 +225,11 @@
         </div>
         <div class="publication-box">
           <div class="image">
-            <img src="projects/PuzzleSim/puzzlesim_teaser.png" alt="ArXiv24">
-          </div>
-          <div class="details">
-              <h2 class="title">Puzzle Similarity: A Perceptually-guided No-Reference Metric for Artifact Detection in 3D Scene Reconstructions</h2>
-              <p class="conference">ArXiv [Nov'24]</p>
-              <p class="abstract">A novel no-reference metric to spatially assess 3D reconstructed view quality
-                using perceptual embeddings, through an efficient patch-wise similarity computation between the
-                training dataset and the evaluated view. Surpasses even direct reference metrics in human assessment 
-                correlation tests. We leverage it in automatic, recursive in-painting for
-                artifact restoration.
-              </p>
-              <p class="authors"><a href="https://nihermann.github.io/">Nicolai Hermann</a>,
-                <strong>Jorge Condor</strong>,
-                <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>
-              <div class="links">
-                  <a href="https://nihermann.github.io/puzzlesim/data/Puzzle_Similarity_paper.pdf" class="pdf-button">Paper</a>
-                  <a href="https://nihermann.github.io/puzzlesim/index.html" class="pdf-button">Project Page</a>
-                  <a href="https://arxiv.org/abs/2411.17489" class="pdf-button">ArXiv Page</a>
-                  <a href="https://github.com/nihermann/PuzzleSim" class="pdf-button">Code</a>
-              </div>
-          </div>
-        </div>
-        <div class="publication-box">
-          <div class="image">
             <img src="projects/HVSSR/hvssr.jpg" alt="ArXiv24">
           </div>
           <div class="details">
-              <h2 class="title">Perceptually Optimized Super Resolution</h2>
-              <p class="conference">ArXiv [Nov'24]</p>
+              <h2 class="title">Super Resolution for Humans</h2>
+              <p class="conference">Siggraph Posters [2025]</p>
               <p class="abstract">We leverage low-level human vision models to drastically improve the 
                 efficiency of learned Super Resolution (SR) models. Our key insight is that compute
                 should be focused on areas that are perceptually significant to the human eye.
@@ -249,7 +251,7 @@
               </div>
           </div>
         </div>
-        <div class="publication-box">
+        <div class="publication-box highlighted-publication-box">
           <div class="image">
             <img src="assets/data/images/ColorGloss/two-colors.png" alt="SIGG23">
           </div>

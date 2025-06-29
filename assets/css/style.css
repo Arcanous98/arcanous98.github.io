@@ -1671,3 +1671,20 @@ samp {
   width: 100%;
   height: 100%;
 }
+.highlighted-publication-box {
+  background-color: #fff9c4; /* Light yellow tint */
+  border: 2px solid #fdd835; /* Yellow border */
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for emphasis */
+}
+.highlighted-publication-box .title {
+  color: #f57f17; /* Dark yellow for the title */
+}
+.highlighted-publication-box .pdf-button {
+  background-color: #66838c; /* Yellow button */
+  color: #fff; /* White text */
+}
+.highlighted-publication-box .pdf-button:hover {
+  background-color: #fbc02d; /* Slightly darker yellow on hover */
+}
