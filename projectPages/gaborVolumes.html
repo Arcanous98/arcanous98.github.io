@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering</title>
+  <meta content="Gabor Fields — orientation-selective level-of-detail for volumetric rendering with Gabor kernel mixtures." name="description">
+  <meta content="volume rendering, Gabor, level of detail, SIGGRAPH" name="keywords">
+
+  <link href="../assets/data/images/NeRFLum/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://kit.fontawesome.com/9e38703a07.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../assets/academicons-1.9.4/css/academicons.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector('.copy-button').addEventListener('click', function() {
+        const codeElement = document.getElementById('codeBox');
+        const textToCopy = codeElement.innerHTML.replace(/&nbsp;/g, ' ')
+                                                .replace(/<br\s*\/?>/mg, "\n")
+                                                .replace(/&amp;/g, "&")
+                                                .replace(/&lt;/g, "<")
+                                                .replace(/&gt;/g, ">");
+                navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert('Text successfully copied to clipboard');
+          })
+          .catch(err => {
+            alert('Unable to copy text');
+            console.error('Unable to copy text', err);
+          });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <header id="header">
+    <div class="d-flex flex-column">
+      <div class="profile">
+        <img src="../assets/img/Jorge-Condor.png" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="/index.html">Jorge Condor</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://github.com/Arcanous98" class="github"><i class="bi bi-github"></i></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en"><svg style=" margin-bottom: -10px; ;" xmlns="http://www.w3.org/2000/svg" aria-label="Google Scholar" role="img" viewBox="0 100 512 512" width="32px" height="32px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"></path></g></svg></a>
+          <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://twitter.com/Arcanous98" class="twitter"><i class="bi bi-twitter "></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="/index.html#about" class="nav-link scrollto"><i class="bi bi-person-vcard"></i> <span>About</span></a></li>
+          <li><a href="/index.html#publications" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Publications</span></a></li>
+          <li><a href="/index.html#workexperience" class="nav-link scrollto"><i class="bi bi-building"></i> <span>Experience</span></a></li>
+          <li><a href="/index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
+          <li><a href="/index.html#portfolio" class="nav-link scrollto"><i class="bi bi-camera2"></i> <span>Photography</span></a></li>
+          <li><a href="/index.html#contact" class="nav-link scrollto"><i class="bi bi-envelope-at"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Projects</h2>
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li>Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="inner-page">
+      <div id="content" class="wrap project-page-fixed">
+        <div class="paperTitle">
+          <h1>Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering</h1>
+          <div class="conf-name">
+            ACM Transactions on Graphics (SIGGRAPH 2026)
+          </div>
+          <div class="authors">
+            <a href="https://arcanous98.github.io/">Jorge Condor</a><sup>1,*</sup><span class="space"></span>
+            <a href="https://nihermann.github.io/">Nicolai Hermann</a><sup>1,*</sup><span class="space"></span>
+            <a href="https://scholar.google.com/citations?user=7_yFEQIAAAAJ&amp;hl=en">Mehmet Ata Yurtsever</a><sup>1</sup><span class="space"></span>
+            <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a><sup>1</sup>
+          </div>
+          <div class="universities">
+            <sup>*</sup>Joint first authors.<span class="smallspace"></span>
+            <sup>1</sup><a href="https://www.usi.ch/en">Università della Svizzera italiana (USI), Lugano, Switzerland</a>
+          </div>
+        </div>
+
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/teaser_v4.png" alt="Teaser: Gabor Field level-of-detail decomposition on the volumetric Bunny"/>
+        <fig_sub class="teaser-caption">Level-of-detail decomposition of a Gabor Field: frequency- and orientation-selectivity lets us mask particle collections at render time for continuous LOD, faster rendering, and a controllable bias–variance trade-off when sample cost matters. OpenVDB volumetric Bunny.</fig_sub>
+        <br/><br/>
+
+        <div class="paper-link-row">
+          <a href="https://arxiv.org/abs/2602.05081" class="paper-link-button"><i class="ai ai-arxiv"></i><span>arXiv</span></a>
+          <a href="https://arxiv.org/pdf/2602.05081.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper PDF</span></a>
+          <span class="paper-link-button disabled" aria-disabled="true"><i class="bi bi-github"></i><span>Code (soon)</span></span>
+        </div>
+        <br/>
+
+        <p>Gaussian-based volumetric representations make physically based rendering 
+          practical at a fraction of the memory and runtime cost of dense voxel grids, 
+          but hierarchical 
+          level-of-detail (LOD) remains inneficient: prefiltering or mipmap-style Gaussians 
+          tends to cost extra memory, requires re-fitting per level, and can produce harsh 
+          transitions between LODs. We introduce <b>Gabor Fields</b>: mixtures of primitive 
+          <b>anisotropic Gabor kernels</b> (Gaussian envelopes with harmonic modulation). Limiting 
+          frequency content corresponds to pruning oriented primitives, without growing the
+           representation. Combined with analytic line integrals and a hierarchical fitting
+            procedure, this yields natural LOD, stochastic masking along rays for cheaper 
+            single- and multiple-scattering traversal, and allows for easy integration within volumetric 
+            path tracing frameworks.</p>
+        <br/><br/>
+
+        <h2p>Gabor kernels: localized in space and in frequency</h2p>
+        <p>Unlike Gaussians, each Gabor primitive is selective in both frequency and orientation: its spectrum is concentrated around a modulation frequency, which makes band-limiting the volume a matter of dropping kernels rather than convolving into ever-larger Gaussians.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/gabor_spatial_fourier.png" alt="Gabor kernel in space and Fourier domain"/>
+        <br/><br/>
+
+        <h2p>LOD: Gaussian vs. Gabor trade-offs</h2p>
+        <br/><br/>
+        <p>Classic voxel LOD removes detail by downsampling or pruning hierarchy levels. Gaussian mixtures lack a similarly cheap spectral knob: low-pass filtering inflates supports or forces re-optimization. Gabor Fields align LOD with frequency content so coarse levels stay consistent and memory does not multiply with each mip.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/lod_paper_comparison_grid.png" alt="Comparison of LOD strategies: Gaussian vs Gabor"/>
+        <br/><br/>
+        <div class="video-pair">
+          <div class="video-container">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+              <source src="../projects/GaborFields/videos/lod_bunny_static.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-container">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+              <source src="../projects/GaborFields/videos/lod_bunny_zooming.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <fig_sub>Volumetric Bunny: static comparison across band-limited LOD levels (left), and camera motion (right) to illustrate temporal stability of coarse levels.</fig_sub>
+        <br/><br/>
+
+        <h2p>Orientation selectivity and ray-space masking</h2p>
+        <br/><br/>
+        <p>Kernels that barely contribute along a given direction can be culled or sampled stochastically, which cuts traversal work in dense volumes while remaining unbiased under our sampling strategies (see paper for derivations and variance discussion).</p>
+        <br/><br/>
+        <div class="video-container">
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+            <source src="../projects/GaborFields/videos/gabor_selectivity.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <fig_sub>Selectivity of Gabor contributions in the volume.</fig_sub>
+        <br/><br/>
+        <div class="video-container">
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+            <source src="../projects/GaborFields/videos/orientation_selective_threshold_culling_bunny.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <fig_sub>Orientation-aware threshold culling on the Bunny.</fig_sub>
+        <br/><br/>
+
+        <h2p>LOD results</h2p>
+        <br/><br/>
+        <div class="figure-half-row">
+          <img src="../projects/GaborFields/figures/far_lod_army_800spp_final.png" alt="Converged reference render"/>
+          <img src="../projects/GaborFields/figures/far_lod_army_colorized_32spp.png" alt="Low-sample biased preview"/>
+        </div>
+        <fig_sub>Far-field LOD: high-sample reference (left) vs. aggressive low-sample rendering with structured residual (right), illustrating performance-oriented trade-offs.</fig_sub>
+        <br/><br/>
+
+        <h2p>Accelerating multiple-scattering with our frequency-based stochastic-analytical estimators</h2p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/ablation_biased_zeronee.png" alt="Ablation: biased vs unbiased stochastic-analytical multiple-scattering estimator on a volumetric cloud"/>
+        <br/><br/>
+
+        <h2p>Results</h2p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/path_tracing_results.png" alt="Path tracing results"/>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/stochastic.png" alt="Stochastic masking along rays"/>
+        <br/><br/>
+
+        <h2p>Motion blur</h2p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/motion_blur_cloud.png" alt="Motion blur with volumetric cloud"/>
+        <br/><br/>
+
+        <div>
+          <h2p>Citation</h2p>
+          <br/><br/>
+          Jorge Condor and Nicolai Hermann (joint first authors), Mehmet Ata Yurtsever, and Piotr Didyk.
+          <b>Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering</b>,
+          ACM Transactions on Graphics (SIGGRAPH 2026).
+          <br/><br/>
+          <div class="code-box">
+            <button class="copy-button">Copy</button>
+            <code id="codeBox">
+              @article{Condor2026GaborFields,<br/>
+              &nbsp;&nbsp;author = {Condor, Jorge and Hermann, Nicolai and Yurtsever, Mehmet Ata and Didyk, Piotr},<br/>
+              &nbsp;&nbsp;title = {{Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering}},<br/>
+              &nbsp;&nbsp;journal = {ACM Trans. Graph.},<br/>
+              &nbsp;&nbsp;year = {2026},<br/>
+              &nbsp;&nbsp;note = {Jorge Condor and Nicolai Hermann contributed equally. SIGGRAPH 2026. arXiv:2602.05081},<br/>
+              &nbsp;&nbsp;url = {https://arxiv.org/abs/2602.05081}<br/>
+              }
+            </code>
+          </div>
+        </div>
+        <br/><br/>
+
+        <h2p>Acknowledgements</h2p>
+        <br/><br/>
+        <div style="text-align:justify">
+          This project has received funding from the Swiss National Science Foundation (SNSF, Grant 200502) and an academic gift from Meta. We acknowledge access to Alps at the Swiss National Supercomputing Centre, Switzerland under USI's share (project ID u6).
+        </div>
+        <br/><br/>
+        <h2p>Affiliation</h2p>
+        <br/><br/>
+        <div id="collaborations">
+          <a href="https://www.usi.ch/"><img src="../projects/ColorGloss/images/usi_logo.png" alt="USI"/></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/typed.js/typed.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/autoplay-videos.js"></script>
+
+</body>
+
+</html>

@@ -100,10 +100,10 @@
             <p class="fst-italic">
               I am a PhD Student on Computer Graphics at <a href="https://www.idsia.ch/">IDSIA-USI</a> (Lugano, Switzerland)
               under the supervision of <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>.
-              My research focuses on leveraging inverse graphics to improve applications in vision, 
-              rendering and fabrication. During my PhD I had the opportunity to intern at <a href="https://about.meta.com/realitylabs/">Meta Reality Labs</a> working alongside the talented Monaco Rendering Team, working on
+              My research focuses on inverse rendering and its applications in vision, graphics and fabrication.
+              During my PhD I had the opportunity to intern at <a href="https://about.meta.com/realitylabs/">Meta Reality Labs</a> working alongside the talented Monaco Rendering Team, working on
               accelerating physically-based volume rendering for photorealistic avatars, under the supervision of <a href="https://www.linkedin.com/in/christophehery">Christophe Hery</a> and <a href="http://giga.cps.unizar.es/~ajarabo/">Adrián Jarabo</a>.
-              Starting from Summer 2025 I will be joining <a href="https://www.nvidia.com/en-us/research/">NVIDIA</a> as a Research Scientist Intern at the Toronto AI Lab, under the supervision of <a href="https://zgojcic.github.io/">Zan Gojcic</a>.
+              Since Summer 2025 I have been working as a Research Scientist Intern at <a href="https://www.nvidia.com/en-us/research/">NVIDIA</a>'s <a href="https://research.nvidia.com/labs/sil/">Spatial Intelligence Lab</a>, under the supervision of <a href="https://zgojcic.github.io/">Zan Gojcic</a>.
             <!-- Previously, I did a Master's in Graphics, Robotics and Computer Vision at <a href="https://www.unizar.es/">Universidad de Zaragoza</a>
             ,
             where I had the immense pleasure of working alongside the <a href="https://graphics.unizar.es/">Graphics and Imaging Lab</a>
@@ -113,7 +113,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Download my CV <a href="assets\data\cv\Jorge_Condor_CV.pdf">here</a></strong></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Download my CV <a href="assets\data\cv\Jorge_Condor_CV.pdf">here</a> (last updated: May 2025)</strong></li>
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li> -->
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li> -->
                   <li><i class="bi bi-chevron-right"></i> <strong>Location:</strong> <span>Lugano, Switzerland</span></li>
@@ -146,6 +146,50 @@
           <h2>Publications</h2>
         </div><p class="fst-italic">Representative works are highlighted</p>
         
+        <div class="publication-box highlighted-publication-box">
+          <div class="image">
+            <img src="assets/data/images/teaser-figure-05-oblique.jpg" alt="Neural Harmonic Textures teaser figure">
+          </div>
+          <div class="details">
+            <h2 class="title">Neural Harmonic Textures for High-Quality Primitive Based Neural Reconstruction</h2>
+            <p class="conference">arXiv preprint, 2026</p>
+            <p class="abstract">We introduce Neural Harmonic Textures, a neural representation that anchors latent feature vectors on a virtual scaffold surrounding each primitive. Inspired by Fourier analysis, periodic activations turn alpha blending into a weighted sum of harmonic components, decoded in a single deferred pass by a small MLP. The method yields state-of-the-art real-time novel view synthesis, integrates seamlessly within reconstruction approaches such as 3DGS, 3DGUT, Triangle Splatting, and 2DGS, and generalizes to 2D image fitting, semantic fields, and PBR material stacks.</p>
+            <p class="authors"><strong>Jorge Condor</strong>,
+              <a href="https://ca.linkedin.com/in/nicolas-mo%C3%ABnne-loccoz-71040512">Nicolas Moenne-Loccoz</a>,
+              <a href="https://merlin.nimierdavid.fr/">Merlin Nimier-David</a>,
+              <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>,
+              <a href="https://zgojcic.github.io/">Zan Gojcic</a>,
+              <a href="https://wilsoncernwq.github.io/">Qi Wu</a>
+            </p>
+            <div class="links">
+              <a href="assets/data/papers/neural_harmonic_textures.pdf" class="pdf-button">Paper</a>
+              <a href="https://research.nvidia.com/labs/sil/projects/neural-harmonic-textures/" class="pdf-button">Project Page</a>
+              <a href="https://arxiv.org/abs/2604.01204" class="pdf-button">ArXiv</a>
+              <a href="https://github.com/nv-tlabs/neural-harmonic-textures" class="pdf-button">Code</a>
+            </div>
+          </div>
+        </div>
+        <div class="publication-box highlighted-publication-box">
+          <div class="image">
+            <img src="projects/GaborFields/figures/png/teaser_v4_render.png" alt="Gabor Fields teaser figure">
+          </div>
+          <div class="details">
+            <h2 class="title">Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering</h2>
+            <p class="conference">ACM Transactions on Graphics [SIGGRAPH'26]</p>
+            <p class="abstract">We represent volumetric density with mixtures of Gabor kernels so that level-of-detail becomes continuous frequency filtering: pruning oriented primitives band-limits the field without mipmaps, re-fitting, or extra memory. We derive analytic line integrals, a hierarchical regression scheme, and stochastic masking along rays that accelerates single- and multiple-scattering path tracing.</p>
+            <p class="authors"><strong>Jorge Condor</strong><sup>*</sup>,
+              <a href="https://nihermann.github.io/">Nicolai Hermann</a><sup>*</sup>,
+              <a href="https://scholar.google.com/citations?user=7_yFEQIAAAAJ&amp;hl=en">Mehmet Ata Yurtsever</a>,
+              <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a><br/>
+              <span class="fst-italic" style="font-size:0.9em"><sup>*</sup>Joint first authors</span>
+            </p>
+            <div class="links">
+              <a href="projectPages/gaborVolumes.html" class="pdf-button">Project Page</a>
+              <a href="https://arxiv.org/abs/2602.05081" class="pdf-button">ArXiv</a>
+              <span class="pdf-button" style="opacity:0.75;cursor:default;">Code (soon)</span>
+            </div>
+          </div>
+        </div>
         <div class="publication-box">
           <div class="image">
             <img src="projects/PuzzleSim/puzzlesim_teaser.png" alt="ArXiv24">
@@ -177,7 +221,7 @@
           <div class="details">
             <h2 class="title">Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
               Modeling and Rendering Scattering and Emissive Media</h2>
-            <p class="conference">ACM Transactions on Graphics (to be presented at SIGGRAPH'25)</p>
+            <p class="conference">ACM Transactions on Graphics [presented at SIGGRAPH'25]</p>
             <p class="abstract">Banking on the popularity of rasterized 3D Gaussian Splatting methods,
               we formalize the ray-tracing of volumes composed of kernel mixture models (Gaussian or otherwise). Our physically-based, 
               path-traced formulation allows us to render and optimize both scattering and emissive volumes, as well as
@@ -694,10 +738,9 @@
             <div class="content">
               <h3>PhD in Computer Science</h3>
               <h4>IDSIA-USI Lugano, Switzerland</h4>
-              <h5date>Feb 2022 - Dec 2026 (expected)</h5date>
+              <h5date>March 2022 - April 2027 (expected)</h5date>
               <div class="details-new">
-                <p>PhD Candidate on Computer Graphics under the supervision of Prof. <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>. My research focuses on leveraging
-                  inverse graphics to improve applications in vision, graphics and fabrication.</p>
+                <p>PhD Candidate on Computer Graphics under the supervision of Prof. <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a>. My research focuses on inverse rendering and its applications in vision, graphics and fabrication.</p>
               </div>
             </div>
           </div>

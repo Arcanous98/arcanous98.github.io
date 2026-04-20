@@ -111,7 +111,7 @@
     </section><!-- End Breadcrumbs -->
     
     <section class="inner-page">
-      <div id="content" class="wrap">
+      <div id="content" class="wrap project-page-fixed">
         <div class="paperTitle">
             <h1>A Learned Radiance-Field Representation
               for Complex Luminaires</h1>
@@ -136,6 +136,13 @@
     with 64 samples per pixel in 1.3 minutes; and our method with 32 samples per pixel, 52.1 seconds. We leverage learned 
     volumetric radiance fields to obtain high quality representations of complex luminaires.</fig_sub>
     <br/><br/>
+
+  <div class="paper-link-row">
+    <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper (64 MB)</span></a>
+    <a href="https://diglib.eg.org/handle/10.2312/sr20221155" class="paper-link-button"><i class="bi bi-globe"></i><span>Publisher</span></a>
+  </div>
+  <br/><br/>
+
   <p style="text-align:justify">We propose an efficient method for rendering complex luminaires using a high quality 
     octree-based representation of the luminaire emission. Complex luminaires are a particularly challenging problem
      in rendering, due to their caustic light paths inside the luminaire. 
@@ -157,20 +164,10 @@
         <h2p>Supplemental: Temporal Stability</h2p>
         <br/><br/>
         <div class="video-container">
-          <video controls>
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
             <source src="../projects/ComplexLum/paper1014_MM_CRC2.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-        </div>
-        <h2p>Downloads</h2p>
-        <br/><br/>
-        <div class="pdfdiv">
-            <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
-            Paper <a href="../assets/data/papers/NeRFComplexLum_JorgeCondor_EGSR2022.pdf">[PDF ~64 MB]</a>
-        </div>
-        <div class="pdfdiv">
-            <a href="https://diglib.eg.org/handle/10.2312/sr20221155"><img src="../projects/ColorGloss/images/website.png" height="40px" class="pdfico"/></a>
-           <a href="https://diglib.eg.org/handle/10.2312/sr20221155">Publisher Website</a>
         </div>
         <div>
             <h2p>Citation</h2p>
@@ -238,6 +235,7 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/autoplay-videos.js"></script>
 
 </body>
 

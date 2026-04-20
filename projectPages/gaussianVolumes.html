@@ -113,12 +113,12 @@
     </section><!-- End Breadcrumbs -->
     
     <section class="inner-page">
-      <div id="content" class="wrap">
+      <div id="content" class="wrap project-page-fixed">
         <div class="paperTitle">
             <h1>Don't Splat your Gaussians: Volumetric Ray-Traced Primitives for
                 Modeling and Rendering Scattering and Emissive Media</h1>
             <div class="conf-name">
-              ACM Transactions on Graphics, 2024 (to be presented at SIGGRAPH 2025)
+              ACM Transactions on Graphics, 2024 (presented at SIGGRAPH 2025)
             </div>
             <div class="authors">
               <a href="https://arcanous98.github.io/">Jorge Condor</a><sup>1,2</sup><span class="space"></span>
@@ -142,6 +142,17 @@
     the original asset, at a potential cost of detail (Figure 7), we provide large performance and memory compression benefits. Asset is part of the Walt Disney
     Animation Studios cloud dataset (CC-BY-SA 3.0). Rendering times reported on a NVIDIA A6000.</fig_sub>
     <br/><br/>
+
+  <div class="paper-link-row">
+    <a href="https://arxiv.org/abs/2405.15425" class="paper-link-button"><i class="ai ai-arxiv"></i><span>arXiv</span></a>
+    <a href="../assets/data/papers/Gaussian_tracing_meta_TOG-compressed.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper (6.9 MB)</span></a>
+    <a href="../assets/data/papers/Gaussian_tracing_meta_TOG.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper (53 MB)</span></a>
+    <a href="../assets/data/papers/Gaussian_tracing_meta_TOG_supplemental-compressed.pdf" class="paper-link-button"><i class="bi bi-journal-text"></i><span>Supplemental</span></a>
+    <a href="https://github.com/facebookresearch/volumetric_primitives" class="paper-link-button"><i class="bi bi-github"></i><span>Code</span></a>
+    <a href="https://dl.acm.org/doi/10.1145/3711853" class="paper-link-button"><i class="bi bi-globe"></i><span>Publisher</span></a>
+  </div>
+  <br/><br/>
+
   <p>We propose a compact and efficient alternative to existing volumetric representations for rendering such as voxel 
     grids. Inspired by recent methods for scene reconstruction that leverage mixtures of 3D Gaussians to model radiance fields, 
     we formalize and generalize the modeling of scattering and emissive media using mixtures of simple kernel-based volumetric 
@@ -175,7 +186,7 @@
         <h2p>Inverse and Forward Path-traced Gaussian Volumes</h2p>
         <br/><br/>
         <div class="video-container">
-          <video controls>
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
             <source src="../projects/GaussianVolumes/figures/cloud.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -188,32 +199,7 @@
         <h2p>Level of Detail and Performance-Quality Control</h2p>
         <br/><br/>
         <img src="../projects/GaussianVolumes/figures/lod_converged_cloud.png" width="100%"/>
-        <h2p>Downloads & Links</h2p>
         <br/><br/>
-        <div class="pdfdiv">
-          <a href="https://github.com/facebookresearch/volumetric_primitives"><img src="../projects/GaussianVolumes/figures/github.png" height="40px" class="pdfico"/></a>
-          <a href="https://github.com/facebookresearch/volumetric_primitives">Code </a>
-      </div>
-        <div class="pdfdiv">
-          <a href="../assets/data/papers/Gaussian_tracing_meta_TOG.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
-          Paper (compressed) <a href="../assets/data/papers/Gaussian_tracing_meta_TOG-compressed.pdf">[PDF ~6.9 MB]</a>
-      </div>
-      <div class="pdfdiv">
-        <a href="../assets/data/papers/Gaussian_tracing_meta_TOG.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
-        Paper <a href="../assets/data/papers/Gaussian_tracing_meta_TOG.pdf">[PDF ~53 MB]</a>
-      </div>
-      <div class="pdfdiv">
-          <a href="../assets/data/papers/Gaussian_tracing_meta_TOG_supplemental.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
-          Supplemental Material (compressed)<a href="../assets/data/papers/Gaussian_tracing_meta_TOG_supplemental-compressed.pdf">[PDF ~5.1 MB]</a>
-      </div>
-        <!-- <div class="pdfdiv">
-            <a href="../assets/data/papers/Gaussian_tracing_meta_TOG_supplemental.pdf"><img src="../projects/ColorGloss/images/pdf-icon.png" height="40px" class="pdfico"/></a>
-            Supplemental Material<a href="../assets/data/papers/Gaussian_tracing_meta_TOG_supplemental.pdf">[PDF ~130 MB]</a>
-        </div> -->
-        <!-- <div class="pdfdiv">
-            <a href="https://diglib.eg.org/handle/10.2312/sr20221155"><img src="../projects/ColorGloss/images/website.png" height="40px" class="pdfico"/></a>
-           <a href="https://diglib.eg.org/handle/10.2312/sr20221155">Publisher Website</a>
-        </div> -->
       <div>
         <h2p>Citation</h2p>
         <br/><br/>
@@ -287,6 +273,7 @@ Meta.
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/autoplay-videos.js"></script>
 
 </body>
 
