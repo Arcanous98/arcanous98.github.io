@@ -532,6 +532,83 @@ section {
 }
 
 /*--------------------------------------------------------------
+# News
+--------------------------------------------------------------*/
+.news {
+  padding: 60px 0;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-left: 4px solid #149ddd;
+  border-radius: 4px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.news-date {
+  flex: 0 0 110px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #149ddd;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-right: 16px;
+  border-right: 1px solid #e6e9ef;
+  margin-right: 18px;
+}
+
+.news-content {
+  flex: 1;
+  color: #2c4566;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.news-content a {
+  color: #1f5297;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.news-content a:hover {
+  color: #149ddd;
+  text-decoration: underline;
+}
+
+@media (max-width: 575px) {
+  .news-item {
+    flex-direction: column;
+  }
+
+  .news-date {
+    flex: none;
+    border-right: none;
+    border-bottom: 1px solid #e6e9ef;
+    padding-right: 0;
+    padding-bottom: 8px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/*--------------------------------------------------------------
 # Akills
 --------------------------------------------------------------*/
 .skills .progress {
