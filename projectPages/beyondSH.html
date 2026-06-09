@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Beyond Spherical Harmonics: Rethinking Appearance Models for Radiance Reconstruction</title>
+  <meta content="Beyond Spherical Harmonics — accepted at Computer Graphics Forum (EGSR 2026). A systematic study of spherical functions for view-dependent appearance in radiance fields, and the Normalized Anisotropic Spherical Gabor (NASGabor) kernel." name="description">
+  <meta content="radiance fields, novel view synthesis, spherical harmonics, spherical Gabor, anisotropic, NASGabor, EGSR, Computer Graphics Forum, view-dependent appearance, 3D Gaussian Splatting" name="keywords">
+
+  <link href="../assets/data/images/NeRFLum/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <script src="https://kit.fontawesome.com/9e38703a07.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../assets/academicons-1.9.4/css/academicons.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/style.css" rel="stylesheet">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector('.copy-button').addEventListener('click', function() {
+        const codeElement = document.getElementById('codeBox');
+        const textToCopy = codeElement.innerHTML.replace(/&nbsp;/g, ' ')
+                                                .replace(/<br\s*\/?>/mg, "\n")
+                                                .replace(/&amp;/g, "&")
+                                                .replace(/&lt;/g, "<")
+                                                .replace(/&gt;/g, ">");
+                navigator.clipboard.writeText(textToCopy)
+          .then(() => {
+            alert('Text successfully copied to clipboard');
+          })
+          .catch(err => {
+            alert('Unable to copy text');
+            console.error('Unable to copy text', err);
+          });
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <header id="header">
+    <div class="d-flex flex-column">
+      <div class="profile">
+        <img src="../assets/img/Jorge-Condor.png" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="/index.html">Jorge Condor</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://github.com/Arcanous98" class="github"><i class="bi bi-github"></i></a>
+          <a href="https://scholar.google.com/citations?user=xaYzz0AAAAAJ&hl=en"><svg style=" margin-bottom: -10px; ;" xmlns="http://www.w3.org/2000/svg" aria-label="Google Scholar" role="img" viewBox="0 100 512 512" width="32px" height="32px" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M213 111l-107 94h69c5 45 41 64 78 67-7 18-4 27 7 39-43 1-103 26-103 67 4 45 63 54 92 54 38 1 81-19 90-54 4-35-10-54-31-71-23-18-28-28-21-40 15-17 35-27 39-51 2-17-2-28-6-43l45-38-1 16c-3 2-5 6-5 9v103c2 13 22 11 23 0V160c0-3-2-7-5-8v-25l16-16zm58 141c-61 10-87-87-38-99 56-11 83 86 38 99zm-5 73c60 13 61 63 10 78-44 9-82-4-81-30 0-25 35-48 71-48z"></path></g></svg></a>
+          <a href="https://www.instagram.com/arcanous98/" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/jorge-condor-9898621b7/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://twitter.com/Arcanous98" class="twitter"><i class="bi bi-twitter "></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="/index.html#about" class="nav-link scrollto"><i class="bi bi-person-vcard"></i> <span>About</span></a></li>
+          <li><a href="/index.html#publications" class="nav-link scrollto"><i class="bi bi-file-earmark"></i> <span>Publications</span></a></li>
+          <li><a href="/index.html#workexperience" class="nav-link scrollto"><i class="bi bi-building"></i> <span>Experience</span></a></li>
+          <li><a href="/index.html#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
+          <li><a href="/index.html#portfolio" class="nav-link scrollto"><i class="bi bi-camera2"></i> <span>Photography</span></a></li>
+          <li><a href="/index.html#contact" class="nav-link scrollto"><i class="bi bi-envelope-at"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Projects</h2>
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li>Beyond Spherical Harmonics: Rethinking Appearance Models for Radiance Reconstruction</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="inner-page">
+      <div id="content" class="wrap project-page-fixed">
+        <div class="paperTitle">
+          <h1>Beyond Spherical Harmonics: Rethinking Appearance Models for Radiance Reconstruction</h1>
+          <div class="conf-name">
+            Computer Graphics Forum [EGSR'26]
+          </div>
+          <div class="authors">
+            <a href="https://people.epfl.ch/ewa.miazga">Ewa Miazga</a><sup>1,2</sup><span class="space"></span>
+            <a href="https://arcanous98.github.io/">Jorge Condor</a><sup>2</sup><span class="space"></span>
+            <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a><sup>2</sup>
+          </div>
+          <div class="universities">
+            <sup>1</sup><a href="https://www.epfl.ch/en/">École Polytechnique Fédérale de Lausanne, Switzerland</a><span class="smallspace"></span>
+            <sup>2</sup><a href="https://www.usi.ch/en">Università della Svizzera italiana, Switzerland</a>
+          </div>
+        </div>
+
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/teaser.png" alt="Teaser: Normalized Anisotropic Spherical Gabor kernel for radiance reconstruction"/>
+        <fig_sub class="teaser-caption">We introduce the Normalized Anisotropic Spherical Gabor (NASGabor): an anisotropic, multi-modal spherical kernel with a closed-form integral expression. The proposed representation is both compact and highly expressive, and is particularly well-suited for modeling view-dependent effects in novel view synthesis, outperforming commonly used approaches such as Spherical Harmonics.</fig_sub>
+        <br/><br/>
+
+        <div class="paper-link-row">
+          <a href="../assets/data/papers/nasgabor_2026.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper PDF</span></a>
+          <a href="https://arxiv.org/abs/2606.09794" class="paper-link-button"><i class="ai ai-arxiv"></i><span>arXiv</span></a>
+          <a href="https://github.com/ewaMiazga/NASGabor" class="paper-link-button"><i class="bi bi-github"></i><span>Code</span></a>
+          <span class="paper-link-button disabled" aria-disabled="true"><i class="bi bi-github"></i><span>Lobes Library (soon)</span></span>
+        </div>
+        <br/>
+
+        <p>View-dependent appearance modeling remains a challenging problem in novel-view synthesis and
+          reconstruction. Accurately representing complex angular effects often requires substantial memory
+          and computational resources. For learning-based methods, a common approach is to rely on low-order
+          <b>Spherical Harmonics (SH)</b>, which limits the ability to model complex view-dependent effects and
+          tends to produce overly smooth or diffuse representations. To address these limitations, we
+          <b>systematically evaluate a wide range of spherical functions</b> in the context of scene
+          reconstruction &mdash; many of them introduced to graphics and computer vision for the first time in
+          this paper. Guided by the resulting insights, we develop the <b>Normalized Anisotropic Spherical Gabor
+          (NASGabor)</b> function: a compact, anisotropic, multi-modal kernel with a closed-form integral that
+          achieves higher-quality reconstruction of view-dependent phenomena such as glints, while being up to
+          five times more memory-efficient and more efficient to evaluate than commonly used SH expansions.</p>
+        <br/><br/>
+
+        <h2p>A systematic study of spherical functions</h2p>
+        <br/><br/>
+        <p>We benchmark a wide family of parametric spherical functions &mdash; from classical
+          <i>Spherical Harmonics</i>, isotropic and anisotropic <i>Spherical Gaussians</i>,
+          <i>Normalized ASGs</i> and <i>Spherical Betas</i>, all the way to less explored families coming
+          from statistics, like the Fisher-Bingham families. All of them are plugged into the same
+          radiance-field pipeline and evaluated under identical conditions.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/spherical_distributions.png" alt="Visualization of the spherical functions evaluated in our study"/>
+        <fig_sub>A subset of the spherical functions covered in our study.</fig_sub>
+        <br/><br/>
+
+        <p>From this analysis we distill three properties that govern effectiveness in radiance-field
+          reconstruction: <b>anisotropy</b> (anisotropic kernels consistently outperform isotropic ones),
+          <b>coupled multi-modality</b> (jointly parameterized lobes are easier to optimize than independent
+          ones), and <b>closed-form integration</b> (learning normalized kernels improves the results, but integrals must be practical to
+          compute during training). A single spherical lobe combined with diffuse color can match or surpass
+          third-degree SH while using roughly five times fewer appearance parameters.</p>
+        <br/><br/>
+
+        <h2p>Quality vs. Memory Across the Design Space</h2p>
+        <br/><br/>
+        <p>The chart below summarizes reconstruction quality (PSNR) versus per-primitive memory for the
+          spherical functions in our study on Mip-NeRF360, grouped by indoor and outdoor scene type and
+          varying lobe count. Motivated by this experiment, we developed a new kernel: a normalized anisotropic spherical Gabor function or NASGabor, which outperforms all other kernels in the task.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/psnr_size_eval.png" alt="PSNR vs. memory for spherical functions"/>
+        <fig_sub>PSNR vs. memory footprint, averaged over indoor and outdoor scenes. NASGabor sits on the Pareto frontier, matching or surpassing higher-degree SH at a fraction of the size.</fig_sub>
+        <br/><br/>
+
+        <h2p>The NASGabor Kernel</h2p>
+        <br/><br/>
+        <p>NASGabor is a normalized anisotropic spherical Gaussian (NASG) envelope multiplied by a positive cosine carrier
+          that introduces a controllable number of ripples. We derive analytic gradients for NASGabor and un-modulated
+          NASG, and implement the appearance model as forward/backward CUDA kernels inside
+          <a href="https://github.com/nerfstudio-project/gsplat"><code>gsplat</code></a>.</p>
+        <br/><br/>
+
+        <div class="nasgabor-equation">
+          <p class="nasgabor-equation__expr">
+            <span class="nasgabor-eq-f"><i>f</i><sub>NASGabor</sub></span>(<strong>v</strong>) =
+            <span class="nasgabor-eq-part nasgabor-eq-part--nasg" title="NASG envelope">
+              <span class="nasgabor-eq-body">e<sup>2<i>λ</i>(K<sub>1</sub> &minus; 1)</sup> K<sub>0</sub></span>
+            </span>
+            <span class="nasgabor-eq-op" aria-hidden="true">&middot;</span>
+            <span class="nasgabor-eq-part nasgabor-eq-part--cos" title="Cosine modulation">
+              <span class="nasgabor-eq-body">
+                <span class="nasgabor-eq-frac">
+                  <span class="nasgabor-eq-frac-num">1 + cos(<i>k</i> <strong>x</strong><sup>&top;</sup><strong>v</strong>)</span>
+                  <span class="nasgabor-eq-frac-den">2</span>
+                </span>
+              </span>
+            </span>
+          </p>
+        </div>
+        <p class="nasgabor-equation-legend">
+          <span class="nasgabor-legend-item"><span class="nasgabor-legend-swatch nasgabor-legend-swatch--nasg" aria-hidden="true"></span> Orange: NASG (Gaussian) envelope</span>
+          <span class="nasgabor-legend-item"><span class="nasgabor-legend-swatch nasgabor-legend-swatch--cos" aria-hidden="true"></span> Blue: shifted cosine carrier (harmonic)</span>
+        </p>
+        <br/><br/>
+
+        <div id="nasgabor-viz" class="nasgabor-viz">
+          <div class="nasgabor-viz__layout">
+            <div class="nasgabor-viz__viewport">
+              <div class="nasgabor-viz__canvas-wrap">
+                <canvas id="nasgabor-canvas" aria-hidden="true"></canvas>
+              </div>
+              <p class="nasgabor-viz__hint">Drag on the sphere to orbit, scroll to zoom. Sliders control kernel parameters directly.</p>
+            </div>
+            <div class="nasgabor-viz__controls">
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label">μ<sub>θ</sub> (polar center)</span>
+                <input type="range" data-param="mu_theta" min="0" max="3.14159" step="0.05" value="1.5"/>
+                <span class="nasgabor-viz__value" data-label="mu_theta">1.50</span>
+              </label>
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label">μ<sub>φ</sub> (azimuth center)</span>
+                <input type="range" data-param="mu_phi" min="0" max="6.28318" step="0.05" value="0"/>
+                <span class="nasgabor-viz__value" data-label="mu_phi">0.00</span>
+              </label>
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label">τ (in-plane rotation)</span>
+                <input type="range" data-param="tau" min="0" max="6.28318" step="0.05" value="0.6"/>
+                <span class="nasgabor-viz__value" data-label="tau">0.60</span>
+              </label>
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label">k (angular frequency)</span>
+                <input type="range" data-param="k" min="0" max="40" step="0.1" value="20.7"/>
+                <span class="nasgabor-viz__value" data-label="k">20.70</span>
+              </label>
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label"><i>a</i> (anisotropy)</span>
+                <input type="range" data-param="a" min="0" max="10" step="0.05" value="1.75"/>
+                <span class="nasgabor-viz__value" data-label="a">1.75</span>
+              </label>
+              <label class="nasgabor-viz__control">
+                <span class="nasgabor-viz__label"><i>λ</i> (concentration)</span>
+                <input type="range" data-param="lambda" min="0.1" max="12" step="0.05" value="8.45"/>
+                <span class="nasgabor-viz__value" data-label="lambda">8.45</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <fig_sub>Unnormalized preview: the plotted value is the product of the two factors above, clipped for display (not divided by the analytic normalization constant).</fig_sub>
+        <br/><br/>
+
+        <h2p>Comparison to Prior Work</h2p>
+        <br/><br/>
+        <p>We compare NASGabor against recent appearance models for primitive-based radiance fields, all
+          implemented in <code>gsplat</code> and evaluated on Mip-NeRF360, Deep Blending, and Tanks &amp; Temples
+          under identical training budgets (learning rates are set per method: manually tuned baselines or our
+          camera-spacing heuristic for NASGabor). Overall, NASGabor matches or outperforms prior methods in
+          quality at a fraction of the memory cost, with faster training and rendering.</p>
+        <br/><br/>
+
+        <div class="table-scroll-wrap">
+          <table class="paper-results-table">
+            <caption>Quantitative comparison on Mip-NeRF360, Deep Blending, and Tanks &amp; Temples. <em>Params</em> denotes appearance parameters per primitive. Best results per column are highlighted (1st / 2nd / 3rd).</caption>
+            <thead>
+              <tr>
+                <th rowspan="2" class="method-col">Method</th>
+                <th rowspan="2">Params</th>
+                <th colspan="3">Mip-NeRF360</th>
+                <th colspan="3">Deep Blending</th>
+                <th colspan="3">Tanks &amp; Temples</th>
+              </tr>
+              <tr>
+                <th>PSNR &uarr;</th><th>SSIM &uarr;</th><th>LPIPS &darr;</th>
+                <th>PSNR &uarr;</th><th>SSIM &uarr;</th><th>LPIPS &darr;</th>
+                <th>PSNR &uarr;</th><th>SSIM &uarr;</th><th>LPIPS &darr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="method-col">2DGS + SH</td>
+                <td>48</td>
+                <td>27.22</td><td>0.804</td><td>0.275</td>
+                <td>29.56</td><td>0.904</td><td>0.325</td>
+                <td>22.85</td><td>0.827</td><td>0.244</td>
+              </tr>
+              <tr>
+                <td class="method-col">3DGS-MCMC + SH</td>
+                <td>48</td>
+                <td>27.99</td><td class="rank-2">0.830</td><td>0.229</td>
+                <td>29.49</td><td>0.912</td><td>0.306</td>
+                <td>24.46</td><td>0.866</td><td class="rank-3">0.174</td>
+              </tr>
+              <tr>
+                <td class="method-col">3DGUT-MCMC + SH</td>
+                <td>48</td>
+                <td>27.82</td><td>0.826</td><td>0.233</td>
+                <td>29.87</td><td class="rank-3">0.913</td><td>0.309</td>
+                <td>24.20</td><td>0.861</td><td>0.180</td>
+              </tr>
+              <tr>
+                <td class="method-col">Beta Splatting + SH</td>
+                <td>48</td>
+                <td>28.00</td><td class="rank-2">0.830</td><td class="rank-1">0.226</td>
+                <td>29.79</td><td>0.911</td><td>0.294</td>
+                <td>24.34</td><td class="rank-3">0.868</td><td class="rank-2">0.173</td>
+              </tr>
+              <tr>
+                <td class="method-col">Beta Splatting + SB</td>
+                <td class="rank-2">15</td>
+                <td>28.09</td><td class="rank-2">0.830</td><td class="rank-2">0.227</td>
+                <td>29.24</td><td>0.908</td><td>0.301</td>
+                <td>24.64</td><td class="rank-1">0.870</td><td class="rank-2">0.173</td>
+              </tr>
+              <tr>
+                <td class="method-col">Spherical Voronoi (12 params)</td>
+                <td class="rank-1">12</td>
+                <td class="rank-3">28.19</td><td class="rank-2">0.830</td><td>0.230</td>
+                <td>29.56</td><td>0.907</td><td>0.301</td>
+                <td>24.64</td><td class="rank-2">0.869</td><td>0.197</td>
+              </tr>
+              <tr>
+                <td class="method-col">Spherical Voronoi (48 params)</td>
+                <td>48</td>
+                <td class="rank-1">28.46</td><td class="rank-1">0.832</td><td class="rank-1">0.226</td>
+                <td>29.90</td><td>0.912</td><td>0.301</td>
+                <td class="rank-3">24.67</td><td class="rank-1">0.870</td><td class="rank-1">0.172</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 1 lobe</td>
+                <td class="rank-1">12</td>
+                <td class="rank-2">28.40</td><td class="rank-3">0.829</td><td class="rank-3">0.228</td>
+                <td class="rank-3">29.91</td><td>0.911</td><td class="rank-3">0.290</td>
+                <td>24.64</td><td>0.867</td><td class="rank-2">0.173</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 2 lobes</td>
+                <td class="rank-3">21</td>
+                <td class="rank-1">28.46</td><td class="rank-2">0.830</td><td class="rank-2">0.227</td>
+                <td class="rank-2">30.24</td><td class="rank-1">0.915</td><td class="rank-2">0.287</td>
+                <td class="rank-2">24.68</td><td class="rank-2">0.869</td><td class="rank-2">0.173</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 4 lobes</td>
+                <td>39</td>
+                <td class="rank-1">28.46</td><td class="rank-2">0.830</td><td class="rank-2">0.227</td>
+                <td class="rank-1">30.37</td><td class="rank-2">0.914</td><td class="rank-1">0.286</td>
+                <td class="rank-1">24.79</td><td class="rank-2">0.869</td><td class="rank-1">0.172</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/><br/>
+
+        <div class="table-scroll-wrap">
+          <table class="paper-results-table paper-results-table--compact">
+            <caption>Training and rendering efficiency on Mip-NeRF360 (appearance parameters per primitive).</caption>
+            <thead>
+              <tr>
+                <th class="method-col">Method</th>
+                <th>Params</th>
+                <th>Storage &darr;</th>
+                <th>Train time &darr;</th>
+                <th>FPS &uarr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="method-col">Spherical Harmonics</td>
+                <td>48</td>
+                <td>747.68&nbsp;MB</td>
+                <td>15m50s</td>
+                <td>128</td>
+              </tr>
+              <tr>
+                <td class="method-col">Spherical Beta</td>
+                <td class="rank-2">15</td>
+                <td class="rank-2">356.04&nbsp;MB</td>
+                <td class="rank-3">15m08s</td>
+                <td class="rank-2">143</td>
+              </tr>
+              <tr>
+                <td class="method-col">Spherical Voronoi</td>
+                <td>48</td>
+                <td>747.68&nbsp;MB</td>
+                <td>17m32s</td>
+                <td>130</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 1 lobe</td>
+                <td class="rank-1">12</td>
+                <td class="rank-1">320.44&nbsp;MB</td>
+                <td class="rank-1">13m38s</td>
+                <td class="rank-1">146</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 2 lobes</td>
+                <td class="rank-3">21</td>
+                <td class="rank-3">427.25&nbsp;MB</td>
+                <td class="rank-2">14m42s</td>
+                <td class="rank-2">143</td>
+              </tr>
+              <tr class="method-ours">
+                <td class="method-col">NASGabor &mdash; 4 lobes</td>
+                <td>39</td>
+                <td>640.87&nbsp;MB</td>
+                <td>16m36s</td>
+                <td class="rank-3">136</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/><br/>
+
+        <h2p>Sharper Highlights, Fewer Parameters</h2p>
+        <br/><br/>
+        <p>Replacing SH with NASGabor inside an otherwise standard 3DGS-style pipeline yields
+          measurably better view-dependent reconstructions. FLIP error maps below show that NASGabor
+          more accurately depicts sheens, highlights, and other high-frequency effects than spherical
+          harmonics.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/flip_sh_ng5.png" alt="FLIP comparison on MipNeRF360"/>
+        <fig_sub>FLIP maps comparing SH and NASGabor on MipNeRF360 scenes. Brighter regions indicate higher error.</fig_sub>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/mip360_visualization.jpg" alt="Qualitative MipNeRF360 reconstructions"/>
+        <fig_sub>Qualitative comparison on Mip-NeRF360. NASGabor achieves comparable or superior appearance reconstruction; insets highlight view-dependent effects captured by our model.</fig_sub>
+        <br/><br/>
+
+        <h2p>Free Disentanglement of Diffuse and Specular</h2p>
+        <br/><br/>
+        <p>An interesting byproduct of mixing diffuse color with spherical functions as an appearance
+          model is its capacity to <b>naturally disentangle diffuse albedo from other view-dependent
+          effects</b> related to material properties or lighting, with no extra losses, regularizers,
+          or supervision. This basic intrinsic decomposition could be useful for simple relighting,
+          material estimation, or reflection removal.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/diff_specular.png" alt="Diffuse-specular disentanglement"/>
+        <fig_sub>Full reconstruction (a), and its diffuse (b) and specular (c) components. Diffuse appearance is modeled explicitly; view-dependent effects are captured by NASGabor lobes.</fig_sub>
+        <br/><br/>
+
+        <h2p>Normalization Matters</h2p>
+        <br/><br/>
+        <p>One the most interesting findings, and one that can be extended to other proposed appearance models for 3DGS 
+          (e.g. Spherical Beta kernels[Liu et al.'25]). Learning normalized kernels (individually) consistently improves quality across
+          scenes. Kernels where integration is analytic or easy to compute becomes critical for maximizing the potential of the model. 
+        We derived closed-form integrals for Spherical Beta kernels and NASGabor, which we detail in the paper.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/BeyondSH/figures/norm_vs_unnorm.png" alt="Normalized vs. unnormalized PSNR"/>
+        <fig_sub>Per-scene PSNR with and without analytic normalization of the spherical functions.</fig_sub>
+        <br/><br/>
+
+        <div>
+          <h2p>Citation</h2p>
+          <br/><br/>
+          Ewa Miazga, Jorge Condor, and Piotr Didyk.
+          <b>Beyond Spherical Harmonics: Rethinking Appearance Models for Radiance Reconstruction</b>,
+          Computer Graphics Forum (Proc. EGSR 2026).
+          <br/><br/>
+          <div class="code-box">
+            <button class="copy-button">Copy</button>
+            <code id="codeBox">
+              @article{Miazga2026BeyondSH,<br/>
+              &nbsp;&nbsp;author  = {Miazga, Ewa and Condor, Jorge and Didyk, Piotr},<br/>
+              &nbsp;&nbsp;title   = {{Beyond Spherical Harmonics: Rethinking Appearance Models for Radiance Reconstruction}},<br/>
+              &nbsp;&nbsp;journal = {Computer Graphics Forum},<br/>
+              &nbsp;&nbsp;note    = {Proc. EGSR 2026},<br/>
+              &nbsp;&nbsp;year    = {2026},<br/>
+              &nbsp;&nbsp;eprint  = {2606.09794},<br/>
+              &nbsp;&nbsp;archivePrefix = {arXiv},<br/>
+              }
+            </code>
+          </div>
+        </div>
+        <br/><br/>
+
+        <h2p>Acknowledgements</h2p>
+        <br/><br/>
+        <div style="text-align:justify">
+          We thank Wenzel Jakob for supporting the project,
+          Nicolai Hermann for interesting discussions, and Sophie Kergaßner for help with designing
+          the figures. This project has received funding from the Swiss National Science Foundation
+          (SNSF, Grant 200502). We acknowledge access to Alps at the Swiss National Supercomputing Centre,
+          Switzerland under USI's share (project ID u6).
+        </div>
+        <br/><br/>
+        <h2p>Affiliations</h2p>
+        <br/><br/>
+        <div id="collaborations">
+          <a href="https://www.epfl.ch/en/"><img src="../projects/BeyondSH/images/epfl_logo.svg" alt="EPFL"/></a>
+          <a href="https://www.usi.ch/"><img src="../projects/ColorGloss/images/usi_logo.png" alt="USI"/></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/typed.js/typed.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/autoplay-videos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="../projects/BeyondSH/js/nasgabor-viz.js"></script>
+
+</body>
+
+</html>

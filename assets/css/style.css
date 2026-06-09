@@ -1607,8 +1607,6 @@ h5date {
   width: 100%;
   height: auto;
   margin: 1rem 0;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
   box-sizing: border-box;
 }
 
@@ -1709,6 +1707,89 @@ h5date {
 .wrap.project-page-fixed video.autoplay-on-scroll {
   cursor: pointer;
 }
+
+.wrap.project-page-fixed .table-scroll-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wrap.project-page-fixed .paper-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.wrap.project-page-fixed .paper-results-table caption {
+  caption-side: top;
+  text-align: left;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #555;
+  padding: 0 0 0.6em;
+  line-height: 1.4;
+}
+
+.wrap.project-page-fixed .paper-results-table th,
+.wrap.project-page-fixed .paper-results-table td {
+  border: 1px solid #dee2e6;
+  padding: 0.35em 0.45em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wrap.project-page-fixed .paper-results-table th.method-col,
+.wrap.project-page-fixed .paper-results-table td.method-col {
+  text-align: left;
+  min-width: 11rem;
+}
+
+.wrap.project-page-fixed .paper-results-table thead th {
+  background: #dceaf9;
+  font-weight: 600;
+  color: #0a1d6f;
+  border-color: #b8d4f8;
+}
+
+.wrap.project-page-fixed .paper-results-table tbody tr:nth-child(even) {
+  background: #f7faff;
+}
+
+.wrap.project-page-fixed .paper-results-table tr.method-ours td.method-col {
+  font-weight: 600;
+  color: #1f5aa5;
+}
+
+.wrap.project-page-fixed .paper-results-table tr.method-ours {
+  background: #f0f6fd;
+}
+
+.wrap.project-page-fixed .paper-results-table tbody tr.method-ours:nth-child(even) {
+  background: #e8f0fc;
+}
+
+.wrap.project-page-fixed .paper-results-table td.rank-1 {
+  background: #1f5aa5;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.wrap.project-page-fixed .paper-results-table td.rank-2 {
+  background: #8fb7f3;
+  color: #0a1d6f;
+}
+
+.wrap.project-page-fixed .paper-results-table td.rank-3 {
+  background: #dceaf9;
+  color: #1f5aa5;
+}
+
+.wrap.project-page-fixed .paper-results-table.paper-results-table--compact {
+  max-width: 42rem;
+}
+
 .paperTitle {
   text-align: center;
   padding-bottom: 3em;
@@ -1872,6 +1953,217 @@ samp {
 #collaborations img {
   height: 75px;
   margin: 1em;
+}
+
+#collaborations img[src$=".svg"] {
+  height: 56px;
+  width: auto;
+}
+
+.nasgabor-equation {
+  overflow-x: auto;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+}
+
+.nasgabor-equation__expr {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.5rem;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #272829;
+}
+
+.nasgabor-eq-f {
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.nasgabor-eq-f sub {
+  font-size: 0.72em;
+}
+
+.nasgabor-eq-part {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.nasgabor-eq-part--nasg {
+  border-color: #c9782e;
+  box-shadow: inset 0 0 0 1px rgba(201, 120, 46, 0.25);
+}
+
+.nasgabor-eq-part--cos {
+  border-color: #149ddd;
+  box-shadow: inset 0 0 0 1px rgba(20, 157, 221, 0.2);
+}
+
+.nasgabor-equation-legend {
+  text-align: center;
+  font-size: 0.92rem;
+  color: #495057;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+}
+
+.nasgabor-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nasgabor-legend-swatch {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nasgabor-legend-swatch--nasg {
+  background-color: #c9782e;
+}
+
+.nasgabor-legend-swatch--cos {
+  background-color: #149ddd;
+}
+
+.nasgabor-eq-body {
+  font-style: italic;
+}
+
+.nasgabor-eq-body strong {
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nasgabor-eq-op {
+  font-style: normal;
+  color: #495057;
+  padding: 0 0.1rem;
+}
+
+.nasgabor-eq-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.nasgabor-eq-frac-num {
+  padding: 0 0.15rem 0.1rem;
+  border-bottom: 1px solid #495057;
+}
+
+.nasgabor-eq-frac-den {
+  padding-top: 0.1rem;
+  font-size: 0.95em;
+}
+
+.nasgabor-viz {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  background: #f8f9fa;
+}
+
+.nasgabor-viz__layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.nasgabor-viz__viewport {
+  flex: 0 1 520px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.nasgabor-viz__canvas-wrap {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1;
+  position: relative;
+  margin: 0 auto;
+  touch-action: none;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #eef1f5;
+  border-radius: 4px;
+}
+
+#nasgabor-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+#nasgabor-canvas:active {
+  cursor: grabbing;
+}
+
+.nasgabor-viz__hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.nasgabor-viz__controls {
+  flex: 1 1 240px;
+  min-width: 220px;
+  max-width: 320px;
+}
+
+.nasgabor-viz__control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.15rem 0.5rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.9rem;
+}
+
+.nasgabor-viz__label {
+  grid-column: 1 / -1;
+  font-weight: 600;
+}
+
+.nasgabor-viz__control input[type="range"] {
+  grid-column: 1;
+  width: 100%;
+}
+
+.nasgabor-viz__value {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 3rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #495057;
 }
 .video-container {
   position: relative;
