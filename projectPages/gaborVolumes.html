@@ -105,7 +105,7 @@
             <a href="https://www.pdf.inf.usi.ch/people/piotr/">Piotr Didyk</a><sup>1</sup>
           </div>
           <div class="universities">
-            <sup>*</sup>Joint first authors.<span class="smallspace"></span>
+            <sup>*</sup>Equal effort.<span class="smallspace"></span>
             <sup>1</sup><a href="https://www.usi.ch/en">Università della Svizzera italiana (USI), Lugano, Switzerland</a>
           </div>
         </div>
@@ -116,99 +116,165 @@
 
         <div class="paper-link-row">
           <a href="https://arxiv.org/abs/2602.05081" class="paper-link-button"><i class="ai ai-arxiv"></i><span>arXiv</span></a>
-          <a href="https://arxiv.org/pdf/2602.05081.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper PDF</span></a>
-          <span class="paper-link-button disabled" aria-disabled="true"><i class="bi bi-github"></i><span>Code (soon)</span></span>
+          <a href="../assets/data/papers/gabor_fields_arxiv_final.pdf" class="paper-link-button"><i class="bi bi-file-earmark-pdf"></i><span>Paper PDF</span></a>
+          <a href="https://github.com/Arcanous98/gabor_fields" class="paper-link-button"><i class="bi bi-github"></i><span>Code</span></a>
         </div>
         <br/>
 
-        <p>Gaussian-based volumetric representations make physically based rendering 
-          practical at a fraction of the memory and runtime cost of dense voxel grids, 
-          but hierarchical 
-          level-of-detail (LOD) remains inneficient: prefiltering or mipmap-style Gaussians 
-          tends to cost extra memory, requires re-fitting per level, and can produce harsh 
-          transitions between LODs. We introduce <b>Gabor Fields</b>: mixtures of primitive 
-          <b>anisotropic Gabor kernels</b> (Gaussian envelopes with harmonic modulation). Limiting 
-          frequency content corresponds to pruning oriented primitives, without growing the
-           representation. Combined with analytic line integrals and a hierarchical fitting
-            procedure, this yields natural LOD, stochastic masking along rays for cheaper 
-            single- and multiple-scattering traversal, and allows for easy integration within volumetric 
-            path tracing frameworks.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; margin:0.5rem 0 0;">
+          <div style="flex:1 1 340px; min-width:280px;">
+            <p style="margin:0;">Gaussian-based volumetric representations make physically based rendering
+              practical at a fraction of the memory and runtime cost of dense voxel grids,
+              but level-of-detail (LOD) remains inefficient: prefiltering or
+              mipmap-style Gaussians costs extra memory, requires re-fitting per level, and
+              can produce harsh transitions between LODs. We introduce <b>Gabor Fields</b>:
+              mixtures of primitive <b>anisotropic Gabor kernels</b> (Gaussian envelopes with
+              harmonic modulation). Since each kernel lives in a known frequency band,
+              filtering becomes a matter of <b>pruning primitives</b>. Combined with analytic line integrals and a
+              hierarchical fitting procedure, this yields continuous LOD, stochastic masking
+              along rays for cheaper single- and multiple-scattering traversal, and easy
+              integration within volumetric path tracing frameworks.</p>
+          </div>
+          <div class="video-container" style="flex:1 1 300px; min-width:260px;">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+              <source src="../projects/GaborFields/videos/disney_takeaway.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <div style="border-left:4px solid #149ddd; background:#f2f8fc; padding:0.85rem 1.15rem; margin:0.8rem 0 0; border-radius:0 8px 8px 0;">
+          <b>TL;DR</b>: an alternative to Gaussian kernels that achieves <b>~2&nbsp;dB higher PSNR</b>
+          at equal primitive count and renders up to <b>~1.4&times; faster</b> at equal variance, provides
+          <b>free runtime level-of-detail</b>, and plugs into <b>control-variate theory</b> for even further
+          acceleration (an extra &nbsp;~2&times; or more), all while keeping the <b>two orders of magnitude</b> compression
+          over voxel grids of <i>Don't Splat your Gaussians</i>.
+        </div>
         <br/><br/>
 
-        <h2p>Gabor kernels: localized in space and in frequency</h2p>
-        <p>Unlike Gaussians, each Gabor primitive is selective in both frequency and orientation: its spectrum is concentrated around a modulation frequency, which makes band-limiting the volume a matter of dropping kernels rather than convolving into ever-larger Gaussians.</p>
+        <h2p>The anisotropic Gabor kernel</h2p>
         <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/gabor_spatial_fourier.png" alt="Gabor kernel in space and Fourier domain"/>
-        <br/><br/>
-
-        <h2p>LOD: Gaussian vs. Gabor trade-offs</h2p>
-        <br/><br/>
-        <p>Classic voxel LOD removes detail by downsampling or pruning hierarchy levels. Gaussian mixtures lack a similarly cheap spectral knob: low-pass filtering inflates supports or forces re-optimization. Gabor Fields align LOD with frequency content so coarse levels stay consistent and memory does not multiply with each mip.</p>
-        <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/lod_paper_comparison_grid.png" alt="Comparison of LOD strategies: Gaussian vs Gabor"/>
+        <p>Each anisotropic Gabor primitive is a Gaussian envelope with a cosine planar wave. A plain 
+          Gaussian is a special case of the anisotropic Gabor where the
+          modulation frequency &omega; is zero. In the Fourier domain the kernel is two
+          symmetric lobes at &plusmn;&omega;, so unlike a Gaussian its spectrum is
+          concentrated in a specific frequency band and a specific orientation rather than
+          spilling across all frequencies.</p>
         <br/><br/>
         <div class="video-pair">
           <div class="video-container">
             <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
-              <source src="../projects/GaborFields/videos/lod_bunny_static.mp4" type="video/mp4">
+              <source src="../projects/GaborFields/videos/gabor_kernel_light.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
           <div class="video-container">
             <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
-              <source src="../projects/GaborFields/videos/lod_bunny_zooming.mp4" type="video/mp4">
+              <source src="../projects/GaborFields/videos/gabor_space_fourier_light.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
         </div>
-        <fig_sub>Volumetric Bunny: static comparison across band-limited LOD levels (left), and camera motion (right) to illustrate temporal stability of coarse levels.</fig_sub>
+        <br/><br/>
+
+        <h2p>Gabor Fields<Fieldset:d></Fieldset:d></h2p>
+        <br/><br/>
+        <p>A Gabor Field is a single continuous decomposition: a low-pass, high-density
+          volume of <b>Gaussians</b> (zero-&omega; Gabors), plus a <b>residual</b> of Gabor
+          kernels carrying the higher frequencies. Since we can analytically compute each kernel's power spectrum, filtering
+          becomes simply removing the kernels that do not contribute meaningfully at the desired cutoff frequency.</p>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/residual_triptych_white.png" alt="Gaussian base, Gabor residual, and their sum"/>
+        <br/><br/>
+
+        <h2p>Continuous LOD from a single asset</h2p>
+        <br/><br/>
+        <p>Gabor Fields enable filtering volumes in a completely continuous manner: as the frequency cutoff
+          shrinks, kernels are masked before tracing, making rendering faster, with 
+          no popping, no re-fitting, and no extra storage (no mipmaps, no pyramids).</p>
+        <br/><br/>
+        <div class="video-container">
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+            <source src="../projects/GaborFields/videos/bunny_continuous_tomo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <br/><br/>
 
         <h2p>Orientation selectivity and ray-space masking</h2p>
         <br/><br/>
-        <p>Kernels that barely contribute along a given direction can be culled or sampled stochastically, which cuts traversal work in dense volumes while remaining unbiased under our sampling strategies (see paper for derivations and variance discussion).</p>
+        <p>Gabors are also directional. As a ray aligns with a kernel's wave direction, its
+          positive and negative lobes cancel and the contribution collapses. We exploit this
+          by splitting each frequency band into oriented, <b>steerable</b> sub-bands, so
+          kernels that cannot contribute to a ray are masked before any intersection.</p>
         <br/><br/>
-        <div class="video-container">
-          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
-            <source src="../projects/GaborFields/videos/gabor_selectivity.mp4" type="video/mp4">
+        <div class="video-pair">
+          <div class="video-container">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+              <source src="../projects/GaborFields/videos/gabor_selectivity.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-container">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
+              <source src="../projects/GaborFields/videos/steerable_decomp_light.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        <fig_sub>Contribution collapses as the ray aligns with &omega; (left); each frequency band splits into steerable, oriented sub-bands (right).</fig_sub>
+        <br/><br/>
+
+        <h2p>Gaussians as control variates</h2p>
+        <br/><br/>
+        <p>A Gabor Field stacks a low-frequency <b>Gaussian base</b> and a series of
+          higher-frequency <b>Gabor residuals</b> that layer together into the full signal, and the
+          base alone already carries most of the density. We can leverage this to accelerate rendering.</p>
+        <br/>
+        <div style="max-width:760px; margin:0 auto;">
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata" style="width:100%; height:auto; display:block;">
+            <source src="../projects/GaborFields/videos/control_variate_slice_light.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
-        <fig_sub>Selectivity of Gabor contributions in the volume.</fig_sub>
         <br/><br/>
-        <div class="video-container">
-          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata">
-            <source src="../projects/GaborFields/videos/orientation_selective_threshold_culling_bunny.mp4" type="video/mp4">
+        <p>The low-pass base is an ideal <b>control variate</b>. We develop a series of stochastic-analytic estimators,
+          where we <b>always trace and analytically integrate the Gaussian base</b> (~2% of the total primitives),
+          and at each sample <b>stochastically select which Gabor residuals to include</b>. Crucially,
+          every selected Gabor is <b>still integrated in closed form</b>: variance only comes from selecting
+          <i>which</i> kernels we trace against. That choice is free: we can
+          prioritise by frequency band, by contribution, or by perceptual importance (foveation-aware
+          or blue-noise style), accelerating rendering with little variance (absorbing mediums) or bias (scattering mediums).</p>
+          The objective in the end is reducing the main bottleneck of primitive volume rendering: the 
+          number of intersections per ray. 
+          <br/>
+        <div style="max-width:760px; margin:0 auto;">
+          <video class="autoplay-on-scroll" muted loop playsinline preload="metadata" style="width:100%; height:auto; display:block;">
+            <source src="../projects/GaborFields/videos/control_variate_sampling_light.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
-        <fig_sub>Orientation-aware threshold culling on the Bunny.</fig_sub>
+        <br/><br/>
+        <img class="paper-figure-png" src="../projects/GaborFields/figures/ablation_biased_zeronee.png" alt="Control-variate acceleration on the Disney cloud: unbiased and two accelerated variants"/>
+        <fig_sub>Disney Cloud, using the Gaussian base as a control variate. Our unbiased reference renders in 977&nbsp;s. <b>Control Variate PLA</b> (power-law accumulating) accelerates the <b>primary camera paths</b>: we always integrate the Gaussian base and stochastically include the Gabor residuals with a power-law probability over frequency (a parameter &beta; trades a little high-frequency error for speed), giving 623&nbsp;s. <b>Zero NEE</b> additionally accelerates the <b>shadow rays</b> (next-event estimation towards the light): since almost all of the field's density lives in the Gaussian base, these rays trace against the base only (~2% of total primitives) and skip the Gabors entirely, reaching 522&nbsp;s; close to the same appearance at nearly 2&times; the speed.</fig_sub>
         <br/><br/>
 
-        <h2p>LOD results</h2p>
+        <h2p>Other applications</h2p>
         <br/><br/>
-        <div class="figure-half-row">
-          <img src="../projects/GaborFields/figures/far_lod_army_800spp_final.png" alt="Converged reference render"/>
-          <img src="../projects/GaborFields/figures/far_lod_army_colorized_32spp.png" alt="Low-sample biased preview"/>
+        <div style="display:flex; flex-wrap:wrap; gap:1.8rem; align-items:center; margin:0.5rem 0 0;">
+          <div style="flex:1 1 440px; min-width:300px;">
+            <ul style="margin:0; padding-left:1.2rem; line-height:1.9;">
+              <li><b>Efficient motion blur</b>, by removing the primitives that destructively interfere with themselves along the direction of travel.</li>
+              <li><b>Foveated rendering</b>, through eccentricity-aware level-of-detail, and by shifting the error into high frequencies, blue-noise style.</li>
+              <li><b>Procedural cloud generation</b> without any regression, just layered, natural-looking Gabor kernel noise.</li>
+            </ul>
+          </div>
+          <div style="flex:0 1 250px; min-width:190px; max-width:270px; margin:0 auto;">
+            <video class="autoplay-on-scroll" muted loop playsinline preload="metadata" style="width:100%; height:auto; display:block;">
+              <source src="../projects/GaborFields/videos/foveation_bunny.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
-        <fig_sub>Far-field LOD: high-sample reference (left) vs. aggressive low-sample rendering with structured residual (right), illustrating performance-oriented trade-offs.</fig_sub>
-        <br/><br/>
-
-        <h2p>Accelerating multiple-scattering with our frequency-based stochastic-analytical estimators</h2p>
-        <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/ablation_biased_zeronee.png" alt="Ablation: biased vs unbiased stochastic-analytical multiple-scattering estimator on a volumetric cloud"/>
-        <br/><br/>
-
-        <h2p>Results</h2p>
-        <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/path_tracing_results.png" alt="Path tracing results"/>
-        <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/stochastic.png" alt="Stochastic masking along rays"/>
-        <br/><br/>
-
-        <h2p>Motion blur</h2p>
-        <br/><br/>
-        <img class="paper-figure-png" src="../projects/GaborFields/figures/png/motion_blur_cloud.png" alt="Motion blur with volumetric cloud"/>
         <br/><br/>
 
         <div>
@@ -221,13 +287,22 @@
           <div class="code-box">
             <button class="copy-button">Copy</button>
             <code id="codeBox">
-              @article{Condor2026GaborFields,<br/>
+              @article{10.1145/3811369,<br/>
               &nbsp;&nbsp;author = {Condor, Jorge and Hermann, Nicolai and Yurtsever, Mehmet Ata and Didyk, Piotr},<br/>
-              &nbsp;&nbsp;title = {{Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering}},<br/>
-              &nbsp;&nbsp;journal = {ACM Trans. Graph.},<br/>
+              &nbsp;&nbsp;title = {Gabor Fields: Orientation-Selective Level-of-Detail for Volume Rendering},<br/>
               &nbsp;&nbsp;year = {2026},<br/>
-              &nbsp;&nbsp;note = {Jorge Condor and Nicolai Hermann contributed equally. SIGGRAPH 2026. arXiv:2602.05081},<br/>
-              &nbsp;&nbsp;url = {https://arxiv.org/abs/2602.05081}<br/>
+              &nbsp;&nbsp;issue_date = {July 2026},<br/>
+              &nbsp;&nbsp;publisher = {Association for Computing Machinery},<br/>
+              &nbsp;&nbsp;address = {New York, NY, USA},<br/>
+              &nbsp;&nbsp;volume = {45},<br/>
+              &nbsp;&nbsp;number = {4},<br/>
+              &nbsp;&nbsp;issn = {0730-0301},<br/>
+              &nbsp;&nbsp;url = {https://doi.org/10.1145/3811369},<br/>
+              &nbsp;&nbsp;doi = {10.1145/3811369},<br/>
+              &nbsp;&nbsp;journal = {ACM Trans. Graph.},<br/>
+              &nbsp;&nbsp;month = jul,<br/>
+              &nbsp;&nbsp;articleno = {62},<br/>
+              &nbsp;&nbsp;numpages = {20}<br/>
               }
             </code>
           </div>
