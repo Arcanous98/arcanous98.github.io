@@ -1,0 +1,17 @@
+# Source PDFs for the Gabor Fields paper figures.
+# PNG versions live under projects/GaborFields/figures/png/ and are committed instead.
+# Regenerate with: python scripts/convert_gabor_figure_pdfs_to_png.py
+projects/GaborFields/figures/*.pdf
+
+# Rasterized paper figures that are not showcased on the project page.
+projects/GaborFields/figures/png/comparison_annotated.png
+projects/GaborFields/figures/png/foveation_fig_new.png
+projects/GaborFields/figures/png/generated_clouds.png
+projects/GaborFields/figures/png/power_law_beta_v2.png
+projects/GaborFields/figures/png/quality_vs_time.png
+projects/GaborFields/figures/png/scaling_combined.png
+projects/GaborFields/figures/png/sinc_attenuation_analysis.png
+
+# Supplementary videos not shown on the project page.
+projects/GaborFields/videos/procedural_generation_app.mp4
+projects/GaborFields/videos/tornado_sequence.mp4
