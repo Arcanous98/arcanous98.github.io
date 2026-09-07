@@ -1024,6 +1024,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
     <button class="tool" id="zin" title="Acercar">+</button>
     <button class="tool" id="zout" title="Alejar">−</button>
     <button class="tool" id="home" title="Centrar en Fuencalderas">⌂</button>
+    <button class="tool" id="satBtn" title="Satélite ⇄ mapa (tecla B)">◉</button>
     <button class="tool" id="loc" title="Mi posición (GPS)">◎</button>
     <button class="tool" id="measure" title="Medir distancia / superficie (doble toque para terminar)">⟷</button>
     <button class="tool" id="fs" title="Pantalla completa">⛶</button>
@@ -1138,7 +1139,11 @@ $('hlsLatest').addEventListener('click', hlsLatest);
 $('sentarSel').addEventListener('change', function(){ bases.sentar.setParams({layers:this.value}); });
 var hybTopo = wmts('https://www.ign.es/wmts/mapa-raster','MTN','image/jpeg',{maxNativeZoom:18, opacity:.45, className:'hybtopo'});
 var currentBase = null;
+var SAT_KEYS={pnoa:1,hyb:1,esri:1,s2:1,sentar:1,hls:1}, lastSat='pnoa', lastMap='mtn';
 function setBase(key){
+  if(SAT_KEYS[key]) lastSat=key; else lastMap=key;
+  $('satBtn').classList.toggle('on', !!SAT_KEYS[key]); $('satBtn').textContent = SAT_KEYS[key] ? '◎' : '◉';
+  if($('baseSel').value!==key) $('baseSel').value=key;
   Object.keys(bases).forEach(function(k){ if(map.hasLayer(bases[k])) map.removeLayer(bases[k]); });
   if(map.hasLayer(hybTopo)) map.removeLayer(hybTopo);
   if(key==='hyb'){ bases.pnoa.addTo(map); hybTopo.addTo(map); currentBase='hyb'; }
@@ -1149,14 +1154,19 @@ function setBase(key){
 }
 
 // overlays (WMS images: no CORS needed)
-var ovParcels = L.tileLayer.wms(CAT_WMS_INSPIRE, {layers:'CP.CadastralParcel,BU.Building', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_DGC, opacity:.85, maxZoom:20, minZoom:12});
-var ovZoning  = L.tileLayer.wms(CAT_WMS_INSPIRE, {layers:'CP.CadastralZoning', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_DGC, opacity:.9, maxZoom:20});
+var ovParcels = L.tileLayer.wms(CAT_WMS_INSPIRE, {layers:'CP.CadastralParcel,BU.Building', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_DGC, opacity:.85, maxZoom:20, minZoom:12, tileSize:512, updateWhenIdle:true, keepBuffer:1});
+var ovZoning  = L.tileLayer.wms(CAT_WMS_INSPIRE, {layers:'CP.CadastralZoning', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_DGC, opacity:.9, maxZoom:20, tileSize:512, updateWhenIdle:true, keepBuffer:1});
+// The Catastro OVC/WMS/WFS share one hourly per-IP quota; when it is exceeded every request answers 403 ("Ha superado el limite de peticiones por hora").
+var CAT_BLOCK_MSG='el Catastro ha limitado temporalmente las peticiones desde tu IP (cuota por hora; afecta a la capa de parcelas, al WFS y a la consulta por punto). Suele desbloquearse en menos de una hora. Mientras tanto, los enlaces a la Sede Electrónica y el resto de capas (PGOU, riesgos, satélite) siguen funcionando';
+function catMsg(e){ var m=(e&&e.message)||String(e||''); if(/403/.test(m)) return 'HTTP 403: '+CAT_BLOCK_MSG; if(/Failed to fetch|NetworkError|Load failed/i.test(m)) return m+': sin respuesta del Catastro (posible cuota horaria superada o bloqueo CORS)'; return m; }
+var catTileErrT=0; ovParcels.on('tileerror', function(){ var n=Date.now(); if(n-catTileErrT<120000) return; catTileErrT=n; toast('Las teselas del Catastro no cargan: '+CAT_BLOCK_MSG+'.', 9000); });
 var ovAdmin   = L.tileLayer.wms('https://www.ign.es/wms-inspire/unidades-administrativas', {layers:'AU.AdministrativeBoundary', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_IGN, opacity:.9, maxZoom:20});
 var ovHill    = L.tileLayer.wms('https://servicios.idee.es/wms-inspire/mdt', {layers:'EL.ElevationGridCoverage', format:'image/png', transparent:true, version:'1.3.0', attribution:ATTR_IGN, opacity:.35, maxZoom:20});
 var ovSiuaWms = L.tileLayer.wms(SIUA_WMS, {layers:'clasificacion_idearagon', format:'image/png', transparent:true, version:'1.3.0', attribution:'<a href="https://idearagon.aragon.es/SIUa" target="_blank">© Gobierno de Aragón · SIUa</a>', opacity:.6, maxZoom:20});
 
 setBase('mtn'); ovParcels.addTo(map); ovAdmin.addTo(map);
 $('baseSel').addEventListener('change', function(){ setBase(this.value); });
+$('satBtn').onclick=function(){ setBase(SAT_KEYS[currentBase] ? lastMap : lastSat); };
 function bindOv(id, layer){ $(id).addEventListener('change', function(){ if(this.checked){ layer.addTo(map); layer.bringToFront(); if(map.hasLayer(ovParcels)) ovParcels.bringToFront(); } else map.removeLayer(layer); }); }
 bindOv('ovParcels', ovParcels); bindOv('ovZoning', ovZoning); bindOv('ovAdmin', ovAdmin); bindOv('ovHill', ovHill);
 $('ovParcelsOp').addEventListener('input', function(){ ovParcels.setOpacity(+this.value); });
@@ -1272,7 +1282,7 @@ var locMarker=null;
 $('loc').onclick=function(){ map.locate({setView:true, maxZoom:17, enableHighAccuracy:true}); };
 map.on('locationfound', function(e){ if(locMarker) map.removeLayer(locMarker); locMarker=L.circleMarker(e.latlng,{radius:7,color:'#6fc3c9',fillColor:'#6fc3c9',fillOpacity:.6,weight:2}).addTo(map).bindTooltip('Tu posición ±'+Math.round(e.accuracy)+' m'); });
 map.on('locationerror', function(e){ toast('Sin posición GPS: '+esc(e.message)); });
-document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'}; if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='ESCAPE') stopMeasure(); });
+document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'}; if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
 
 // ------------------------------------------------------------------ measure tool
 var measuring=false, mPts=[], mLine=null, mPoly=null, mLabel=null, mDots=L.layerGroup().addTo(map);
@@ -1351,9 +1361,9 @@ function loadView(){
   if(cells.length>20){ toast('Vista demasiado amplia ('+cells.length+' km²). Acerca el zoom.'); return; }
   var btn=$('loadBtn'); btn.disabled=true; $('loadInfo').innerHTML='<span class="spin"></span>Consultando WFS Catastro · '+cells.length+' celda(s)…';
   var done=0, added=0, errs=[];
-  Promise.all(cells.map(function(c){ var url=CAT_WFS+'?service=wfs&version=2.0.0&request=getfeature&Typenames=cp.cadastralparcel&SRSname=EPSG::25830&bbox='+c.map(function(v){return v.toFixed(1);}).join(','); return wfsFetch(url).then(function(fs){ fs.forEach(function(f){ if(!parcels[f.properties.rc]) added++; parcels[f.properties.rc]=f; }); }).catch(function(e){ errs.push(e.message); }).then(function(){ done++; }); })).then(function(){
+  Promise.all(cells.map(function(c){ var url=CAT_WFS+'?service=wfs&version=2.0.0&request=getfeature&Typenames=cp.cadastralparcel&SRSname=EPSG::25830&bbox='+c.map(function(v){return v.toFixed(1);}).join(','); return wfsFetch(url).then(function(fs){ fs.forEach(function(f){ if(!parcels[f.properties.rc]) added++; parcels[f.properties.rc]=f; }); }).catch(function(e){ errs.push(catMsg(e)); }).then(function(){ done++; }); })).then(function(){
     btn.disabled=false; refresh();
-    if(errs.length===cells.length){ $('loadInfo').innerHTML='<span class="tag na">sin respuesta</span> El navegador no pudo leer el WFS ('+esc(errs[0])+'). Si es un bloqueo CORS, la capa WMS (imagen) sigue funcionando y puedes tocar el mapa para identificar la parcela.'; }
+    if(errs.length===cells.length){ $('loadInfo').innerHTML='<span class="tag na">sin respuesta</span> El navegador no pudo leer el WFS ('+esc(errs[0])+').'; }
     else $('loadInfo').innerHTML='<span class="tag ok">ok</span> '+added+' parcelas nuevas · '+Object.keys(parcels).length+' en memoria'+(errs.length?' · '+errs.length+' celdas fallaron':'')+'.';
   });
 }
@@ -1419,7 +1429,7 @@ function selectParcel(rc, layer){
   var insp=$('insp'); insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m²</dd>':'')+'</dl><div class="hint"><span class="spin"></span>Consultando datos públicos (Consulta_DNPRC)…</div>'+sedeLinks(rc);
   $('inspBlock').classList.remove('closed');
   fetch(OVC_CALLE+'Consulta_DNPRC?RefCat='+encodeURIComponent(rc.slice(0,14))).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){ if(selected!==rc) return; insp.innerHTML=renderDNP(j, rc, props)+planHtml; terrAppend(planPt); })
-  .catch(function(e){ if(selected!==rc) return; insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m² ('+fmt(props.area/10000,3)+' ha)</dd>':'')+(props?'<dt>Clase (por ref.)</dt><dd><span class="tag '+(isRustic(rc)?'ru':'ur')+'">'+(isRustic(rc)?'Rústico':'Urbano')+'</span></dd>':'')+(props&&props.zoning?'<dt>Polígono / parcela</dt><dd>'+esc(props.zoning)+' / '+esc(props.label||'?')+'</dd>':'')+'<dt>Titular</dt><dd><span class="tag na">protegido · art. 51</span></dd><dt>Valor catastral</dt><dd><span class="tag na">protegido · art. 51</span></dd></dl><div class="note">No se pudo consultar el servicio OVC desde el navegador ('+esc(e.message)+'). Usa la ficha en la Sede (enlace abajo): muestra los mismos datos públicos.</div>'+sedeLinks(rc)+planHtml; terrAppend(planPt); });
+  .catch(function(e){ if(selected!==rc) return; insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m² ('+fmt(props.area/10000,3)+' ha)</dd>':'')+(props?'<dt>Clase (por ref.)</dt><dd><span class="tag '+(isRustic(rc)?'ru':'ur')+'">'+(isRustic(rc)?'Rústico':'Urbano')+'</span></dd>':'')+(props&&props.zoning?'<dt>Polígono / parcela</dt><dd>'+esc(props.zoning)+' / '+esc(props.label||'?')+'</dd>':'')+'<dt>Titular</dt><dd><span class="tag na">protegido · art. 51</span></dd><dt>Valor catastral</dt><dd><span class="tag na">protegido · art. 51</span></dd></dl><div class="note">No se pudo consultar el servicio OVC desde el navegador ('+esc(catMsg(e))+'). Usa la ficha en la Sede (enlace abajo): muestra los mismos datos públicos.</div>'+sedeLinks(rc)+planHtml; terrAppend(planPt); });
 }
 
 // ------------------------------------------------------------------ public documents (BOA/BOPZ/BOE) that name parcels of Biel/Fuencalderas
@@ -1590,6 +1600,7 @@ function estimar(){ if(!MD) return; var B=MD.bandas; var nuc=$('eNuc').value, es
   h+='<dt>ELM · entidad local menor</dt><dd>Fuencalderas tiene junta vecinal propia con patrimonio (montes, solares) y presupuesto, dentro del municipio de Biel, que otorga las licencias urbanísticas.</dd>';
   h+='<dt>Estudio geotécnico</dt><dd>Obligatorio para todo proyecto de edificación (CTE DB-SE-C): sondeos o catas según tipo de edificio (C-0/C-1 para vivienda) y terreno (T-1 a T-3); define la cimentación. En Biel/Fuencalderas el sustrato es arenisca con lutitas: hay que ensayar la expansividad de la arcilla. Coste orientativo 450–1.800 €.</dd><dt>ZAR incendio</dt><dd>Zona de Alto Riesgo de incendio forestal (Orden DRS/1521/2017). Las nuevas edificaciones necesitan plan de autoprotección y una franja perimetral de 25 m con vegetación reducida; condiciona seguros y licencias.</dd><dt>Susceptibilidad (Aragón 2011)</dt><dd>Mapas regionales 1:50.000 de propensión del terreno a deslizamiento, colapso (dolinas) e inundación, por cruce de geología, pendiente y lluvia. No son zonas inundables oficiales (SNCZI, que aquí no existen) ni sustituyen al geotécnico.</dd><dt>Unidades</dt><dd>1 ha = 10.000 m²; 1 a (área) = 100 m²; 1 ca (centiárea) = 1 m². Coordenadas del mapa: ETRS89 / UTM huso 30 (EPSG:25830); MGRS 30T XM.</dd>';
   h+='</dl></div>';
+  h='<div class="links" style="margin:0 0 10px"><a href="manual.html" target="_blank" rel="noopener" style="border-color:var(--amber2);color:var(--amber)">Manual completo: clases de suelo, recalificación, costes, Catastro y Registro ↗</a></div>'+h;
   $('manual').innerHTML=h; })();
 
 // click anywhere -> identify by coordinates
@@ -1606,7 +1617,7 @@ map.on('click', function(ev){
     selectParcel(lyr?lyr.feature.properties.rc:rc, lyr);
   }).catch(function(e){
     var u=toUTM(ll.lng,ll.lat);
-    insp.innerHTML='<div class="note">No se pudo identificar la parcela desde el navegador ('+esc(e.message)+'). Prueba «Cargar parcelas (WFS)» o abre la Sede en este punto:</div><div class="links"><a href="https://www1.sedecatastro.gob.es/Cartografia/mapa.aspx?del=50&mun=49&x='+u[0].toFixed(2)+'&y='+u[1].toFixed(2)+'" target="_blank" rel="noopener">Sede Catastro en '+fmt(u[0])+' / '+fmt(u[1])+' ↗</a></div>'+siuaHtml(ll); terrAppend(ll);
+    insp.innerHTML='<div class="note">No se pudo identificar la parcela desde el navegador ('+esc(catMsg(e))+'). Prueba «Cargar parcelas (WFS)» o abre la Sede en este punto:</div><div class="links"><a href="https://www1.sedecatastro.gob.es/Cartografia/mapa.aspx?del=50&mun=49&x='+u[0].toFixed(2)+'&y='+u[1].toFixed(2)+'" target="_blank" rel="noopener">Sede Catastro en '+fmt(u[0])+' / '+fmt(u[1])+' ↗</a></div>'+siuaHtml(ll); terrAppend(ll);
   });
 });
 
@@ -1616,7 +1627,7 @@ function doSearch(){
   var m=q.match(/^(\d{1,3})[\/\-,.](\d{1,5})$/);
   if(m){ // polígono / parcela in Biel
     $('insp').innerHTML='<div class="hint"><span class="spin"></span>Buscando polígono '+m[1]+' parcela '+m[2]+' en Biel (Consulta_DNPPP)…</div>'; $('inspBlock').classList.remove('closed');
-    fetch(OVC_CALLE+'Consulta_DNPPP?Provincia='+MUN.prov+'&Municipio='+MUN.name+'&Poligono='+m[1]+'&Parcela='+m[2]).then(function(r){ return r.json(); }).then(function(j){ var rc=''; walk(j,function(k,v){ if(k==='rc'&&v&&!rc) rc=[v.pc1,v.pc2,v.car,v.cc1,v.cc2].filter(Boolean).join(''); }); if(!rc){ $('insp').innerHTML='<div class="note">No encontrada. Comprueba polígono/parcela.</div>'; return; } selectParcel(rc,null); }).catch(function(e){ $('insp').innerHTML='<div class="note">Error consultando OVC: '+esc(e.message)+'</div>'; });
+    fetch(OVC_CALLE+'Consulta_DNPPP?Provincia='+MUN.prov+'&Municipio='+MUN.name+'&Poligono='+m[1]+'&Parcela='+m[2]).then(function(r){ return r.json(); }).then(function(j){ var rc=''; walk(j,function(k,v){ if(k==='rc'&&v&&!rc) rc=[v.pc1,v.pc2,v.car,v.cc1,v.cc2].filter(Boolean).join(''); }); if(!rc){ $('insp').innerHTML='<div class="note">No encontrada. Comprueba polígono/parcela.</div>'; return; } selectParcel(rc,null); }).catch(function(e){ $('insp').innerHTML='<div class="note">Error consultando OVC: '+esc(catMsg(e))+'</div>'; });
     return;
   }
   if(/^[0-9A-Z]{14}([0-9A-Z]{6})?$/.test(q)){ selectParcel(q, null); return; }
@@ -1627,7 +1638,7 @@ $('goq').onclick=doSearch; $('q').addEventListener('keydown', function(e){ if(e.
 // tile error hints -------------------------------------------------------
 var tileErr=0; [bases.mtn,bases.pnoa,bases.ignbase].forEach(function(l){ l.on('tileerror', function(){ if(++tileErr===6) toast('<b>El mapa no puede descargar los mosaicos del IGN.</b><br>Si estás viendo el archivo en la vista previa de la app de Claude o en Quick Look (iPhone), ese visor bloquea todas las conexiones externas. Guarda el archivo y ábrelo en Chrome, Safari, Firefox o Edge (en móvil: Archivos → compartir → abrir en el navegador). Si ya estás en un navegador, comprueba la conexión o si la red bloquea www.ign.es.', 20000); }); });
 window.__cat = {map:map, parcels:parcels, parseGML:parseGML, renderDNP:renderDNP, toUTM:toUTM, mgrs:mgrs};
-window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor};
+window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg};
 })();
 
 </script>
