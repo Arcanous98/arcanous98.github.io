@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opción B · comprar rústico junto a Fuencalderas, recalificar, urbanizar y construir</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../siua_biel.js"></script>
+<script src="../riesgos_biel.js"></script>
+<script src="candidatos.js"></script>
+<style>
+:root{--bg:#0b0f0c;--panel:#11170f;--line:#2b3a25;--line2:#3d5133;--ink:#d9e2cf;--ink2:#9fae8f;--ink3:#6f7f62;--amber:#e8b64a;--amber2:#b98620;--olive:#8fbf5a;--red:#e0654b;--cyan:#6fc3c9;--mono:"JetBrains Mono","Cascadia Mono",Consolas,monospace;--sans:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.55}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(111,195,201,.5)}
+header{border-bottom:1px solid var(--line);background:var(--panel);padding:16px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+header .mark{width:38px;height:38px;border:1.5px solid var(--amber);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--amber)}
+header h1{margin:0;font-size:16px}
+header .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase}
+header nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+header nav a{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:4px;padding:6px 10px}
+main{max-width:1040px;margin:0 auto;padding:24px 24px 80px}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);border-bottom:1px solid var(--line);padding:26px 0 6px;margin:22px 0 12px}
+h3{font-size:15px;margin:18px 0 6px}
+p{margin:6px 0 10px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 14px}
+th{text-align:left;font-family:var(--mono);font-size:10.5px;color:var(--ink3);font-weight:500;border-bottom:1px solid var(--line);padding:5px 6px;letter-spacing:.05em;text-transform:uppercase;vertical-align:bottom}
+td{padding:6px 6px;border-bottom:1px solid rgba(43,58,37,.6);vertical-align:top}
+tr:hover td{background:rgba(232,182,74,.04)}
+td.n{text-align:right;font-family:var(--mono);white-space:nowrap}
+.tag{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.tag.ok{background:rgba(111,195,201,.12);color:var(--cyan);border:1px solid rgba(111,195,201,.4)}
+.tag.ur{background:rgba(232,182,74,.15);color:var(--amber);border:1px solid rgba(232,182,74,.4)}
+.tag.na{background:rgba(224,101,75,.12);color:var(--red);border:1px solid rgba(224,101,75,.4)}
+.note{background:rgba(224,101,75,.06);border:1px solid rgba(224,101,75,.3);border-radius:4px;padding:10px 14px;font-size:13px;margin:10px 0}
+.note.ok{background:rgba(111,195,201,.06);border-color:rgba(111,195,201,.3)}
+.note.amb{background:rgba(232,182,74,.06);border-color:rgba(232,182,74,.35)}
+.out{padding:10px 14px;border:1px solid var(--amber2);border-radius:4px;background:rgba(232,182,74,.06);font-size:13px;line-height:1.55}
+.out b{color:var(--amber);font-family:var(--mono)}
+#map{height:520px;border:1px solid var(--line);border-radius:6px;margin:10px 0 6px;background:#000}
+.leg{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink2);margin-bottom:12px}
+.leg span i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:middle;margin-right:5px;border:1px solid rgba(255,255,255,.3)}
+.leaflet-container{font-family:var(--sans)}
+.leaflet-popup-content-wrapper{background:#11170f;color:var(--ink);border:1px solid var(--line2);border-radius:4px}
+.leaflet-popup-tip{background:#11170f}
+.tl{border-left:2px solid var(--line2);margin:8px 0 8px 8px;padding-left:16px}
+.tl .st{position:relative;margin:0 0 14px}
+.tl .st:before{content:"";position:absolute;left:-22px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--amber);border:2px solid var(--bg)}
+.tl .st b{color:var(--amber)}
+.tl .st .m{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.small{font-size:12px;color:var(--ink3)}
+.cmp td:first-child{color:var(--ink2)}
+@media (max-width:720px){main{padding:16px}#map{height:380px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">OP-B</div>
+  <div><h1>Opción B · rústico junto al pueblo → recalificar → urbanizar → construir</h1><div class="sub">Fuencalderas (Biel) · suelo no urbanizable genérico · pasos, plazos y costes · 8-9-2026</div></div>
+  <nav><a href="../p3621102/">Opción A: solar C/ Aire 2</a><a href="../manual.html">Manual</a><a href="../">Mapa</a></nav>
+</header>
+<main>
+
+<div class="note amb">Este documento describe el camino completo para hacer una vivienda sobre <b>suelo no urbanizable genérico (SNU-G)</b> pegado al casco de Fuencalderas cambiando su clase a suelo urbanizable (o urbano no consolidado), dotándolo de agua, saneamiento y electricidad, y construyendo. Se apoya en el TRLUA (DL 1/2014, arts. 85, 288–294), en el PGOU Simplificado de Biel (2014), en la Ley 11/2014 de evaluación ambiental de Aragón y en costes habituales de Aragón rural en 2026. Conclusión anticipada: es un proceso de <b>5 a 8 años</b>, con coste total de <b>0,6–1,1 M€</b> y probabilidad de éxito moderada-baja; se compara al final con la opción A (solar urbano) y con las vías que no exigen recalificar.</div>
+
+<h2 id="s1">1 · El terreno candidato: parcelas SNU-G que tocan el casco</h2>
+<p>El casco urbano consolidado de Fuencalderas (SU-C) tiene 1,9 ha. A su alrededor, el PGOU clasifica todo como SNU-G, salvo la franja del LIC (SNU-E) al norte y noroeste. La tabla y el mapa recogen las parcelas rústicas que <b>lindan</b> con el SU-C (distancia 0) o quedan a menos de 40 m, con su clasificación, si están dentro de la Zona de Alto Riesgo de incendio (ZAR) y si tienen edificación. Las de más de 1 ha están marcadas: son las únicas en las que cabría además la vía «sin recalificar» del art. 34.2 TRLUA (§6).</p>
+<div id="map"></div>
+<div class="leg"><span><i style="background:#c800c8"></i>SU-C casco</span><span><i style="background:#ffff99"></i>SNU-G</span><span><i style="background:#008000"></i>SNU-E (LIC)</span><span><i style="border-color:#ff5a1f;background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(255,90,31,.7) 3px 4px)"></i>ZAR alto</span><span><i style="border:2px solid #6fc3c9;background:rgba(111,195,201,.25)"></i>candidata ≥ 1 ha fuera de ZAR</span><span><i style="border:2px solid #e8b64a;background:rgba(232,182,74,.2)"></i>otras lindantes</span><span><i style="border:2px solid #e0654b"></i>opción A (C/ Aire 2)</span></div>
+<table id="cands"><tr><th>Parcela</th><th>Lado</th><th class="n">m²</th><th>Clase</th><th>ZAR</th><th>Edif.</th><th>Comentario</th></tr></table>
+<p class="small">Fuente: Catastro INSPIRE 2026-02, SIUa (PGOU 2014), ZAR 2017, susceptibilidad de inundación 2011. Las parcelas 9xxx (caminos, cauces) se han excluido. Precio de mercado del rústico de labor en el Prepirineo: 2.500–4.500 €/ha; pasto 1.500–2.500 €/ha; en cuanto el vendedor sabe que hay «expectativa urbanística» pedirá 5–15 €/m² (50.000–150.000 €/ha).</p>
+
+<h2 id="s2">2 · Marco legal: qué cambio de clase es posible y quién lo decide</h2>
+<h3>2.1 Lo que dice la ley</h3>
+<ul>
+<li><b>Sólo el Ayuntamiento</b> puede iniciar y aprobar (inicial y provisionalmente) una <b>modificación aislada del PGOU</b> (TRLUA art. 85); la aprobación definitiva es del <b>Consejo Provincial de Urbanismo de Zaragoza</b> (CPU), que informa y puede denegar. El particular no tiene derecho a la recalificación: puede proponerla, redactarla y pagarla mediante un <b>convenio urbanístico de planeamiento</b> (arts. 100–104), que se publica y no vincula al CPU.</li>
+<li><b>Régimen urbanístico simplificado</b> (arts. 288–294, municipios &lt; 2.000 hab.): el plan general simplificado sólo puede clasificar <b>suelo urbanizable delimitado</b> (nada de no delimitado), en «áreas de crecimiento coherentes con la estructura del núcleo» y con justificación de la demanda; las reservas de dotaciones se reducen respecto al régimen general (art. 291: espacios libres y equipamientos según módulo reducido; cesión del 10 % del aprovechamiento medio, o del 5 % si el Ayuntamiento lo acuerda para actuaciones pequeñas, art. 292).</li>
+<li><b>Dos figuras posibles</b> para el terreno: (a) <b>SUZ-D, nuevo sector</b>: después de la modificación hacen falta plan parcial, reparcelación y proyecto de urbanización; o (b) <b>SU-NC, nueva unidad de ejecución</b> anexa al casco: sólo cabe si el terreno ya está «en malla urbana» con servicios a pie (TRLUA art. 12); es la vía más corta y la que un CPU aceptaría antes para 2–4 viviendas de borde. En ambos casos las obras de urbanización, las cesiones y los proyectos los paga el propietario.</li>
+<li><b>Zonas de borde</b> (art. 289): en municipios simplificados el plan puede delimitar «zonas de borde» donde se permite vivienda unifamiliar en parcelas ≥ 1.500 m² (1.000 m² con informe del CPU) manteniéndolas como suelo no urbanizable, con servicios a cargo del promotor. El PGOU de Biel <b>no</b> las delimitó: habría que introducirlas por modificación del plan, con la misma tramitación que la recalificación pero sin plan parcial ni cesiones. Es la alternativa intermedia más realista si el Ayuntamiento colabora.</li>
+<li><b>Evaluación ambiental estratégica</b> (Ley 11/2014 de Aragón, arts. 11–12 y 20–22): toda modificación que clasifique suelo se somete a EAE; <b>simplificada</b> (informe ambiental estratégico del INAGA en ~4 meses) si es de pequeña extensión y no afecta a Natura 2000; <b>ordinaria</b> (estudio ambiental estratégico, 12–18 meses) si afecta al LIC o el INAGA lo decide. Las parcelas del norte y noroeste tocan el LIC Sierras de Santo Domingo: descartarlas.</li>
+<li><b>Informes sectoriales obligatorios</b>: Confederación Hidrográfica del Ebro (disponibilidad de recursos hídricos, art. 25.4 Ley de Aguas: sin informe favorable no hay aprobación), Instituto Aragonés del Agua (saneamiento), Carreteras (A-1202 si linda), Vías pecuarias (el Cordel de Agüero a Biel cruza el norte del casco), Patrimonio cultural, Telecomunicaciones (Ministerio), Comarca Cinco Villas, Protección Civil (ZAR incendio), Diputación (caminos). Cada uno tiene plazos de 1–3 meses y puede exigir cambios.</li>
+</ul>
+<h3>2.2 Lo que pesa en contra</h3>
+<ul>
+<li>Fuencalderas tiene 26 habitantes, 18 solares vacíos, 11 edificios en ruina, el sector S-1 de Biel sin desarrollar desde 2014 y la UE-1 de Fuencalderas sin ejecutar: la «necesidad de nuevo suelo» es casi imposible de justificar ante el CPU con criterios de sostenibilidad (TRLUA art. 40 y Ley del Suelo estatal, art. 20: crecimiento sobre suelo ya transformado).</li>
+<li>El Ayuntamiento de Biel (165 hab.) no tiene arquitecto municipal ni presupuesto para tramitar; dependería del promotor y de la asistencia de la DPZ, y la decisión política de abrir el plan por un particular es incierta.</li>
+<li>Casi todo el perímetro del casco está en ZAR de incendio o linda con el LIC; el INAGA exigirá franjas de defensa y podrá pedir EAE ordinaria.</li>
+</ul>
+
+<h2 id="s3">3 · Pasos, plazos y costes</h2>
+<p>Escenario de referencia: comprar <b>1 parcela de 4.000–11.000 m²</b> que linde con el casco por el este o el norte (fuera del LIC), recalificar <b>0,4–0,6 ha</b> como sector residencial de baja densidad (3–6 viviendas; el CPU no aceptará un sector para una sola casa) o como unidad de ejecución anexa, urbanizar y construir una vivienda de 140 m² conservando el resto de parcelas para venta o para uso propio.</p>
+<div class="tl">
+<div class="st"><b>Fase 0 · Exploración previa</b> <span class="m">2–4 meses · 1.500–4.000 €</span><br>Informe urbanístico de las parcelas; consulta previa (no reglada) al Ayuntamiento y al Servicio de Urbanismo de la DPZ sobre la viabilidad política y técnica; nota simple y titularidad de cada finca (muchas están sin inscribir o en proindiviso); consulta a la ELM sobre agua y saneamiento; consulta de punto de conexión a e-distribución (gratuita, 1 mes). Sin una señal positiva del Ayuntamiento no se debería seguir.</div>
+<div class="st"><b>Fase 1 · Compra del rústico</b> <span class="m">2–6 meses · 15.000–60.000 € (1 ha)</span><br>Precio agrario 3.000–4.500 €/ha, pero con expectativa el vendedor pedirá 5–15 €/m²; contar 30.000–60.000 € por hectárea junto al casco. ITP 8 % + notaría/registro (1.500 €). Comprar con <b>opción de compra</b> (5–10 % del precio, 2–3 años) condicionada a la aprobación definitiva de la modificación es lo sensato: se paga el resto sólo si el suelo pasa a urbanizable. Riesgo de retracto de colindantes (finca menor que la UMC de 4 ha): notificar antes.</div>
+<div class="st"><b>Fase 2 · Convenio y redacción de la modificación aislada</b> <span class="m">4–8 meses · 25.000–60.000 €</span><br>Convenio urbanístico de planeamiento con el Ayuntamiento (el promotor asume redacción, tramitación, anuncios, urbanización y cesiones); equipo redactor (arquitecto urbanista + ingeniero + ambientólogo): memoria justificativa, normativa, planos, estudio de sostenibilidad económica, informe de sostenibilidad, memoria de impacto de género y de salud, documento ambiental estratégico; estudios sectoriales: disponibilidad de agua, inundabilidad si hay barranco, incendios (plan de defensa), ruido, arqueología superficial. Tasas municipales de tramitación (ordenanza: 0–3.000 €).</div>
+<div class="st"><b>Fase 3 · Tramitación de la modificación</b> <span class="m">18–36 meses · 8.000–20.000 €</span><br>Aprobación inicial por el Pleno → información pública (BOPZ, 1 mes; anuncios 600–1.500 €) → solicitud de informes sectoriales (CHE, IAA, INAGA, Carreteras, VVPP, Patrimonio, Comarca, DPZ, Telecomunicaciones, Protección Civil: 2–6 meses, y sus condiciones) → evaluación ambiental estratégica simplificada (INAGA, 4 meses; ordinaria 12–18) → alegaciones y cambios → aprobación provisional por el Pleno → remisión al CPU → informe y aprobación definitiva del CPU (3–6 meses; puede suspender o denegar, como hizo con el propio PGOU en 2013) → publicación en BOPZ. Honorarios por modificaciones y contestación de informes: 8.000–20.000 €. <b>Riesgo de denegación: alto.</b></div>
+<div class="st"><b>Fase 4 · Plan parcial (si SUZ-D)</b> <span class="m">10–18 meses · 20.000–45.000 €</span><br>Ordenación detallada del sector (viales, parcelas, reservas de zonas verdes y equipamientos, alineaciones, ordenanzas): aprobación inicial municipal, información pública, informes, aprobación definitiva municipal con informe del CPU (TRLUA art. 57). Puede redactarse en paralelo a la fase 3 y tramitarse justo después. Si la figura elegida es SU-NC con ordenación detallada incluida en la modificación, esta fase desaparece (por eso la vía SU-NC es más corta).</div>
+<div class="st"><b>Fase 5 · Gestión: reparcelación y proyecto de urbanización</b> <span class="m">6–12 meses · 15.000–40.000 € + cesiones</span><br>Sistema de compensación o de propietario único (art. 155 TRLUA): proyecto de reparcelación (o «normalización de fincas» si es un solo propietario) con las <b>cesiones obligatorias</b>: viales y zonas verdes (en régimen simplificado ≈ 10 m² de espacio libre por vivienda o por 100 m² construidos, según art. 291), suelo para el <b>10 % del aprovechamiento</b> (o su valor en metálico, típicamente 10–30 k€ en un sector así), inscripción en el Registro (2.000–4.000 €). Proyecto de urbanización (ingeniería: 8–20 k€) con separatas de la distribuidora eléctrica, del Instituto Aragonés del Agua y de telecomunicaciones; garantía del 6 % del coste de urbanización (aval) ante el Ayuntamiento.</div>
+<div class="st"><b>Fase 6 · Obras de urbanización: agua, saneamiento, electricidad, vial</b> <span class="m">6–12 meses · 150.000–400.000 € (0,4–0,6 ha)</span><br>Ver detalle en §4. Recepción de las obras por el Ayuntamiento (acta), que desde entonces mantiene las redes; hasta la recepción no se pueden conceder licencias de vivienda (salvo simultaneidad con aval, art. 254 TRLUA).</div>
+<div class="st"><b>Fase 7 · Licencia y construcción de la vivienda</b> <span class="m">14–20 meses · 210.000–300.000 €</span><br>Proyecto básico y de ejecución, geotécnico, licencia (ICIO 2 % + tasa), obra (140 m² construidos a 1.300–1.700 €/m²), medidas ZAR, fotovoltaica, cédula/licencia de primera ocupación, alta de suministros. Idéntico a la opción A.</div>
+<div class="st"><b>Fase 8 · Después</b> <span class="m">permanente</span><br>IBI urbana de todas las parcelas resultantes (aunque no se construyan), conservación de la urbanización hasta su recepción, obligación de edificar los solares en el plazo que fije el plan (TRLUA art. 231: si no, el Ayuntamiento puede incluirlos en el registro de solares y llegar a la venta forzosa), y venta o mantenimiento de los solares sobrantes en un mercado de 0–3 operaciones al año.</div>
+</div>
+<div class="out"><b>Plazo total realista: 5–8 años</b> desde la compra hasta entrar a vivir (frente a 18–24 meses en un solar urbano). <b>Coste total: 0,6–1,1 M€</b> para obtener una vivienda y 2–5 solares sobrantes de valor incierto. Desglose orientativo (escenario 0,5 ha, 4 parcelas resultantes): suelo 30–60 k€ · redacción y tramitación 60–130 k€ · plan parcial 20–45 k€ · reparcelación y proyecto de urbanización 25–45 k€ · cesión del 10 % 10–30 k€ · urbanización 150–400 k€ · avales, tasas, registro, seguros 15–30 k€ · vivienda 210–300 k€ · imprevistos 10 % · más el coste financiero de tener 200–300 k€ inmovilizados 4–6 años.</div>
+
+<h2 id="s4">4 · Servicios: qué hay que traer y cuánto cuesta</h2>
+<table>
+<tr><th>Servicio</th><th>Situación en Fuencalderas</th><th>Qué exige la normativa</th><th>Coste orientativo (sector 0,5 ha, 4 parcelas)</th></tr>
+<tr><td>Agua potable</td><td>Red de la ELM (tasa anual; presupuesto ELM 2026: 78 k€). Captación y depósito propios del pueblo; capacidad para 26 hab. + segundas residencias. Cota del casco 830–840 m: las parcelas del norte están a la misma cota o más altas que el depósito (presión).</td><td>Informe favorable de la CHE sobre disponibilidad de recursos (art. 25.4 TRLA) e informe del IAA; el PGOU exige red con hidrantes; si el depósito no da presión hay que ampliar o bombear. Dotación de cálculo ≈ 200–250 l/hab·día.</td><td>Ampliación de red en polietileno/fundición con hidrante y acometidas: 60–120 €/m lineal → 15–35 k€; ampliación de depósito o grupo de presión si la ELM lo exige: 20–60 k€; canon de conexión de la ELM: según ordenanza (a fijar).</td></tr>
+<tr><td>Saneamiento</td><td>Red unitaria del casco que vierte a un colector municipal; la depuración en núcleos &lt; 50 hab. de la zona suele ser inexistente o mediante fosa/decantador; hay que comprobarlo con el Instituto Aragonés del Agua (Plan de Depuración).</td><td>PGOU: red unitaria PVC SN4 ≥ 315 mm, pendiente ≥ 1 %, cámara de descarga; el IAA exige garantizar la depuración: conexión a EDAR existente o sistema propio (depuradora compacta o filtro verde) autorizado por la CHE (vertido).</td><td>Colector nuevo 80–150 €/m → 12–30 k€; depuradora compacta para 20–40 hab.-eq. 25–60 k€ + autorización de vertido y mantenimiento (1–2 k€/año); canon de saneamiento del IAA en el recibo del agua.</td></tr>
+<tr><td>Electricidad</td><td>Red de baja tensión del pueblo alimentada por la línea 15 kV Fuencalderas–Agüero (renovada en 2023, e-distribución). Un CT de pequeña potencia en el casco.</td><td>RD 1048/2013: la distribuidora extiende red hasta 100 kW en suelo urbanizado cobrando derechos de extensión (≈ 17,4 €/kW) sólo si la red existe; en suelo <b>urbanizable</b> el promotor ejecuta y cede toda la infraestructura (nuevo CT, red MT/BT subterránea, alumbrado) según proyecto supervisado por la distribuidora.</td><td>Extensión de BT subterránea + alumbrado público: 90–150 €/m → 20–45 k€; si hace falta un CT nuevo (si el existente no admite 4 × 9,2 kW): 45–90 k€ incluida acometida de MT; derechos de acometida y verificación 2–4 k€. Alternativa: autoconsumo aislado con baterías (25–40 k€/vivienda) no exime de la red en suelo urbanizable.</td></tr>
+<tr><td>Vial y pavimentación</td><td>Caminos de tierra alrededor del casco (3–4 m).</td><td>Vial ≥ 5 m (CTE SI 5: 3,5 m libres y 20 t para bomberos), aceras, drenaje de pluviales, señalización; en ZAR, vial perimetral y franja de 25 m.</td><td>Vial urbanizado completo: 250–400 €/m² de vial → 60–120 k€ para 60–80 m de calle con aceras; franja cortafuegos y desbroce: 3–8 k€.</td></tr>
+<tr><td>Telecomunicaciones</td><td>Fibra: verificar (Biel la tiene; Fuencalderas puede depender de radioenlace).</td><td>Canalización de telecomunicaciones (RD 346/2011 ICT) en la urbanización.</td><td>Canalización 30–50 €/m → 3–6 k€.</td></tr>
+<tr><td>Gas</td><td>No hay red. Propano en depósito individual o aerotermia.</td><td>Sin obligación.</td><td>0 (aerotermia en la vivienda).</td></tr>
+</table>
+<p><b>Total de urbanización</b> para 0,4–0,6 ha con 3–6 parcelas: <b>150.000–400.000 €</b> (300–700 €/m² de vial, 60–150 €/m² de suelo bruto), más el 6 % de aval y la dirección de obra (6–8 %). Con una sola vivienda a cargo del mismo promotor, la urbanización se reparte entre parcelas que nadie compra a corto plazo.</p>
+
+<h2 id="s5">5 · Calendario tipo (escenario favorable y desfavorable)</h2>
+<table>
+<tr><th>Hito</th><th>Favorable</th><th>Desfavorable</th></tr>
+<tr><td>Exploración y opción de compra</td><td>mes 0–4</td><td>mes 0–6</td></tr>
+<tr><td>Convenio y redacción de la modificación</td><td>mes 4–10</td><td>mes 6–16</td></tr>
+<tr><td>Aprobación inicial + información pública + informes + EAE simplificada</td><td>mes 10–22</td><td>mes 16–34 (EAE ordinaria)</td></tr>
+<tr><td>Aprobación provisional y definitiva del CPU, publicación</td><td>mes 22–30</td><td>mes 34–48 (con suspensión y subsanación, como el PGOU en 2013–15)</td></tr>
+<tr><td>Plan parcial (si SUZ-D)</td><td>mes 30–40</td><td>mes 48–66</td></tr>
+<tr><td>Reparcelación + proyecto de urbanización</td><td>mes 40–48</td><td>mes 66–78</td></tr>
+<tr><td>Obras de urbanización y recepción</td><td>mes 48–58</td><td>mes 78–92</td></tr>
+<tr><td>Licencia + obra de la vivienda</td><td>mes 58–74</td><td>mes 92–110</td></tr>
+<tr><td><b>Entrar a vivir</b></td><td><b>≈ 6 años</b></td><td><b>≈ 9 años</b></td></tr>
+</table>
+<p>Si se elige la vía SU-NC (unidad de ejecución anexa al casco con ordenación detallada en la propia modificación) se ahorran 10–18 meses (plan parcial); si el Ayuntamiento introduce «zonas de borde» (art. 289) en lugar de urbanizable, se ahorran además la reparcelación y las cesiones, y la vivienda se licencia como en SNU con servicios a cargo del promotor: 3–5 años en total.</p>
+
+<h2 id="s6">6 · Comparación con las alternativas</h2>
+<table class="cmp">
+<tr><th>Vía</th><th>Requisitos</th><th>Plazo hasta vivir</th><th>Coste total (vivienda de 140 m²)</th><th>Probabilidad</th></tr>
+<tr><td><b>A · Solar urbano</b> (C/ Aire 2, 625 m², SU-C)</td><td>Licencia municipal directa; ordenanza Casco Antiguo.</td><td>18–24 meses</td><td>235–320 k€ (solar 15 k€)</td><td><span class="tag ok">alta</span></td></tr>
+<tr><td><b>B · Recalificar SNU-G → urbanizable / SU-NC</b></td><td>Modificación del PGOU, EAE, informes sectoriales, CPU, plan parcial, reparcelación, urbanización, cesiones.</td><td>5–9 años</td><td>600–1.100 k€ (con 2–5 solares sobrantes)</td><td><span class="tag na">baja-moderada</span></td></tr>
+<tr><td><b>B' · Zona de borde</b> (art. 289) introducida por modificación</td><td>Modificación del PGOU + EAE + CPU; parcela ≥ 1.500 m²; servicios a cargo del promotor; sin cesiones ni urbanización pública.</td><td>3–5 años</td><td>330–450 k€</td><td><span class="tag ur">moderada</span> (depende del Ayuntamiento)</td></tr>
+<tr><td><b>C · Vivienda aislada en SNU-G</b> (TRLUA art. 34.2, PGOU art. 86/94)</td><td>Parcela ≥ 10.000 m², ≤ 300 m², sin otra vivienda a 150 m (imposible pegado al casco: hay que alejarse ≥ 150 m de la última casa), autorización especial del CPU + licencia; servicios propios (pozo/depósito, fosa, línea o fotovoltaica aislada).</td><td>18–30 meses</td><td>280–400 k€ (finca 1 ha 5–15 k€ + servicios 30–60 k€)</td><td><span class="tag ur">moderada-alta</span></td></tr>
+<tr><td><b>D · Rehabilitar una borda/corral existente en SNU</b> (art. 35.1.c)</td><td>Edificación existente acreditada; ampliación ≤ 100 %; autorización especial; en SNU-E informe INAGA.</td><td>18–30 meses</td><td>200–350 k€</td><td><span class="tag ur">moderada</span> (depende de encontrar la borda)</td></tr>
+<tr><td><b>E · Solar municipal en la UE-1</b> (SU-NC, 3.339 m², 3 viviendas previstas)</td><td>Que la ELM/Ayuntamiento ejecute o ceda la unidad; urbanización pequeña con servicios a pie de casco.</td><td>3–4 años</td><td>260–360 k€</td><td><span class="tag ur">moderada</span> (voluntad municipal)</td></tr>
+</table>
+<div class="note ok"><b>Lectura.</b> La opción B sólo tiene lógica como promoción (varias viviendas para vender) o como operación patrimonial a muy largo plazo, no para hacerse una casa: multiplica por 3–4 el coste y por 4 el plazo de la opción A con una probabilidad de éxito baja, porque el CPU difícilmente admitirá suelo nuevo en un núcleo de 26 habitantes con solares vacíos y un sector sin desarrollar. Si lo que se busca es «campo alrededor de la casa», es más barato y rápido comprar el solar urbano y, aparte, una o dos parcelas rústicas lindantes (112/58, 112/50, 112/137, 112/57: 400–7.700 m² a precio agrario) como huerto y jardín: siguen siendo rústicas (sin construir, sin IBI urbana, cierre provisional permitido), pero dan el espacio. Si se quiere una casa realmente aislada en el campo, la vía C (1 ha a ≥ 150 m del pueblo, p. ej. 112/138, 112/140 o 112/167 en su parte alejada) es la que la ley ya permite.</div>
+
+<h2 id="s7">7 · Lista de comprobación antes de gastar un euro</h2>
+<ol>
+<li>Reunión con el alcalde de Biel y el presidente de la ELM: ¿aceptarían tramitar una modificación o una zona de borde? Sin un sí explícito (idealmente un acuerdo de Pleno de inicio de expediente), parar.</li>
+<li>Consulta al Servicio de Urbanismo de la DPZ y al CPU (consulta previa informal): criterio sobre crecimientos en núcleos &lt; 50 hab.</li>
+<li>Informe urbanístico de las parcelas candidatas; comprobar que no están en SNU-E, LIC, vía pecuaria (Cordel de Agüero a Biel al norte), MUP ni ZAR tipo 1–3 (todas las del oeste y sur lo están).</li>
+<li>Nota simple y titularidad: muchas parcelas rústicas de Fuencalderas están sin inscribir o en herencias; sin título limpio no hay convenio ni reparcelación.</li>
+<li>Consulta a la CHE (disponibilidad de agua) y al IAA (depuración): son los informes que más modificaciones tumban en Aragón.</li>
+<li>Consulta de punto de conexión a e-distribución para 40–60 kW: capacidad del CT de Fuencalderas.</li>
+<li>Presupuesto vinculante de un urbanista con experiencia en el CPU de Zaragoza y calendario; opción de compra sobre el suelo condicionada a la aprobación definitiva.</li>
+</ol>
+<p class="small">Fuentes: TRLUA (DL 1/2014; arts. 12, 34–36, 54, 57, 85, 100–104, 155, 231, 254, 288–294); PGOU Simplificado de Biel (BOPZ 1-9-2014, arts. 79–97 y condiciones de urbanización); Ley 11/2014 de Prevención y Protección Ambiental de Aragón; Ley de Aguas (TRLA art. 25.4); RD 1048/2013 (acometidas eléctricas); CTE DB-SI 5; Orden DRS/1521/2017 (ZAR); Catastro INSPIRE 2026-02; costes: tarifas habituales de urbanización y redacción en Aragón 2025–2026 (estimaciones; pedir presupuestos).</p>
+</main>
+<script>
+(function(){
+var map=L.map('map',{center:[42.3597,-0.8932],zoom:16,scrollWheelZoom:false});
+L.tileLayer('https://www.ign.es/wmts/pnoa-ma?service=WMTS&request=GetTile&version=1.0.0&layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&format=image/jpeg&tilematrix={z}&tilerow={y}&tilecol={x}',{maxZoom:20,maxNativeZoom:19,attribution:'© IGN PNOA · © DGC · © Gobierno de Aragón'}).addTo(map);
+var SC={'SU-C':'#c800c8','SU-NC':'#ff00ff','SUZ-D':'#d2b48c','SNU-G':'#ffff99','SNU-E':'#008000'};
+if(window.SIUA_DATA) L.geoJSON(SIUA_DATA.clasif,{style:function(f){ var c=SC[f.properties.notepa]||'#fff'; return {color:'#fff',weight:.8,fillColor:c,fillOpacity:.22,interactive:false}; }}).addTo(map);
+if(window.RIESGOS_DATA) L.geoJSON(RIESGOS_DATA.zar,{style:{color:'#ff5a1f',weight:1.2,dashArray:'3 3',fillColor:'#ff5a1f',fillOpacity:.10},interactive:false}).addTo(map);
+var fmt=function(n){ return Number(n).toLocaleString('es-ES'); };
+var tbl=document.getElementById('cands'); var group=L.featureGroup().addTo(map);
+(window.SNU_CAND||[]).forEach(function(c){ var big=c.area>=10000&&!c.zar; var color=big?'#6fc3c9':'#e8b64a'; var l=L.geoJSON(c.g,{style:{color:color,weight:2,fillColor:color,fillOpacity:big?.25:.12}}).addTo(group);
+  var com=[]; if(c.clas==='SNU-E') com.push('SNU-E: descartar'); if(c.zar) com.push('dentro de ZAR alto'); if(c.bld) com.push(c.bld+' edificación (posible vía D)'); if(c.area>=10000) com.push('≥ 1 ha: admite vía C si está a 150 m de otra vivienda'); if(c.dist===0) com.push('linda con el SU-C'); if(c.area<1500) com.push('demasiado pequeña incluso para zona de borde');
+  l.bindPopup('<b>'+c.rc+'</b> · pol. '+c.pol+' parc. '+c.par+'<br>'+fmt(c.area)+' m² · lado '+c.dir+' · '+(c.clas||'?')+(c.zar?' · ZAR':'')+'<br>'+com.join(' · '));
+  var tr=document.createElement('tr'); tr.innerHTML='<td><a href="#" data-rc="'+c.rc+'">'+c.pol+'/'+c.par+'</a></td><td>'+c.dir+'</td><td class="n">'+fmt(c.area)+'</td><td>'+(c.clas||'—')+'</td><td>'+(c.zar?'<span class="tag na">sí</span>':'no')+'</td><td>'+(c.bld||'—')+'</td><td>'+com.join(' · ')+'</td>'; tbl.appendChild(tr);
+  tr.querySelector('a').addEventListener('click',function(e){ e.preventDefault(); map.fitBounds(l.getBounds().pad(.5)); l.openPopup(); });
+});
+// option A parcel
+fetch('../p3621102/data.js').then(function(r){ return r.text(); }).then(function(t){ var m=t.match(/"parcel":(\{.*?"g":(\{.*?\})\}),"centroid"/); if(!m) return; var g=JSON.parse(m[2]); L.geoJSON(g,{style:{color:'#e0654b',weight:2.5,fillOpacity:.1}}).bindPopup('Opción A · 3621102XM7932B · 625 m²').addTo(map); }).catch(function(){});
+L.control.scale({imperial:false}).addTo(map);
+})();
+</script>
+</body>
+</html>
