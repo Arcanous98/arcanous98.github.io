@@ -1486,7 +1486,9 @@ var DOCS=[
  {pol:27, par:8, t:'MUP 524 «Las Navarras» (11,78 ha), Ayto. de Biel — Orden 23-11-2015 (BOA 250).', u:BOA+'PIECE=BOLE&DOCR=10&TITU-C=VAL++++BIEL', d:'2015'},
  {pol:2, par:13, t:'MUP 507 «Campo Fenero» (12,68 ha, parte de la parcela 2/13), Comunidad Autónoma — Orden 16-8-2011 (BOA 180).', u:BOA+'PIECE=BOLE&DOCR=21&TEXT-C=Fuencalderas+monte+utilidad+p%FAblica', d:'2011'}
 ];
-function docsFor(rc, pol, par){ var rc14=(rc||'').slice(0,14); pol=+pol; par=+par; var hits=DOCS.filter(function(d){ if(d.rc && rc14 && d.rc.slice(0,14)===rc14) return true; if(d.pol && pol && d.pol===pol){ var ps=Array.isArray(d.par)?d.par:[d.par]; return ps.indexOf(par)>=0; } return false; });
+var EXPED={'3621102XM7932B':'p3621102/'};
+function docsFor(rc, pol, par){ var rc14=(rc||'').slice(0,14); if(EXPED[rc14]){ return '<div class="links"><a href="'+EXPED[rc14]+'" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Expediente de adquisición · vista 3D e informe ↗</a></div>'+docsFor2(rc,pol,par); } return docsFor2(rc,pol,par); }
+function docsFor2(rc, pol, par){ var rc14=(rc||'').slice(0,14); pol=+pol; par=+par; var hits=DOCS.filter(function(d){ if(d.rc && rc14 && d.rc.slice(0,14)===rc14) return true; if(d.pol && pol && d.pol===pol){ var ps=Array.isArray(d.par)?d.par:[d.par]; return ps.indexOf(par)>=0; } return false; });
   if(!hits.length) return ''; return '<div class="hint" style="margin:10px 0 4px;color:var(--amber);font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;font-size:10px">Documentos públicos que citan esta parcela</div><ul class="doclist" style="padding-left:16px;margin:0">'+hits.map(function(d){ return '<li><span class="d">'+esc(d.d)+'</span> '+esc(d.t)+' <a href="'+d.u+'" target="_blank" rel="noopener">↗</a></li>'; }).join('')+'</ul>'; }
 
 (function(){ var h='';
@@ -1636,7 +1638,7 @@ function estimar(){ if(!MD) return; var B=MD.bandas; var nuc=$('eNuc').value, es
   h+='<dt>ELM · entidad local menor</dt><dd>Fuencalderas tiene junta vecinal propia con patrimonio (montes, solares) y presupuesto, dentro del municipio de Biel, que otorga las licencias urbanísticas.</dd>';
   h+='<dt>Estudio geotécnico</dt><dd>Obligatorio para todo proyecto de edificación (CTE DB-SE-C): sondeos o catas según tipo de edificio (C-0/C-1 para vivienda) y terreno (T-1 a T-3); define la cimentación. En Biel/Fuencalderas el sustrato es arenisca con lutitas: hay que ensayar la expansividad de la arcilla. Coste orientativo 450–1.800 €.</dd><dt>ZAR incendio</dt><dd>Zona de Alto Riesgo de incendio forestal (Orden DRS/1521/2017). Las nuevas edificaciones necesitan plan de autoprotección y una franja perimetral de 25 m con vegetación reducida; condiciona seguros y licencias.</dd><dt>Susceptibilidad (Aragón 2011)</dt><dd>Mapas regionales 1:50.000 de propensión del terreno a deslizamiento, colapso (dolinas) e inundación, por cruce de geología, pendiente y lluvia. No son zonas inundables oficiales (SNCZI, que aquí no existen) ni sustituyen al geotécnico.</dd><dt>Unidades</dt><dd>1 ha = 10.000 m²; 1 a (área) = 100 m²; 1 ca (centiárea) = 1 m². Coordenadas del mapa: ETRS89 / UTM huso 30 (EPSG:25830); MGRS 30T XM.</dd>';
   h+='</dl></div>';
-  h='<div class="links" style="margin:0 0 10px"><a href="manual.html" target="_blank" rel="noopener" style="border-color:var(--amber2);color:var(--amber)">Manual completo: clases de suelo, recalificación, costes, Catastro y Registro ↗</a></div>'+h;
+  h='<div class="links" style="margin:0 0 10px"><a href="manual.html" target="_blank" rel="noopener" style="border-color:var(--amber2);color:var(--amber)">Manual completo: clases de suelo, recalificación, costes, Catastro y Registro ↗</a><a href="p3621102/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Expediente: parcela 3621102XM7932B (C/ Aire 2) · estudio 3D de adquisición ↗</a></div>'+h;
   $('manual').innerHTML=h; })();
 
 // click anywhere -> identify by coordinates

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcela 3621102XM7932B · Fuencalderas · estudio de adquisición</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="../siua_biel.js"></script>
+<script src="../riesgos_biel.js"></script>
+<script src="data.js"></script>
+<style>
+:root{--bg:#0b0f0c;--panel:#11170f;--line:#2b3a25;--line2:#3d5133;--ink:#d9e2cf;--ink2:#9fae8f;--ink3:#6f7f62;--amber:#e8b64a;--amber2:#b98620;--olive:#8fbf5a;--red:#e0654b;--cyan:#6fc3c9;--mono:"JetBrains Mono","Cascadia Mono",Consolas,monospace;--sans:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(111,195,201,.5)}
+header{border-bottom:1px solid var(--line);background:var(--panel);padding:14px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+header .mark{width:38px;height:38px;border:1.5px solid var(--amber);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--amber)}
+header h1{margin:0;font-size:16px;letter-spacing:.03em}
+header .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase}
+header nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+header nav a{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:4px;padding:6px 10px}
+#wrap{display:grid;grid-template-columns:340px 1fr;height:calc(100vh - 68px);min-height:560px}
+#side{overflow:auto;border-right:1px solid var(--line);background:var(--panel);padding:10px 12px;scrollbar-width:thin}
+#map{position:relative;background:#000}
+section.block{border:1px solid var(--line);border-radius:6px;background:rgba(23,31,20,.55);margin-bottom:10px}
+section.block>h2{margin:0;padding:8px 12px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--mono);color:var(--amber);border-bottom:1px solid var(--line);cursor:pointer;display:flex;justify-content:space-between}
+section.block.closed>.content{display:none}
+section.block>.content{padding:10px 12px}
+label.chk{display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer;font-size:12.5px}
+label.chk input{accent-color:var(--amber);margin:0}
+label.chk .sw{width:13px;height:13px;border-radius:2px;border:1px solid rgba(255,255,255,.25);flex:none}
+.opac{display:flex;align-items:center;gap:8px;margin:0 0 4px 21px}
+.opac span{font-family:var(--mono);font-size:10px;color:var(--ink3);width:56px}
+input[type=range]{width:100%;accent-color:var(--amber)}
+select,input[type=number]{width:100%;background:#0c110b;border:1px solid var(--line2);color:var(--ink);padding:6px 8px;border-radius:4px;font-family:var(--mono);font-size:12px;box-sizing:border-box}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.grid2 label,.g1 label{display:block;font-family:var(--mono);font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.hint{color:var(--ink3);font-size:11.5px;line-height:1.45;margin-top:6px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;font-size:12px;margin:0}
+.kv dt{color:var(--ink3);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.kv dd{margin:0}
+.tag{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.tag.ok{background:rgba(111,195,201,.12);color:var(--cyan);border:1px solid rgba(111,195,201,.4)}
+.tag.ur{background:rgba(232,182,74,.15);color:var(--amber);border:1px solid rgba(232,182,74,.4)}
+.tag.na{background:rgba(224,101,75,.12);color:var(--red);border:1px solid rgba(224,101,75,.4)}
+.out{margin-top:8px;padding:8px 10px;border:1px solid var(--amber2);border-radius:4px;background:rgba(232,182,74,.06);font-size:12px;line-height:1.5}
+.out b{color:var(--amber);font-family:var(--mono)}
+button.btn{background:#1c2618;border:1px solid var(--line2);color:var(--ink);padding:6px 10px;border-radius:4px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+button.btn:hover{border-color:var(--amber2);color:var(--amber)}
+#status{position:absolute;left:0;right:0;bottom:0;height:26px;background:rgba(11,15,12,.9);border-top:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:0 10px;font-family:var(--mono);font-size:10.5px;color:var(--ink2);z-index:5}
+#status b{color:var(--amber);font-weight:500}
+main{max-width:1040px;margin:0 auto;padding:26px 24px 80px}
+main h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);border-bottom:1px solid var(--line);padding:26px 0 6px;margin:22px 0 12px}
+main h3{font-size:15px;margin:16px 0 6px}
+main p{margin:6px 0 10px}
+main ul,main ol{margin:4px 0 10px;padding-left:22px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 14px}
+th{text-align:left;font-family:var(--mono);font-size:10.5px;color:var(--ink3);font-weight:500;border-bottom:1px solid var(--line);padding:5px 6px;letter-spacing:.05em;text-transform:uppercase}
+td{padding:6px 6px;border-bottom:1px solid rgba(43,58,37,.6);vertical-align:top}
+.note{background:rgba(224,101,75,.06);border:1px solid rgba(224,101,75,.3);border-radius:4px;padding:10px 14px;font-size:13px;margin:10px 0}
+.note.ok{background:rgba(111,195,201,.06);border-color:rgba(111,195,201,.3)}
+.note.amb{background:rgba(232,182,74,.06);border-color:rgba(232,182,74,.35)}
+.figs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.figs img{width:100%;border:1px solid var(--line);border-radius:4px}
+figcaption{font-size:11.5px;color:var(--ink3);margin-top:4px}
+.maplibregl-ctrl-group{background:rgba(17,23,15,.92)!important;border:1px solid var(--line2)}
+.maplibregl-ctrl-group button{filter:invert(.85)}
+.maplibregl-popup-content{background:#11170f;color:var(--ink);font-size:12px;border:1px solid var(--line2)}
+.maplibregl-popup-tip{border-top-color:#11170f!important}
+.small{font-size:12px;color:var(--ink3)}
+@media (max-width:860px){#wrap{grid-template-columns:1fr;height:auto}#map{height:70vh}#side{max-height:50vh}}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">EXP</div>
+  <div><h1>Parcela 3621102XM7932B · C/ Aire 2 · Fuencalderas</h1><div class="sub">Estudio de adquisición · 625 m² · suelo urbano consolidado · 836 m · 7-9-2026</div></div>
+  <nav><a href="#informe">Informe ↓</a><a href="../manual.html">Manual</a><a href="../">Mapa catastral</a></nav>
+</header>
+
+<div id="wrap">
+  <aside id="side">
+    <section class="block">
+      <h2>Vista 3D <span>▾</span></h2>
+      <div class="content">
+        <div class="g1"><label>Mapa base</label><select id="base">
+          <option value="pnoa">PNOA ortofoto 2024 (IGN, 25 cm)</option>
+          <option value="esri">Esri World Imagery (Maxar 2023)</option>
+          <option value="mtn">MTN topográfico (IGN)</option>
+          <option value="ams56">Vuelo americano 1956-57</option>
+          <option value="inter73">Vuelo interministerial 1973-86</option>
+          <option value="sigpac">SIGPAC 1997-2003</option>
+          <option value="p2006">PNOA 2006</option><option value="p2012">PNOA 2012</option><option value="p2018">PNOA 2018</option>
+          <option value="none">Sin base (sólo relieve)</option>
+        </select></div>
+        <div class="opac" style="margin-left:0"><span>relieve ×</span><input type="range" id="exag" min="0" max="3" step=".1" value="1.4"></div>
+        <label class="chk"><input type="checkbox" id="lyHill" checked><span class="sw" style="background:linear-gradient(135deg,#333,#999)"></span>Sombreado del relieve (MDT 2 m)</label>
+        <label class="chk"><input type="checkbox" id="lyGeo"><span class="sw" style="background:repeating-radial-gradient(circle,#e8d44a 0 1px,#f7f0b0 1px 4px)"></span>Geología IGME MAGNA 50</label>
+        <div class="opac"><span>opacidad</span><input type="range" id="geoOp" min="0" max="1" step=".05" value=".55"></div>
+        <label class="chk"><input type="checkbox" id="lyClas" checked><span class="sw" style="background:#c800c8"></span>PGOU · clasificación del suelo</label>
+        <label class="chk"><input type="checkbox" id="lyZar" checked><span class="sw" style="border-color:#ff5a1f;background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(255,90,31,.7) 3px 4px)"></span>Zona de alto riesgo de incendio (ZAR)</label>
+        <label class="chk"><input type="checkbox" id="lyInu"><span class="sw" style="background:rgba(59,139,214,.5)"></span>Susceptibilidad de inundación</label>
+        <label class="chk"><input type="checkbox" id="lyParc" checked><span class="sw" style="border-color:#e8b64a"></span>Parcelario catastral (Biel)</label>
+        <label class="chk"><input type="checkbox" id="lyBld" checked><span class="sw" style="background:#c9a24a"></span>Edificios existentes (3D, alturas Catastro)</label>
+        <label class="chk"><input type="checkbox" id="lyBuf" checked><span class="sw" style="border-color:#ff5a1f;border-style:dashed"></span>Franja de 25 m (CTE SI 5 / ZAR)</label>
+        <label class="chk"><input type="checkbox" id="lyContour"><span class="sw" style="border-color:#9fae8f"></span>Curvas de nivel IGN</label>
+        <div class="hint">Arrastra con el botón derecho (o Ctrl) para inclinar y girar. Los edificios se elevan con las plantas del Catastro (≈3 m/planta). Relieve: MDT05/2 m del IGN.</div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Boceto de vivienda <span>▾</span></h2>
+      <div class="content">
+        <div class="grid2">
+          <div><label>Zona (ordenanza)</label><select id="zona"><option value="ca">Casco Antiguo</option><option value="ens">Ensanche</option><option value="vu2">Vivienda unifamiliar 2</option><option value="vu1">Vivienda unifamiliar 1</option></select></div>
+          <div><label>Plantas</label><select id="plantas"><option>1</option><option selected>2</option><option>3</option></select></div>
+          <div><label>Frente (m)</label><input type="number" id="w" value="12" min="4" max="40" step=".5"></div>
+          <div><label>Fondo (m)</label><input type="number" id="d" value="9" min="4" max="22" step=".5"></div>
+          <div><label>Giro (°, antihorario)</label><input type="number" id="rot" value="20" min="-180" max="180" step="1"></div>
+          <div><label>Pendiente cubierta (%)</label><input type="number" id="pitch" value="35" min="0" max="60" step="1"></div>
+          <div><label>Desplaz. E-W (m)</label><input type="number" id="dx" value="2" min="-25" max="25" step=".5"></div>
+          <div><label>Desplaz. N-S (m)</label><input type="number" id="dy" value="-2" min="-25" max="25" step=".5"></div>
+          <div><label>Altura planta (m)</label><input type="number" id="hp" value="3" min="2.5" max="4" step=".1"></div>
+          <div><label>Cumbrera</label><select id="ridge"><option value="w">a lo largo del frente</option><option value="d">a lo largo del fondo</option></select></div>
+        </div>
+        <div class="out" id="sketchOut"></div>
+        <div class="hint">La caja se coloca respecto al centro de la parcela. Comprueba en el informe qué ordenanza aplica (por defecto, Casco Antiguo: fondo ≤ 15 m, PB+2, 10 m).</div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Fotovoltaica sobre la cubierta del boceto <span>▾</span></h2>
+      <div class="content">
+        <div class="grid2">
+          <div><label>Faldón permitido</label><select id="pvSide"><option value="both">ambos faldones</option><option value="back" selected>sólo el no visible desde vía pública</option><option value="best">sólo el mejor orientado</option></select></div>
+          <div><label>Ocupación máx. cubierta</label><select id="pvCap"><option value="1">100 % (integración)</option><option value="0.85" selected>85 % (práctica)</option><option value="0.4">40 % (art. 53/58/63)</option></select></div>
+          <div><label>Potencia módulos (W/m²)</label><input type="number" id="pvDens" value="215" min="150" max="260" step="5"></div>
+          <div><label>Consumo anual (kWh)</label><input type="number" id="pvCons" value="4500" min="1000" max="30000" step="100"></div>
+        </div>
+        <div class="out" id="pvOut"></div>
+        <div class="hint">Rendimientos PVGIS 5.2 (SARAH2, con horizonte real) para este punto: 1.508 kWh/kWp·año orientado a sur 35°; 1.255 en plano; 947 a norte. Ver §5 del informe.</div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Ficha rápida <span>▾</span></h2>
+      <div class="content" id="ficha"></div>
+    </section>
+  </aside>
+  <div id="map">
+    <div id="status"><span>LON <b id="sLon">—</b></span><span>LAT <b id="sLat">—</b></span><span>ALT <b id="sAlt">—</b> m</span><span>Z <b id="sZ">—</b></span><span style="margin-left:auto">© IGN · © DGC · © IGME · © Gobierno de Aragón</span></div>
+  </div>
+</div>
+
+<main id="informe">
+<div class="note amb">Estudio preliminar elaborado el 7-9-2026 con fuentes públicas (Catastro INSPIRE, PGOU Simplificado de Biel, SIUa, IGME, mapas de susceptibilidad de Aragón, ZAR 2017, IGN MDT y ortofotos históricas, PVGIS). No sustituye al <b>informe urbanístico municipal</b>, a la <b>nota simple</b> del Registro ni al <b>estudio geotécnico</b>: los tres son imprescindibles antes de ofertar. Los costes son orientativos (Aragón rural, 2026).</div>
+
+<h2 id="s0">0 · Resumen ejecutivo</h2>
+<ul>
+<li><b>Qué es</b>: solar urbano de 625 m² (Catastro; 620 m² medidos) en el borde norte del casco de Fuencalderas, C/ Aire 2, nunca edificado (vacío en todas las ortofotos 1997–2024), en forma de pentágono de ≈ 40 × 22 m con dos frentes a viales (sur y oeste) y una casa medianera al norte.</li>
+<li><b>Legal</b>: suelo urbano consolidado, uso residencial (PGOU Biel 2014, plano NPO02B). Se puede edificar con licencia municipal directa. Ordenanza previsible: <b>Casco Antiguo</b> (edificabilidad 2,5 m²/m², ocupación 80 %, PB+2 y 10 m, fondo edificable 15 m, alineación a calle, materiales tradicionales). A confirmar con informe urbanístico (§2).</li>
+<li><b>Terreno</b>: areniscas y lutitas miocenas (Fm. Uncastillo), pendiente media 8° hacia el SSE, 835–837 m. Cimentación normal sobre roca/arenisca con zapatas o losa; hay que ensayar la expansividad de la lutita. Sin riesgo de inundación ni deslizamiento; sismicidad baja (§3).</li>
+<li><b>Incendio</b>: la parcela está dentro de la <b>Zona de Alto Riesgo tipo 1</b> y linda al oeste con matorral. Condiciona el diseño (envolvente incombustible, franja de 25 m, aljibe, plan de autoprotección) y el seguro, no la viabilidad (§4).</li>
+<li><b>Solar</b>: 1.508 kWh/kWp·año a sur. Una cubierta de 12 × 9 m con cumbrera E-W admite 9–10 kWp por faldón; con la regla de «no visible desde vía pública» del Casco Antiguo el faldón útil puede ser el norte (≈ 950 kWh/kWp): 4–5 kWp «legales» dan 4.500–6.000 kWh/año, suficiente para la vivienda; hasta 20 kWp físicamente (§5).</li>
+<li><b>Precio objetivo</b>: valor de mercado del solar 12.000–20.000 € (20–32 €/m²); oferta inicial ≈ 10.000 €, precio objetivo 14.000–16.000 €, tope 22.000 €. El coste total de casa nueva de 120 m² ronda 210.000–270.000 € (§6).</li>
+</ul>
+
+<h2 id="s1">1 · La parcela</h2>
+<div class="figs">
+<figure><img src="img/pnoa_2024.jpg" alt="Ortofoto PNOA 2024 con la parcela"><figcaption>PNOA 2024 (IGN, 25 cm). La parcela (rojo) es la explanada entre la casa de C/ San Miguel 1 (norte), el vial de C/ Aire (sur) y la pista del oeste; al noroeste, matorral.</figcaption></figure>
+<figure><img src="img/historico.jpg" alt="Serie histórica de ortofotos"><figcaption>Serie 1997–2024 (SIGPAC y PNOA): nunca ha habido edificación. Era o corral de trilla sin muros visibles.</figcaption></figure>
+</div>
+<table>
+<tr><th>Dato</th><th>Valor</th><th>Fuente</th></tr>
+<tr><td>Referencia catastral</td><td>3621102XM7932B (parcela urbana; manzana 36211, parcela 02)</td><td>Catastro</td></tr>
+<tr><td>Dirección</td><td>CL Aire 2, Fuencalderas (Biel), 50619</td><td>Catastro INSPIRE AD</td></tr>
+<tr><td>Superficie</td><td>625 m² (catastral) · 620 m² (calculada) · perímetro 102 m</td><td>Catastro INSPIRE CP</td></tr>
+<tr><td>Forma</td><td>Pentágono irregular; rectángulo envolvente 40,4 × 21,6 m; frentes: sur ≈ 17 + 4 m (C/ Aire), oeste ≈ 20 + 9 m (pista), norte 22 m medianera con 3621101, este 9 m</td><td>geometría</td></tr>
+<tr><td>Edificación</td><td>Ninguna registrada. Ortofotos 1997–2024: vacía</td><td>Catastro BU · IGN</td></tr>
+<tr><td>Cota / pendiente</td><td>835–837 m; pendiente media 8,4° (máx. 24° en el talud oeste); orientación SSE (162°)</td><td>MDT IGN 2 m</td></tr>
+<tr><td>Clasificación</td><td>SU-C, uso residencial, núcleo Fuencalderas (los 14 vértices dentro del SU-C)</td><td>SIUa / PGOU 2014</td></tr>
+<tr><td>Protecciones</td><td>Fuera del Paisaje Protegido, de MUP, LIC y vías pecuarias. El SNU-E (LIC Sierras de Santo Domingo) empieza al NW, a ~60 m</td><td>SIUa</td></tr>
+<tr><td>Riesgos</td><td>Inundación BAJA (no hay cauce; la más próxima ALTA está a 3,5 km); colapso y deslizamiento MUY BAJA; ZAR incendio tipo 1 ALTO</td><td>Gobierno de Aragón 2011 / 2017</td></tr>
+<tr><td>Colindantes</td><td>N: 3621101 (C/ San Miguel 1, casa 1960, 101 m², 1 planta). A &lt; 6 m: C/ Aire 1 (1970, 2 pl.), C/ Arrabal 1, 3 y 7, C/ San Miguel 2, el edificio público de C/ Iglesia 4-6 (1910/1970). W: rústica 112/58 (7.674 ha… 7.674 m², matorral, sin edificios)</td><td>Catastro</td></tr>
+</table>
+<p><b>Contexto del pueblo</b> (radio 450 m): 113 parcelas urbanas, 95 edificios, 91 viviendas, 18 solares sin edificar, 11 edificios en ruina o deteriorados, año mediano de construcción 1970; parcela mediana 94 m² (esta es 6,6 veces mayor; sólo hay una parcela urbana más grande). 26 habitantes empadronados (2025). Servicios: red de agua de la ELM (tasa anual), electricidad (línea 15 kV Fuencalderas–Agüero renovada 2023), recogida de residuos (60 €/año); fibra: verificar (Biel la tiene). Distancias: Biel 8 km, Ayerbe 22 km, Ejea 45 km, Huesca 75 km, Zaragoza 100 km.</p>
+<div class="note">Hipótesis a comprobar con la nota simple: la ELM de Fuencalderas vendió en subasta (BOPZ 9-10-2004) un «solar urbano pol. 112 parc. 401, zona periférica, para una vivienda» con tipo 600 €. Esta parcela, periférica, grande y nunca edificada, encaja con esa descripción: si es la misma, el título actual será una escritura de 2004–05 (fácil de inscribir) y el vendedor será quien la compró entonces. Si no está inscrita, descontar 1.500–4.000 € y 6–12 meses de inmatriculación.</div>
+
+<h2 id="s2">2 · Qué se puede construir: legislación aplicable</h2>
+<p>Régimen: suelo urbano consolidado (TRLUA art. 12; PGOU Simplificado de Biel, aprobado por el CPU en 2014). Derecho a edificar con <b>licencia urbanística municipal</b> (Ayuntamiento de Biel; ICIO 2 % + tasa), sin cesiones ni reparcelación, con el deber de completar la urbanización que falte (acometidas, acera). No hace falta autorización del CPU ni evaluación ambiental.</p>
+<h3>Ordenanza de zona</h3>
+<p>El plano NPO02B del PGOU asigna a cada manzana una zona. El núcleo histórico de Fuencalderas es <b>Casco Antiguo</b>; las zonas Ensanche y Vivienda unifamiliar se delimitaron sobre todo en Biel. Como esta parcela está en el borde («zona periférica»), conviene confirmar la zona con un <b>informe urbanístico</b> (Ayuntamiento, 0–60 €). Las dos hipótesis:</p>
+<table>
+<tr><th>Parámetro</th><th>Casco Antiguo (arts. 45–48)</th><th>Ensanche (49–53)</th><th>Vivienda unifamiliar 2 (59–63)</th></tr>
+<tr><td>Edificabilidad</td><td>2,5 m²/m² → 1.562 m² (teórica)</td><td>2 m²/m² → 1.250 m²</td><td>0,6 m²/m² → 375 m²</td></tr>
+<tr><td>Ocupación máxima</td><td>80 % (PB 100 %) → 500 m²</td><td>80 % → 500 m²</td><td>30 % → 187 m²</td></tr>
+<tr><td>Altura</td><td>10 m, PB+2 (3 plantas)</td><td>10 m, PB+2</td><td>7 m, PB+1</td></tr>
+<tr><td>Fondo edificable</td><td>15 m desde la alineación</td><td>15 m</td><td>15 m</td></tr>
+<tr><td>Parcela mínima / frente</td><td>90 m² / 5 m (cumple)</td><td>150 m² / 6,5 m</td><td>225 m²</td></tr>
+<tr><td>Posición</td><td>Alineada a calle; edificación aislada prohibida</td><td>Alineada</td><td>Aislada o pareada, retranqueos</td></tr>
+<tr><td>Usos</td><td>Vivienda uni/plurifamiliar, talleres ≤ 5 CV, hostelería ≤ 100 plazas, comercio</td><td>Ídem</td><td>Vivienda unifamiliar</td></tr>
+</table>
+<h3>Condiciones estéticas (art. 48, Casco Antiguo; similares en las otras zonas)</h3>
+<ul>
+<li><b>Cubierta</b> inclinada 30–40 % de teja curva cerámica color pardo (se recomienda teja recuperada); a dos aguas sobre muros piñón; aleros de madera con canes y tablazón, vuelo 0,45–0,70 m; chimeneas no pirenaicas; sin áticos ni buhardillas sobre la altura máxima.</li>
+<li><b>Fachadas</b> de mampostería o sillería de piedra, o revoco pintado en tonos ocres; prohibidos los aplacados. Carpintería de madera barnizada oscura; rejería de forja maciza.</li>
+<li><b>Huecos</b> verticales, ≤ 30 % de la superficie de fachada; balcones ≤ 45 cm de vuelo, sin balcones corridos.</li>
+<li><b>Placas solares</b>: sólo donde no sean visibles desde el espacio público (Casco Antiguo); en Ensanche/VU, ≤ 40 % de la cubierta y teja parda obligatoria.</li>
+<li>Planta baja ≤ 4 m libres; alineación oficial y rasante de la calle.</li>
+</ul>
+<h3>Vivienda de ejemplo</h3>
+<p>Casa de <b>12 × 9 m</b> (108 m² de huella, 17 % de ocupación) en dos plantas (216 m² construidos) alineada al frente sur (C/ Aire) o al oeste, cumbrera paralela al frente, cubierta a dos aguas al 35 %, muros de piedra o revoco ocre, y el resto del solar como patio/huerto al este y al norte. Cabe también una casa de 15 × 10 m en PB+2 (450 m²) o dos viviendas pareadas; el límite real no es la edificabilidad sino el fondo de 15 m, la altura y el presupuesto. Con ≥ 2 viviendas o local, plaza de aparcamiento por vivienda según normativa. Plazos: proyecto básico y de ejecución 3–4 meses; licencia 1–3 meses; obra 10–14 meses.</p>
+<div class="note ok">Ventaja específica: al ser suelo urbano consolidado no aplican ni la parcela mínima de 10.000 m² ni la autorización del CPU que pesan sobre el rústico; y al haber dos frentes de calle, la alineación obligatoria del Casco Antiguo deja libertad de orientación (frente sur para vistas y sol; frente oeste para alejarse de la medianera).</div>
+
+<h2 id="s3">3 · Geología y geotecnia: ¿se puede cimentar?</h2>
+<table>
+<tr><th>Fuente</th><th>Dato en la parcela</th></tr>
+<tr><td>IGME MAGNA 50 (hoja 208 Uncastillo, unidad 22)</td><td>Areniscas y lutitas (Fm. Uncastillo)</td></tr>
+<tr><td>IGME GEODE (unidad 128)</td><td>Areniscas, lutitas y conglomerados, Rambliense–Aragoniense medio (Mioceno)</td></tr>
+<tr><td>IGME litoestratigráfico 1:200.000</td><td>Alternancia de areniscas y lutitas, localmente conglomerados; permeabilidad baja</td></tr>
+<tr><td>IGME arcillas expansivas 1:1.000.000</td><td>Arcillas expansivas localmente predominantes en zona con déficit de humedad: riesgo moderado-alto (aviso regional, no medida local)</td></tr>
+<tr><td>Aragón · susceptibilidad</td><td>Deslizamiento MUY BAJA (sustrato roca), colapso MUY BAJA, inundación BAJA</td></tr>
+<tr><td>IGME BD MOVES</td><td>0 movimientos inventariados en el término</td></tr>
+<tr><td>IGN MDT 2 m</td><td>836 m; pendiente media 8,4°, máxima 24° en el talud del borde oeste; perfil E-W: la parcela es la cresta local (830 → 836 → 831 m en 150 m)</td></tr>
+<tr><td>IGN peligrosidad sísmica</td><td>PGA 0,06 g (475 años); a<sub>b</sub> &lt; 0,04 g: NCSE-02 no exige medidas para vivienda</td></tr>
+</table>
+<p><b>Interpretación.</b> La parcela está sobre el sustrato rocoso terciario que forma la loma del pueblo, no sobre rellenos ni aluvial. Las areniscas dan una capacidad portante buena (típicamente 3–6 kg/cm² en roca sana); las lutitas intercaladas meteorizan en los primeros 1–2 m a una arcilla limosa que puede ser <b>expansiva</b> (hinchamiento con la lluvia, retracción en verano), y esa es la única incógnita geotécnica real. Consecuencias de diseño:</p>
+<ul>
+<li>Cimentación por <b>zapatas corridas o losa</b> empotradas hasta la arenisca o hasta 1,0–1,5 m bajo la cota de meteorización; si el geotécnico confirma arcilla expansiva con presión de hinchamiento &gt; 0,5 kg/cm², losa rígida o pozos hasta roca y lámina drenante. Sobrecoste típico 3.000–8.000 €.</li>
+<li>Drenaje perimetral y evitar que el agua de la cubierta descargue junto a la cimentación (regla de oro en lutitas).</li>
+<li>El talud oeste (hasta 24°) hacia la pista queda fuera de la huella propuesta; construir en la meseta este/sur, y no descargar rellenos sobre el talud.</li>
+<li>Explanación mínima: la parcela cae 1,9 m en 40 m (sur más alto que norte, 837 → 835 m). Un desmonte de 0,5–1 m en la parte alta nivela la planta baja.</li>
+<li>El estudio geotécnico es obligatorio (CTE DB-SE-C): vivienda de 2 plantas = tipo C-1 en terreno T-1: 2–3 puntos de reconocimiento (catas o penetrómetro + un sondeo corto), ensayos de identificación y de hinchamiento Lambe. Coste 900–1.800 € con desplazamiento. Encargarlo <b>antes</b> de la escritura si el precio lo justifica, o condicionar la compra.</li>
+<li>Radón: el mapa del CTE DB-HS6 sitúa el norte de Zaragoza mayoritariamente en zona 0–1; comprobar el municipio en la tabla del DB-HS6 (barrera antirradón en solera si es zona 1: coste bajo).</li>
+</ul>
+<div class="note ok">Veredicto geotécnico: <b>parcela apta</b> para vivienda unifamiliar de 2–3 plantas con cimentación convencional, con la salvedad habitual de las lutitas expansivas. No hay riesgo de inundación, deslizamiento ni colapso.</div>
+
+<h2 id="s4">4 · Incendios forestales: cómo condiciona la ZAR</h2>
+<p>La parcela cae dentro de un polígono de <b>Zona de Alto Riesgo tipo 1</b> de la Orden DRS/1521/2017 (el casco consolidado es ZMR tipo 6, medio) y linda al oeste y noroeste, a 3–10 m, con «matorral, forestal no arbolado» del mapa forestal de Aragón; al norte, cultivo. Es la interfaz urbano-forestal clásica de los pueblos de Santo Domingo. Implicaciones:</p>
+<table>
+<tr><th>Norma</th><th>Exigencia</th><th>Efecto en este solar</th></tr>
+<tr><td>CTE DB-SI, sección SI 5 (entorno de los edificios)</td><td>Zonas edificadas limítrofes con área forestal: franja de <b>25 m</b> de anchura libre de vegetación que propague el fuego (arbolado aclarado, sin matorral continuo) y vial perimetral de 5 m; accesibilidad de bomberos.</td><td>La franja de 25 m se extiende sobre la pista y la parcela rústica 112/58 (ajena) y el monte al NW. Sólo se puede gestionar dentro del solar (mantener el patio limpio) y pidiendo al Ayuntamiento/ELM la gestión de la interfaz (obligación municipal en ZAR, Ley 43/2003 art. 44 y Ley 15/2006 de Aragón). Situar la casa en la mitad este/sur maximiza la distancia al matorral (25–35 m).</td></tr>
+<tr><td>Directriz básica de incendios forestales (RD 893/2013) y Ley 15/2006 de Montes de Aragón</td><td>Edificaciones y urbanizaciones en ZAR: <b>plan de autoprotección</b>, medidas de prevención propias, obligación de mantener la franja; restricciones al uso del fuego y maquinaria en época de peligro (junio–octubre).</td><td>Redactar el plan de autoprotección con el proyecto (500–1.500 €); prever agua de extinción: aljibe o depósito de 5–10 m³ con toma de bombero (2.000–4.000 €), útil además para riego y como reserva.</td></tr>
+<tr><td>Orden anual de prevención de incendios (Gobierno de Aragón)</td><td>Prohibición de quemas, barbacoas y trabajos con chispa en ZAR en época de peligro sin autorización.</td><td>Condiciona la fase de obra (soldadura, radial) en verano: planificar los trabajos exteriores fuera de junio–octubre o con permiso.</td></tr>
+<tr><td>Buenas prácticas de diseño (guías Aragón/MITECO)</td><td>Envolvente incombustible (piedra, revoco, teja), evitar madera vista en aleros y persianas del lado forestal o usar madera tratada/clase B-s1,d0, rejillas de ventilación con malla ≤ 3 mm contra pavesas, sin depósitos de leña o GLP junto a la fachada W, ventanas con vidrio templado en el lado W.</td><td>Compatible con la ordenanza del Casco Antiguo (piedra y teja son incombustibles); los aleros de madera exigidos por el art. 48 se resuelven con madera ignifugada o con el alero mínimo (0,45 m) y forro incombustible en la cara W.</td></tr>
+<tr><td>Seguros</td><td>Las aseguradoras aplican recargo o exclusiones por interfaz forestal en ZAR.</td><td>Prima de hogar +10–30 %; documentar las medidas (franja, aljibe, materiales) para negociarla.</td></tr>
+</table>
+<p><b>Coste añadido total por incendio</b>: 4.000–9.000 € (aljibe, plan de autoprotección, carpintería y rejillas del lado oeste, madera tratada), 2–4 % del presupuesto. <b>Ubicación</b>: casa pegada al frente sur/este, patio y huerto hacia el oeste como cortafuegos propio, sin seto de ciprés ni leñera junto al matorral. <b>Ventaja</b>: la pista del oeste y el vial sur son ya el «vial perimetral» que pide el CTE.</p>
+
+<h2 id="s5">5 · Fotovoltaica: legislación y potencial</h2>
+<h3>Marco legal</h3>
+<ul>
+<li><b>Autoconsumo</b> (RD 244/2019, Ley 24/2013): instalaciones ≤ 100 kW con compensación simplificada de excedentes (el sobrante se descuenta en la factura hasta el importe de la energía consumida; no se paga el excedente adicional). Con ≤ 15 kW en suelo urbanizado no hace falta permiso de acceso y conexión; ≤ 100 kW no necesita autorización administrativa previa.</li>
+<li><b>Tramitación en Aragón</b>: las instalaciones de autoconsumo sobre cubierta de edificios se tramitan por <b>declaración responsable</b> ante el Ayuntamiento (no licencia de obras) y registro en el Servicio Provincial de Industria; verificar el trámite vigente en el momento de ejecutar.</li>
+<li><b>Bonificaciones</b>: el Ayuntamiento de Biel bonifica el 50 % del ICIO en obras con energía solar (ordenanza 2013); no consta bonificación de IBI (pedirla).</li>
+<li><b>PGOU Biel</b>: en Casco Antiguo (art. 48) sólo se admiten placas <b>no visibles desde el espacio público</b>; en Ensanche/VU (arts. 53, 58, 63) hasta el <b>40 % de la cubierta</b>. En la práctica se acepta integración en el plano de cubierta con módulos oscuros sin marco; conviene consultar al Ayuntamiento con un fotomontaje.</li>
+<li><b>Conexión</b>: la red del pueblo es probablemente monofásica en baja tensión; por encima de ~5 kW de inversor la distribuidora (e-distribución) suele exigir trifásica o limitar la potencia de vertido. Consultar el punto de conexión antes de dimensionar.</li>
+</ul>
+<h3>Recurso solar en la parcela (PVGIS 5.2, base SARAH2, con horizonte real, pérdidas 14 %)</h3>
+<table>
+<tr><th>Orientación / inclinación</th><th>kWh por kWp y año</th><th>Comentario</th></tr>
+<tr><td>Óptima (sur, 38°)</td><td>1.511</td><td>Máximo local</td></tr>
+<tr><td>Sur 35° · sur 20°</td><td>1.508 · 1.452</td><td>Faldón sur de cubierta al 35 % (19°) ≈ 1.440</td></tr>
+<tr><td>Sureste / suroeste 35°</td><td>1.416 · 1.409</td><td>Cumbrera girada ±45°: pérdida del 6 %</td></tr>
+<tr><td>Este / oeste 35°</td><td>1.176 · 1.164</td><td>Cumbrera N-S</td></tr>
+<tr><td>Horizontal</td><td>1.255</td><td></td></tr>
+<tr><td>Norte 20°</td><td>947</td><td>El faldón «no visible» en una casa alineada al sur</td></tr>
+</table>
+<p>Horizonte: la sierra al norte y las lomas al sur tapan menos de 5° en todas las direcciones (el sur está libre hasta 1°), por lo que no hay sombras topográficas relevantes; la casa medianera del norte (1 planta) tampoco sombrea. Producción mensual a sur 35°: 95–101 kWh/kWp en noviembre–febrero y 150–168 en mayo–agosto; la relación verano/invierno es 1,7, favorable a la bomba de calor.</p>
+<h3>Modelo sobre la cubierta de ejemplo</h3>
+<p>Casa 12 × 9 m, cubierta a dos aguas al 35 % con cumbrera paralela al frente sur: cada faldón mide 12 × 4,76 = <b>57 m²</b>; con módulos de 215 W/m² (paneles de 430–450 W, 1,95 m²) y un 85 % de aprovechamiento, <b>10,4 kWp por faldón</b>.</p>
+<table>
+<tr><th>Escenario</th><th>Potencia</th><th>Producción anual</th><th>Cobertura de 4.500 kWh</th></tr>
+<tr><td>Casco Antiguo estricto: sólo faldón norte (no visible desde C/ Aire)</td><td>10,4 kWp (o 4–5 kWp razonables)</td><td>≈ 9.900 kWh (4–5 kWp: 3.800–4.700)</td><td>La cobertura real del consumo con excedentes compensados es del 50–70 % sin batería; con batería de 10 kWh, 80–90 %</td></tr>
+<tr><td>Integración aceptada / zona Ensanche-VU con 40 % de cubierta: faldón sur</td><td>40 % × 114 m² × 215 W = 9,8 kWp en el faldón sur</td><td>≈ 14.100 kWh</td><td>Excedente triple del consumo: sólo compensa con vehículo eléctrico, bomba de calor o dos viviendas</td></tr>
+<tr><td>Máximo físico: ambos faldones al 85 %</td><td>20,8 kWp</td><td>≈ 24.900 kWh (14.900 sur + 9.900 norte)</td><td>Fuera de la compensación simplificada útil; exigiría trifásica y no tiene sentido económico</td></tr>
+<tr><td>Alternativa: cumbrera N-S (faldones E y W)</td><td>2 × 10,4 kWp</td><td>≈ 12.200 + 12.100 kWh</td><td>Ambos faldones «laterales» son más defendibles como no visibles; producción total 24 MWh, por kWp un 22 % menor que a sur</td></tr>
+</table>
+<p><b>Dimensionado recomendable</b>: 5–6 kWp en el faldón menos visible (o 3 + 3 en dos faldones), inversor híbrido 5 kW monofásico, batería 5–10 kWh opcional, 7.000–11.000 € instalados (antes de bonificaciones): cubre el 70–90 % de una vivienda con bomba de calor aerotérmica y deja la cubierta sur limpia de cara al Casco Antiguo. Si el Ayuntamiento acepta la integración en el faldón sur, 6 kWp a sur rinden 9.000 kWh/año. La calculadora del panel izquierdo aplica estos rendimientos al boceto que dibujes.</p>
+
+<h2 id="s6">6 · Precio objetivo</h2>
+<h3>Referencias</h3>
+<ul>
+<li>Bandas del estudio de mercado (§Mercado del mapa): solar urbano <b>Fuencalderas 15–40 €/m²</b>, Biel 30–60 €/m²; Uncastillo, terrenos desde 1.250 €; parcelas rústicas en Cinco Villas 1.500–10.000 €/lote.</li>
+<li>Único anuncio en Fuencalderas: casa de 400 años con parcela de 1.300 m² (precio no visible). Ventas ELM 2004: solar periférico, tipo de subasta 600 € (≈ 1 €/m² hace 22 años; el mercado ha cambiado poco en el pueblo).</li>
+<li>Casas reformadas en Biel: 600–1.050 €/m² (105.000–210.000 €); Fuencalderas −15/−30 %. Coste de obra nueva en casco 1.200–1.700 €/m² + 20 % de honorarios y tasas.</li>
+<li>Valor de referencia del Catastro (base mínima del ITP): consultar en la Sede para esta referencia; para solares en pueblos pequeños suele estar entre 5 y 25 €/m².</li>
+</ul>
+<h3>Ajustes propios de esta parcela</h3>
+<table>
+<tr><th>Factor</th><th>Efecto</th></tr>
+<tr><td>Tamaño (625 m², 6,6 × la mediana del pueblo) y forma regular, dos frentes de vial</td><td>+ (permite casa exenta de hecho, patio, huerto, aparcamiento; poco competidor local)</td></tr>
+<tr><td>Orientación SSE, cota alta, vistas al valle, sol sin sombras</td><td>+</td></tr>
+<tr><td>Suelo urbano consolidado con servicios a pie de parcela</td><td>+ (ahorra los 15–50 k€ de servicios de una parcela rústica)</td></tr>
+<tr><td>Nunca edificada: sin «volumen demolido» que consolidar, sin ruina que derribar</td><td>neutro (no hay descuento por demolición ni prima por edificabilidad consolidada)</td></tr>
+<tr><td>ZAR tipo 1 y matorral a 3–10 m</td><td>− (4–9 k€ de medidas y recargo de seguro)</td></tr>
+<tr><td>Lutitas potencialmente expansivas</td><td>− (geotécnico + posible sobrecoste de cimentación 3–8 k€)</td></tr>
+<tr><td>Pueblo de 26 habitantes, sin bar ni tienda, 8 km de Biel</td><td>− (liquidez muy baja: pocos compradores, reventa lenta)</td></tr>
+<tr><td>Posible falta de inscripción / herencia</td><td>− (1,5–4 k€ y meses; comprobar)</td></tr>
+</table>
+<h3>Conclusión</h3>
+<div class="out" style="font-size:13px">
+Valor de mercado razonable del solar: <b>12.000 – 20.000 €</b> (20–32 €/m²).<br>
+Oferta de apertura: <b>≈ 10.000 €</b> (16 €/m²) justificada con ZAR, geotécnico y liquidez.<br>
+Precio objetivo de cierre: <b>14.000 – 16.000 €</b>. Tope antes de retirarse: <b>22.000 €</b> (35 €/m²), salvo que el vendedor aporte proyecto o licencia.<br>
+Condiciones a incluir: nota simple limpia (o inmatriculación a cargo del vendedor), informe urbanístico que confirme SU-C residencial y la ordenanza, comprobación de acometidas de agua y luz, y opción de retirarse si el geotécnico detecta arcillas con presión de hinchamiento alta.
+</div>
+<p><b>Coste total del proyecto</b> (vivienda de 120 m² útiles, 140 m² construidos, PB+1): solar 15 k€ + ITP 8 % y notaría 2 k€ + geotécnico 1,5 k€ + proyecto, dirección y seguros 25–35 k€ + obra 170–240 k€ + acometidas y urbanización de acera 4–8 k€ + medidas ZAR 4–9 k€ + fotovoltaica 8 k€ + ICIO/tasas 4–6 k€ ≈ <b>235.000 – 320.000 €</b>. Comparación: una casa ya reformada en Biel cuesta 105.000–210.000 €; el solar sólo tiene sentido si se quiere una casa nueva a medida (eficiencia, orientación, patio) o como inversión a muy largo plazo.</p>
+
+<h2 id="s7">7 · Otras comprobaciones antes de ofertar</h2>
+<ol>
+<li><b>Nota simple</b> (Registro de Ejea, ≈ 11 €): titular, cargas, superficie registral, coordinación con Catastro. Si la finca no aparece por referencia catastral, buscar por titular o pedirla por correo con la descripción «solar en C/ Aire 2, antes pol. 112 parc. 401».</li>
+<li><b>Informe urbanístico</b> del Ayuntamiento de Biel: zona de ordenanza, alineaciones oficiales (¿el vial sur tiene ensanche previsto?), afecciones, si el solar computa como «suelo urbano consolidado» a todos los efectos y si existe algún expediente.</li>
+<li><b>Acometidas</b>: la ELM de Fuencalderas gestiona el agua (pedir punto de enganche y presión: la parcela está en la cota alta del pueblo); e-distribución para el punto de conexión eléctrico; saneamiento municipal en C/ Aire (comprobar cota de la red: la parcela está 1–2 m por encima de la calle, favorable).</li>
+<li><b>Lindes</b>: replanteo con topógrafo (300–500 €) del muro medianero norte y de los frentes: en el Catastro la parcela llega hasta el borde de la pista; el Ayuntamiento puede reclamar la alineación oficial.</li>
+<li><b>Colindante norte</b> (3621101, casa de 1960): derechos de luces y vistas sobre la medianera, servidumbres de desagüe; conviene hablar con el propietario (probablemente el mismo grupo familiar) y, si se compra, preguntar por 3621103 (84 m², sin edificar, a 11 m).</li>
+<li><b>Arqueología/patrimonio</b>: el catálogo del PGOU no señala yacimientos en el casco de Fuencalderas; la ermita de San Miguel de Liso está fuera. Sin condicionante conocido.</li>
+<li><b>Valor de referencia</b> (Sede Catastro) para prever el ITP; si es superior al precio, liquidar por el valor de referencia o impugnarlo con tasación.</li>
+</ol>
+<p class="small">Fuentes: Catastro (INSPIRE CP/BU/AD 2026-02); PGOU Simplificado de Biel, normas urbanísticas (BOPZ 200, 1-9-2014) y art. 97 (BOPZ 12-2-2015); SIUa (clasificación, ENP, montes); IGME (MAGNA 50 hoja 208, GEODE, litoestratigráfico y arcillas expansivas, BD MOVES); Gobierno de Aragón (mapas de susceptibilidad 2011, Orden DRS/1521/2017 ZAR, mapa forestal); IGN (MDT 2 m, PNOA 2024, ortofotos históricas 1956–2024, peligrosidad sísmica 2015); PVGIS 5.2 (JRC); CTE DB-SE-C, DB-SI, DB-HS6; RD 244/2019; TRLUA. Cifras de coste: estimaciones 2026.</p>
+</main>
+
+<script>
+(function(){
+var D=window.PDATA; var C=D.centroid; var $=function(id){return document.getElementById(id);};
+var fmt=function(n,d){ return Number(n).toLocaleString('es-ES',{maximumFractionDigits:d===undefined?0:d,minimumFractionDigits:d===undefined?0:d}); };
+var kx=111320*Math.cos(C[1]*Math.PI/180), ky=111320;
+function toLL(x,y){ return [C[0]+x/kx, C[1]+y/ky]; }
+function pip(pt,ring){ var x=pt[0],y=pt[1],ins=false; for(var i=0,j=ring.length-1;i<ring.length;j=i++){ var xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1]; if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi)) ins=!ins; } return ins; }
+var pring=D.parcel.g.coordinates[0];
+function distToBoundary(pt){ var best=1e9; for(var i=0;i<pring.length-1;i++){ var a=pring[i],b=pring[i+1]; var ax=(a[0]-pt[0])*kx, ay=(a[1]-pt[1])*ky, bx=(b[0]-pt[0])*kx, by=(b[1]-pt[1])*ky; var dx=bx-ax, dy=by-ay; var L=dx*dx+dy*dy; var t=L?Math.max(0,Math.min(1,-(ax*dx+ay*dy)/L)):0; var d=Math.hypot(ax+t*dx, ay+t*dy); if(d<best) best=d; } return best; }
+// buffer polygon (25 m) around parcel: approximate by offsetting vertices along outward normals + circle arcs
+function bufferRing(ring, r){ var pts=[]; var n=ring.length-1; var xy=ring.slice(0,n).map(function(c){ return [(c[0]-C[0])*kx,(c[1]-C[1])*ky]; }); var area=0; for(var i=0;i<n;i++){ var j=(i+1)%n; area+=xy[i][0]*xy[j][1]-xy[j][0]*xy[i][1]; } var ccw=area>0; for(var i=0;i<n;i++){ var p=xy[i]; for(var k=0;k<=12;k++){ var a=k/12*2*Math.PI; pts.push([p[0]+r*Math.cos(a),p[1]+r*Math.sin(a)]); } } // convex hull of the circles' points (gift wrapping)
+  pts.sort(function(a,b){ return a[0]-b[0]||a[1]-b[1]; }); var cross=function(o,a,b){ return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]); }; var lower=[]; pts.forEach(function(p){ while(lower.length>=2&&cross(lower[lower.length-2],lower[lower.length-1],p)<=0) lower.pop(); lower.push(p); }); var upper=[]; pts.slice().reverse().forEach(function(p){ while(upper.length>=2&&cross(upper[upper.length-2],upper[upper.length-1],p)<=0) upper.pop(); upper.push(p); }); var hull=lower.slice(0,-1).concat(upper.slice(0,-1)); hull.push(hull[0]); return hull.map(function(p){ return toLL(p[0],p[1]); }); }
+
+// ---------- sources
+var WMTS=function(u,l){ return u+'?service=WMTS&request=GetTile&version=1.0.0&layer='+l+'&style=default&tilematrixset=GoogleMapsCompatible&format=image/jpeg&tilematrix={z}&tilerow={y}&tilecol={x}'; };
+var HIST=function(l){ return 'https://www.ign.es/wms/pnoa-historico?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS='+l+'&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/jpeg'; };
+var BASES={pnoa:{tiles:[WMTS('https://www.ign.es/wmts/pnoa-ma','OI.OrthoimageCoverage')],maxzoom:19}, esri:{tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],maxzoom:19}, mtn:{tiles:[WMTS('https://www.ign.es/wmts/mapa-raster','MTN')],maxzoom:18}, ams56:{tiles:[HIST('AMS_1956-1957')],maxzoom:17}, inter73:{tiles:[HIST('Interministerial_1973-1986')],maxzoom:17}, sigpac:{tiles:[HIST('SIGPAC')],maxzoom:18}, p2006:{tiles:[HIST('PNOA2006')],maxzoom:18}, p2012:{tiles:[HIST('PNOA2012')],maxzoom:19}, p2018:{tiles:[HIST('PNOA2018')],maxzoom:19}};
+var sources={dem:{type:'raster-dem',tiles:['https://xyz-mdt.idee.es/1.0.0/raster-dem/{z}/{x}/{y}.png'],tileSize:512,encoding:'mapbox',maxzoom:15,attribution:'© IGN MDT'},
+  geo:{type:'raster',tiles:['https://mapas.igme.es/gis/rest/services/Cartografia_Geologica/IGME_MAGNA_50/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=256,256&layers=show:11,9,3&format=png32&transparent=true&dpi=96&f=image'],tileSize:256,attribution:'© IGME'},
+  contour:{type:'raster',tiles:['https://servicios.idee.es/wms-inspire/mdt?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EL.ContourLine&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&TRANSPARENT=true'],tileSize:256},
+  parcel:{type:'geojson',data:{type:'Feature',properties:{},geometry:D.parcel.g}},
+  buf:{type:'geojson',data:{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[bufferRing(pring,25)]}}},
+  clas:{type:'geojson',data:window.SIUA_DATA?window.SIUA_DATA.clasif:{type:'FeatureCollection',features:[]}},
+  zar:{type:'geojson',data:window.RIESGOS_DATA?window.RIESGOS_DATA.zar:{type:'FeatureCollection',features:[]}},
+  inu:{type:'geojson',data:window.RIESGOS_DATA?window.RIESGOS_DATA.inu:{type:'FeatureCollection',features:[]}},
+  parcels:{type:'geojson',data:{type:'FeatureCollection',features:[]}},
+  blds:{type:'geojson',data:{type:'FeatureCollection',features:[]}},
+  sketch:{type:'geojson',data:{type:'FeatureCollection',features:[]}}};
+Object.keys(BASES).forEach(function(k){ sources['b_'+k]={type:'raster',tiles:BASES[k].tiles,tileSize:256,maxzoom:BASES[k].maxzoom}; });
+var SC={'SU-C':'#c800c8','SU-NC':'#ff00ff','SUZ-D':'#d2b48c','SNU-G':'#ffff99','SNU-E':'#008000'};
+var layers=[{id:'bg',type:'background',paint:{'background-color':'#0b0f0c'}}];
+Object.keys(BASES).forEach(function(k){ layers.push({id:'b_'+k,type:'raster',source:'b_'+k,layout:{visibility:k==='pnoa'?'visible':'none'},paint:{'raster-opacity':1}}); });
+layers.push({id:'hill',type:'hillshade',source:'dem',paint:{'hillshade-exaggeration':.45,'hillshade-shadow-color':'#000','hillshade-highlight-color':'#fff'}});
+layers.push({id:'geo',type:'raster',source:'geo',layout:{visibility:'none'},paint:{'raster-opacity':.55}});
+layers.push({id:'contour',type:'raster',source:'contour',layout:{visibility:'none'},paint:{'raster-opacity':.8}});
+layers.push({id:'clas',type:'fill',source:'clas',paint:{'fill-color':['match',['get','notepa'],'SU-C',SC['SU-C'],'SU-NC',SC['SU-NC'],'SUZ-D',SC['SUZ-D'],'SNU-G',SC['SNU-G'],'SNU-E',SC['SNU-E'],'#fff'],'fill-opacity':.22}});
+layers.push({id:'clas-line',type:'line',source:'clas',paint:{'line-color':'#fff','line-width':1,'line-opacity':.6}});
+layers.push({id:'inu',type:'fill',source:'inu',layout:{visibility:'none'},paint:{'fill-color':'#3b8bd6','fill-opacity':.35}});
+layers.push({id:'zar',type:'fill',source:'zar',paint:{'fill-color':'#ff5a1f','fill-opacity':.10}});
+layers.push({id:'zar-line',type:'line',source:'zar',paint:{'line-color':'#ff5a1f','line-width':1.5,'line-dasharray':[3,2]}});
+layers.push({id:'parcels',type:'line',source:'parcels',paint:{'line-color':'#e8b64a','line-width':1,'line-opacity':.8}});
+layers.push({id:'blds',type:'fill-extrusion',source:'blds',paint:{'fill-extrusion-color':['case',['==',['get','c'],'ruina'],'#e0654b','#c9a24a'],'fill-extrusion-height':['get','h'],'fill-extrusion-opacity':.85}});
+layers.push({id:'buf',type:'line',source:'buf',paint:{'line-color':'#ff5a1f','line-width':2,'line-dasharray':[2,2]}});
+layers.push({id:'parcel-fill',type:'fill',source:'parcel',paint:{'fill-color':'#6fc3c9','fill-opacity':.15}});
+layers.push({id:'parcel-line',type:'line',source:'parcel',paint:{'line-color':'#6fc3c9','line-width':3}});
+layers.push({id:'sketch-body',type:'fill-extrusion',source:'sketch',filter:['==',['get','part'],'body'],paint:{'fill-extrusion-color':'#e8b64a','fill-extrusion-height':['get','h'],'fill-extrusion-opacity':.9}});
+layers.push({id:'sketch-roof',type:'fill-extrusion',source:'sketch',filter:['==',['get','part'],'roof'],paint:{'fill-extrusion-color':'#8a4b2a','fill-extrusion-height':['get','h'],'fill-extrusion-base':['get','b'],'fill-extrusion-opacity':.95}});
+var map=new maplibregl.Map({container:'map',style:{version:8,sources:sources,layers:layers,terrain:{source:'dem',exaggeration:1.4}},center:C,zoom:18.2,pitch:62,bearing:-25,maxPitch:85,antialias:true,attributionControl:{compact:true}});
+map.addControl(new maplibregl.NavigationControl({visualizePitch:true}),'top-right');
+map.addControl(new maplibregl.ScaleControl({maxWidth:120,unit:'metric'}),'bottom-left');
+map.on('load', function(){ map.setTerrain({source:'dem',exaggeration:+$('exag').value}); loadCadastre(); sketch(); });
+$('exag').addEventListener('input', function(){ map.setTerrain({source:'dem',exaggeration:+this.value}); });
+$('base').addEventListener('change', function(){ var v=this.value; Object.keys(BASES).forEach(function(k){ map.setLayoutProperty('b_'+k,'visibility',k===v?'visible':'none'); }); });
+function bind(id,ls){ $(id).addEventListener('change', function(){ var v=this.checked?'visible':'none'; ls.forEach(function(l){ map.setLayoutProperty(l,'visibility',v); }); }); }
+bind('lyHill',['hill']); bind('lyGeo',['geo']); bind('lyClas',['clas','clas-line']); bind('lyZar',['zar','zar-line']); bind('lyInu',['inu']); bind('lyParc',['parcels']); bind('lyBld',['blds']); bind('lyBuf',['buf']); bind('lyContour',['contour']);
+$('geoOp').addEventListener('input', function(){ map.setPaintProperty('geo','raster-opacity',+this.value); });
+map.on('mousemove', function(e){ $('sLon').textContent=e.lngLat.lng.toFixed(5); $('sLat').textContent=e.lngLat.lat.toFixed(5); var el=map.queryTerrainElevation(e.lngLat); $('sAlt').textContent=el!=null?Math.round(el):'—'; $('sZ').textContent=map.getZoom().toFixed(1); });
+function loadCadastre(){ fetch('../cat/50049.json').then(function(r){ return r.json(); }).then(function(j){ var pf=[], bf=[]; j.parcels.forEach(function(q){ var c=q.g.type==='Polygon'?q.g.coordinates[0][0]:q.g.coordinates[0][0][0]; if(Math.abs(c[0]-C[0])<0.012 && Math.abs(c[1]-C[1])<0.009) pf.push({type:'Feature',properties:{rc:q.rc,a:q.a},geometry:q.g}); }); Object.keys(j.bld).forEach(function(k){ j.bld[k].forEach(function(b){ if(!b.g) return; var c=b.g.type==='Polygon'?b.g.coordinates[0][0]:b.g.coordinates[0][0][0]; if(Math.abs(c[0]-C[0])<0.012 && Math.abs(c[1]-C[1])<0.009) bf.push({type:'Feature',properties:{rc:k,c:b.c,h:(b.f||1)*3.1+0.6,u:b.u,y:b.y},geometry:b.g}); }); }); map.getSource('parcels').setData({type:'FeatureCollection',features:pf}); map.getSource('blds').setData({type:'FeatureCollection',features:bf}); }).catch(function(){}); }
+map.on('click','blds', function(e){ var p=e.features[0].properties; new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<b>'+p.rc+'</b><br>'+(p.u||'')+(p.y?' · '+p.y:'')+(p.c?' · '+p.c:'')+'<br>'+Math.round((p.h-0.6)/3.1)+' planta(s) (Catastro)').addTo(map); });
+map.on('click','parcels', function(e){ if(map.queryRenderedFeatures(e.point,{layers:['blds']}).length) return; var p=e.features[0].properties; new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<b>'+p.rc+'</b><br>'+fmt(p.a)+' m²').addTo(map); });
+
+// ---------- sketch
+var ZON={ca:{n:'Casco Antiguo',edif:2.5,occ:.8,hmax:10,pl:3,fondo:15},ens:{n:'Ensanche',edif:2,occ:.8,hmax:10,pl:3,fondo:15},vu2:{n:'Vivienda unifamiliar 2',edif:.6,occ:.3,hmax:7,pl:2,fondo:15},vu1:{n:'Vivienda unifamiliar 1',edif:.35,occ:.35,hmax:6.5,pl:2,fondo:15}};
+var lastRoof=null;
+function sketch(){ var w=+$('w').value, d=+$('d').value, rot=+$('rot').value*Math.PI/180, pl=+$('plantas').value, hp=+$('hp').value, pitch=+$('pitch').value/100, dx=+$('dx').value, dy=+$('dy').value, ridgeW=$('ridge').value==='w'; var z=ZON[$('zona').value];
+  var R=function(x,y){ return [dx + x*Math.cos(rot) - y*Math.sin(rot), dy + x*Math.sin(rot) + y*Math.cos(rot)]; };
+  var corners=[R(-w/2,-d/2),R(w/2,-d/2),R(w/2,d/2),R(-w/2,d/2)]; var ring=corners.concat([corners[0]]).map(function(p){ return toLL(p[0],p[1]); });
+  var hc=pl*hp+0.4; var half=ridgeW?d/2:w/2; var ridgeH=half*pitch; var hr=hc+ridgeH;
+  var strip = ridgeW ? [R(-w/2,-d/4),R(w/2,-d/4),R(w/2,d/4),R(-w/2,d/4)] : [R(-w/4,-d/2),R(w/4,-d/2),R(w/4,d/2),R(-w/4,d/2)];
+  var stripRing=strip.concat([strip[0]]).map(function(p){ return toLL(p[0],p[1]); });
+  map.getSource('sketch').setData({type:'FeatureCollection',features:[{type:'Feature',properties:{part:'body',h:hc},geometry:{type:'Polygon',coordinates:[ring]}},{type:'Feature',properties:{part:'roof',h:hr,b:hc-0.05},geometry:{type:'Polygon',coordinates:[stripRing]}}]});
+  var foot=w*d, built=foot*pl, occ=foot/D.geom.area_cat*100, inside=ring.every(function(p){ return pip(p,pring); }); var minD=Math.min.apply(null,ring.slice(0,4).map(function(p){ return distToBoundary(p); }));
+  var probs=[]; if(!inside) probs.push('la huella sale de la parcela'); if(occ>z.occ*100) probs.push('ocupación '+occ.toFixed(0)+' % > '+(z.occ*100)+' %'); if(built>z.edif*D.geom.area_cat) probs.push('edificabilidad '+fmt(built)+' m² > '+fmt(z.edif*D.geom.area_cat)+' m²'); if(pl>z.pl) probs.push('plantas '+pl+' > '+z.pl); if(hc-0.4>z.hmax) probs.push('altura de cornisa '+(hc-0.4).toFixed(1)+' m > '+z.hmax+' m'); if((ridgeW?d:w)>z.fondo && (ridgeW?d:w)>15) probs.push('fondo '+(ridgeW?d:w)+' m > 15 m'); if(pitch<0.30||pitch>0.40) probs.push('pendiente de cubierta fuera del 30–40 %');
+  var slopeLen=Math.hypot(half,ridgeH); var roofSide=(ridgeW?w:d)*slopeLen; var tilt=Math.atan(pitch)*180/Math.PI; var az1=((rot*180/Math.PI)+(ridgeW?180:90)+360)%360, az2=(az1+180)%360;
+  lastRoof={area:roofSide,tilt:tilt,az:[az1,az2],front:az1};
+  $('sketchOut').innerHTML='<b>'+fmt(foot)+' m²</b> de huella ('+occ.toFixed(0)+' % de ocupación) · <b>'+fmt(built)+' m²</b> construidos en '+pl+' plantas · cornisa '+(hc-0.4).toFixed(1)+' m, cumbrera '+(hr-0.4).toFixed(1)+' m · cubierta 2 × '+fmt(roofSide)+' m² a '+tilt.toFixed(0)+'° (faldones hacia '+azName(az1)+' y '+azName(az2)+') · distancia mínima al lindero '+minD.toFixed(1)+' m<br>'+(probs.length?'<span class="tag na">revisar</span> '+probs.join('; '):'<span class="tag ok">cumple</span> los parámetros de '+z.n+' (a falta de alineación oficial y fondo desde la alineación)');
+  pv(); }
+function azName(a){ var n=['N','NE','E','SE','S','SW','W','NW']; return n[Math.round(a/45)%8]+' ('+Math.round(a)+'°)'; }
+['w','d','rot','plantas','hp','pitch','dx','dy','ridge','zona'].forEach(function(id){ $(id).addEventListener('input',sketch); $(id).addEventListener('change',sketch); });
+// ---------- PV model (PVGIS anchors)
+function yieldFor(az,tilt){ var a=Math.abs((((az-180)%360)+540)%360-180); // angular distance from south: 0=S ... 180=N
+  var eS=function(t){ var pts=[[0,1255],[20,1452],[35,1508],[38,1511],[50,1475],[90,1150]]; for(var i=1;i<pts.length;i++){ if(t<=pts[i][0]){ var f=(t-pts[i-1][0])/(pts[i][0]-pts[i-1][0]); return pts[i-1][1]+f*(pts[i][1]-pts[i-1][1]); } } return 1150; };
+  var h=function(x){ var pts=[[0,1],[45,0.62],[90,-0.34],[180,-1.48]]; for(var i=1;i<pts.length;i++){ if(x<=pts[i][0]){ var f=(x-pts[i-1][0])/(pts[i][0]-pts[i-1][0]); return pts[i-1][1]+f*(pts[i][1]-pts[i-1][1]); } } return -1.48; };
+  return 1255+(eS(tilt)-1255)*h(a); }
+function pv(){ if(!lastRoof) return; var dens=+$('pvDens').value/1000, cap=+$('pvCap').value, cons=+$('pvCons').value, side=$('pvSide').value; var faces=lastRoof.az.map(function(az){ return {az:az, y:yieldFor(az,lastRoof.tilt)}; });
+  // "front" = pitch facing the public street: assume the street is on the side the facade azimuth az1 looks at (front of the house). The back pitch faces az2.
+  var use = side==='both'?faces:(side==='best'?[faces.slice().sort(function(a,b){return b.y-a.y;})[0]]:[faces[1]]);
+  var rows=use.map(function(f){ var kwp=lastRoof.area*cap*dens; return {az:f.az,kwp:kwp,kwh:kwp*f.y,y:f.y}; }); var kwp=rows.reduce(function(s,r){return s+r.kwp;},0), kwh=rows.reduce(function(s,r){return s+r.kwh;},0);
+  var selfc=Math.min(cons, kwh*0.35), comp=Math.min(cons-selfc, kwh-selfc); var cover=(selfc+comp)/cons*100;
+  $('pvOut').innerHTML=rows.map(function(r){ return 'Faldón '+azName(r.az)+': <b>'+r.kwp.toFixed(1)+' kWp</b> → <b>'+fmt(r.kwh)+' kWh/año</b> ('+fmt(r.y)+' kWh/kWp)'; }).join('<br>')+(rows.length>1?'<br>Total <b>'+kwp.toFixed(1)+' kWp · '+fmt(kwh)+' kWh/año</b>':'')+'<br><span class="small">Autoconsumo directo ≈ '+fmt(selfc)+' kWh + excedentes compensables ≈ '+fmt(comp)+' kWh → cubre ≈ '+cover.toFixed(0)+' % de la factura de '+fmt(cons)+' kWh (sin batería, 35 % de autoconsumo instantáneo). '+(kwp>15?'> 15 kW: necesita permiso de acceso y conexión y probablemente trifásica.':(kwp>5?'> 5 kW: consultar conexión trifásica.':''))+'</span>'; }
+['pvSide','pvCap','pvDens','pvCons'].forEach(function(id){ $(id).addEventListener('input',pv); $(id).addEventListener('change',pv); });
+// ---------- ficha
+$('ficha').innerHTML='<dl class="kv"><dt>Ref.</dt><dd style="font-family:var(--mono);color:var(--amber)">'+D.rc+'</dd><dt>Dirección</dt><dd>'+D.addr+'</dd><dt>Superficie</dt><dd>'+fmt(D.geom.area_cat)+' m² · '+D.geom.rect[0]+' × '+D.geom.rect[1]+' m</dd><dt>Clasificación</dt><dd><span class="tag" style="background:#c800c822;border:1px solid #c800c8;color:var(--ink)">SU-C</span> residencial</dd><dt>Cota</dt><dd>'+D.dem.centroid_elev+' m · pendiente '+D.dem.slope_mean+'° (máx. '+D.dem.slope_max+'°) · orientación SSE</dd><dt>Geología</dt><dd>Areniscas y lutitas (Fm. Uncastillo)</dd><dt>Riesgos</dt><dd>Inundación BAJA · deslizamiento MUY BAJA · <span class="tag na">ZAR tipo 1</span></dd><dt>Solar</dt><dd>1.508 kWh/kWp (S 35°)</dd><dt>Precio objetivo</dt><dd><b style="color:var(--amber)">14–16 k€</b> (oferta 10 k€, tope 22 k€)</dd></dl><div class="hint">Vecinos: '+D.near.slice(0,4).map(function(n){ return n.addr+' ('+n.b+')'; }).join(' · ')+'.</div>';
+[].forEach.call(document.querySelectorAll('section.block>h2'), function(h){ h.addEventListener('click', function(){ h.parentNode.classList.toggle('closed'); }); });
+window._p={map:map, sketch:sketch, yieldFor:yieldFor};
+})();
+</script>
+</body>
+</html>
