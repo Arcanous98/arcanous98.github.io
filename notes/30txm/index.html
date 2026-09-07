@@ -854,6 +854,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <button class="btn" id="clearBtn">Limpiar</button>
           </div>
           <div class="hint" id="loadInfo">Acerca el zoom (≥ 15) y pulsa cargar. El WFS del Catastro sirve ≤ 1 km² por petición; la vista se trocea automáticamente.</div>
+          <div class="note ok" id="localInfo" style="margin-top:6px;display:none"></div>
           <div class="chips" id="classChips">
             <span class="chip on" data-f="all">Todas</span>
             <span class="chip" data-f="RU">Rústicas</span>
@@ -1012,7 +1013,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <span class="sw" style="background:#d2dc8c"></span><span>SNU-E · otras categorías</span>
             <span class="sw" style="border:2px dashed #fff;background:rgba(255,255,255,.1)"></span><span>Sistema general (SG) · dot. pública</span>
           </div>
-          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS. Los datos se consultan en directo desde tu navegador (salvo la clasificación urbanística, incrustada en <code>siua_biel.js</code> a partir del SIUa el 6-9-2026); nada se almacena en servidores intermedios.</div>
+          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS. El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
         </div>
       </section>
 
@@ -1097,7 +1098,7 @@ function mgrs(e, n, lat, zone){
 }
 
 // ------------------------------------------------------------------ map
-var map = L.map('map',{center:HOME, zoom:15, minZoom:6, maxZoom:20, zoomControl:false, attributionControl:true, doubleClickZoom:false});
+var map = L.map('map',{center:HOME, zoom:15, minZoom:6, maxZoom:20, zoomControl:false, attributionControl:true, doubleClickZoom:false, preferCanvas:true});
 L.control.scale({imperial:false, maxWidth:160}).addTo(map);
 
 function wmts(url, layer, fmtImg, opts){
@@ -1308,9 +1309,10 @@ var filterMode='all', selected=null, selLayer=null, autoLoad=false, lastLL=null;
 function isRustic(rc){ return /^\d{5}[A-Z]/.test(rc); }
 function pStyle(f){ var ru=isRustic(f.properties.rc); var sel=f.properties.rc===selected; return {color: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), weight: sel?2.5:1.2, fillColor: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), fillOpacity: sel?.28:.10, opacity:.95}; }
 function passes(f){ var rc=f.properties.rc; if(filterMode==='RU') return isRustic(rc); if(filterMode==='UR') return !isRustic(rc); if(filterMode==='big') return (f.properties.area||0)>=10000; return true; }
-function refresh(){ parcelLayer.clearLayers(); var feats=Object.keys(parcels).map(function(k){return parcels[k];}).filter(passes); parcelLayer.addData({type:'FeatureCollection',features:feats}); renderList(feats); $('dlBtn').disabled=!Object.keys(parcels).length; }
+function refresh(){ parcelLayer.clearLayers(); var feats=Object.keys(parcels).map(function(k){return parcels[k];}).filter(passes); parcelLayer.addData({type:'FeatureCollection',features:feats}); var lf=feats; if(feats.length>600){ var v=map.getBounds(); lf=feats.filter(function(f){ var c=f.geometry.type==='Polygon'?f.geometry.coordinates[0][0]:f.geometry.coordinates[0][0][0]; return v.contains([c[1],c[0]]); }); } renderList(lf); $('dlBtn').disabled=!Object.keys(parcels).length; }
+var listT=null; map.on('moveend', function(){ if(Object.keys(parcels).length>600){ clearTimeout(listT); listT=setTimeout(function(){ var feats=Object.keys(parcels).map(function(k){return parcels[k];}).filter(passes); var v=map.getBounds(); renderList(feats.filter(function(f){ var c=f.geometry.type==='Polygon'?f.geometry.coordinates[0][0]:f.geometry.coordinates[0][0][0]; return v.contains([c[1],c[0]]); })); }, 250); } });
 function renderList(feats){
-  $('pcount').textContent = feats.length+' de '+Object.keys(parcels).length+' parcelas';
+  $('pcount').textContent = feats.length+' de '+Object.keys(parcels).length+' parcelas'+(Object.keys(parcels).length>600?' (lista: en pantalla)':'');
   feats.sort(function(a,b){ return (b.properties.area||0)-(a.properties.area||0); });
   var h=''; feats.slice(0,400).forEach(function(f){ var p=f.properties; h+='<div class="pi'+(p.rc===selected?' sel':'')+'" data-rc="'+p.rc+'"><span class="rc">'+esc(p.rc)+'</span><span class="a">'+(p.area? (p.area>=10000? fmt(p.area/10000,2)+' ha' : fmt(p.area)+' m²'):'')+'</span><span class="m">'+(isRustic(p.rc)?'RÚSTICA':'URBANA')+(p.zoning?' · pol. '+esc(p.zoning):'')+(p.label?' · parc. '+esc(p.label):'')+'</span></div>'; });
   if(feats.length>400) h+='<div class="hint">… y '+(feats.length-400)+' más (filtra o acerca el zoom)</div>';
@@ -1318,7 +1320,39 @@ function renderList(feats){
 }
 $('plist').addEventListener('click', function(ev){ var el=ev.target.closest('.pi'); if(!el) return; var rc=el.getAttribute('data-rc'); var lyr=null; parcelLayer.eachLayer(function(l){ if(l.feature.properties.rc===rc) lyr=l; }); if(lyr) map.fitBounds(lyr.getBounds().pad(0.6)); selectParcel(rc, lyr); });
 [].forEach.call(document.querySelectorAll('#classChips .chip'), function(c){ c.addEventListener('click', function(){ [].forEach.call(document.querySelectorAll('#classChips .chip'),function(x){x.classList.remove('on');}); c.classList.add('on'); filterMode=c.getAttribute('data-f'); refresh(); }); });
-$('clearBtn').onclick=function(){ parcels={}; selected=null; refresh(); $('insp').innerHTML='<div class="hint">Toca una parcela (o cualquier punto del mapa) para consultar sus datos públicos en el Catastro.</div>'; };
+$('clearBtn').onclick=function(){ parcels={}; selected=null; LOCAL.loaded={}; bldLayer.clearLayers(); refresh(); updateCatMode(); $('insp').innerHTML='<div class="hint">Toca una parcela (o cualquier punto del mapa) para consultar sus datos públicos en el Catastro.</div>'; };
+// ------------------------------------------------------------------ local cadastral data (INSPIRE ATOM dumps converted to cat/<code>.json)
+// Parcels, buildings and addresses of Biel and its neighbours are served from this site; the Catastro WMS/WFS is only used outside them.
+var LOCAL={idx:null, loaded:{}, loading:{}, bld:{}, addr:{}, muniOf:{}, active:false, wmsSuspended:false};
+var bldLayer = L.geoJSON(null, {style:function(f){ var b=f.properties; var col = b.c==='ruina'?'#e0654b':(b.u==='Residencial'?'#e8b64a':'#c9a24a'); return {color:col, weight:.8, fillColor:col, fillOpacity:.35, opacity:.9}; }, interactive:false}).addTo(map);
+fetch('cat/index.json').then(function(r){ return r.ok?r.json():null; }).then(function(j){ if(j){ LOCAL.idx=j.munis; updateCatMode(); } }).catch(function(){});
+function bboxHits(b){ var v=map.getBounds(); return b[0]<v.getEast() && b[2]>v.getWest() && b[1]<v.getNorth() && b[3]>v.getSouth(); }
+function localMunisInView(){ return (LOCAL.idx||[]).filter(function(m){ if(!bboxHits(m.bbox)) return false; if(!m.zones||!m.zones.length) return true; return m.zones.some(bboxHits); }); }
+function ensureLocal(m){ var c=m.code; if(LOCAL.loaded[c]||LOCAL.loading[c]) return; LOCAL.loading[c]=true; setMsg('Cargando parcelario local '+m.name+'…');
+  fetch('cat/'+c+'.json').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){
+    j.parcels.forEach(function(q){ var rc=q.rc; if(parcels[rc] && !parcels[rc].properties.local) return; var zon=/^\d{5}[A-Z]/.test(rc)? String(+rc.slice(6,9)) : ''; parcels[rc]={type:'Feature',properties:{rc:rc, area:q.a, label:q.l, zoning:zon, clase:isRustic(rc)?'Rústico':'Urbano', local:true, muni:j.name}, geometry:q.g}; LOCAL.muniOf[rc]=j.name; });
+    Object.keys(j.bld).forEach(function(k){ LOCAL.bld[k]=j.bld[k]; }); Object.keys(j.addr).forEach(function(k){ LOCAL.addr[k]=j.addr[k]; });
+    var bf=[]; Object.keys(j.bld).forEach(function(k){ j.bld[k].forEach(function(b){ if(b.g) bf.push({type:'Feature',properties:{u:b.u,c:b.c},geometry:b.g}); }); }); bldLayer.addData({type:'FeatureCollection',features:bf});
+    LOCAL.loaded[c]=j.name; LOCAL.loading[c]=false; refresh(); updateCatMode(); setMsg('© DGC · © IGN · ETRS89 / UTM 30N');
+  }).catch(function(e){ LOCAL.loading[c]=false; toast('No se pudo cargar cat/'+c+'.json ('+esc(e.message)+'). Si abres el archivo en local (file://), usa un servidor o la copia publicada.'); });
+}
+function updateCatMode(){ if(!LOCAL.idx) return; var z=map.getZoom(); var inView=localMunisInView(); var local = z>=13 && inView.length>0; LOCAL.active=local;
+  if(local){ inView.forEach(ensureLocal); if(map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } }
+  else if(LOCAL.wmsSuspended){ LOCAL.wmsSuspended=false; if($('ovParcels').checked) { ovParcels.addTo(map); ovParcels.bringToFront(); } }
+  var li=$('localInfo'); if(local){ var names=inView.map(function(m){ return LOCAL.loaded[m.code]?m.name:(m.name+' (cargando…)'); }); li.style.display='block'; li.innerHTML='<b>Parcelario local</b> · '+esc(names.join(', '))+' · Catastro INSPIRE (descarga 2026-02) servido desde esta web: parcelas, edificios y direcciones sin consultar al Catastro. La capa WMS del Catastro queda en pausa aquí; fuera de estos municipios se usa el WMS/WFS en directo.'; }
+  else { li.style.display= (z<13 && inView.length) ? 'block':'none'; li.innerHTML='Acerca el zoom (≥ 13) para ver el parcelario local de '+esc(inView.map(function(m){return m.name;}).join(', '))+'.'; }
+}
+map.on('moveend zoomend', updateCatMode);
+$('ovParcels').addEventListener('change', function(){ if(LOCAL.active && this.checked && map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } });
+function localCard(rc){ var rc14=rc.slice(0,14); var f=parcels[rc14]||parcels[rc]; var bl=LOCAL.bld[rc14]; var ad=LOCAL.addr[rc14]; if(!(f&&f.properties.local) && !bl && !ad) return '';
+  var h='<div class="hint" style="margin:8px 0 4px;color:var(--amber);font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;font-size:10px">Datos locales · Catastro INSPIRE 2026-02</div><dl class="kv">';
+  if(f&&f.properties.local){ var pr=f.properties; h+='<dt>Municipio</dt><dd>'+esc(pr.muni||'')+'</dd>'; if(pr.zoning) h+='<dt>Polígono / parcela</dt><dd>'+esc(pr.zoning)+' / '+esc(pr.label||'')+'</dd>'; else if(pr.label) h+='<dt>Parcela (manzana)</dt><dd>'+esc(pr.label)+'</dd>'; if(pr.area) h+='<dt>Superficie</dt><dd>'+fmt(pr.area)+' m²'+(pr.area>=10000?' ('+fmt(pr.area/10000,2)+' ha)':'')+'</dd>'; }
+  if(ad) h+='<dt>Dirección</dt><dd>'+esc(ad)+'</dd>';
+  if(bl&&bl.length){ h+='<dt>Edificios</dt><dd>'+bl.map(function(b){ var s=[]; if(b.u) s.push(b.u); if(b.c&&b.c!=='funcional') s.push('<span class="tag na">'+esc(b.c)+'</span>'); if(b.y) s.push('año '+b.y); if(b.a) s.push(fmt(+b.a)+' m² construidos'); if(b.f) s.push(b.f+' planta'+(b.f>1?'s':'')); if(b.d&&+b.d>0) s.push(b.d+' vivienda'+(+b.d>1?'s':'')); if(b.n&&+b.n>1) s.push(b.n+' unidades'); return s.join(' · '); }).join('<br>')+'</dd>'; }
+  else if(f&&f.properties.local) h+='<dt>Edificios</dt><dd>ninguno registrado</dd>';
+  h+='</dl>'; return h; }
+function localFind(pol, par){ var rc=MUN.code+'A'+String(pol).padStart(3,'0')+String(par).padStart(5,'0'); return parcels[rc]?rc:null; }
+
 $('autoBtn').onclick=function(){ autoLoad=!autoLoad; this.classList.toggle('on',autoLoad); if(autoLoad) loadView(); };
 map.on('moveend', function(){ if(autoLoad && map.getZoom()>=15) loadView(); });
 $('dlBtn').onclick=function(){ var fc={type:'FeatureCollection',features:Object.keys(parcels).map(function(k){return parcels[k];})}; var blob=new Blob([JSON.stringify(fc)],{type:'application/geo+json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='parcelas_biel_'+new Date().toISOString().slice(0,10)+'.geojson'; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},1000); };
@@ -1354,6 +1388,7 @@ function parseGML(txt){
 function wfsFetch(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); }).then(parseGML); }
 
 function loadView(){
+  if(LOCAL.active){ $('loadInfo').innerHTML='<span class="tag ok">local</span> Esta zona ya tiene el parcelario completo servido desde la web; no hace falta consultar el WFS del Catastro.'; return; }
   if(map.getZoom()<15){ toast('Acerca el zoom al menos a 15 para cargar parcelas vectoriales.'); return; }
   var b=map.getBounds(); var sw=toUTM(b.getWest(),b.getSouth()), ne=toUTM(b.getEast(),b.getNorth());
   var W=ne[0]-sw[0], H=ne[1]-sw[1]; var nx=Math.ceil(W/990), ny=Math.ceil(H/990); var cells=[];
@@ -1421,15 +1456,16 @@ function selectParcel(rc, layer){
   selected=rc; if(selLayer){ map.removeLayer(selLayer); selLayer=null; }
   parcelLayer.setStyle(pStyle);
   var pt = lastLL || (layer && layer.getBounds ? layer.getBounds().getCenter() : null); lastLL=null; var planHtml=siuaHtml(pt); var planPt=pt;
+  if(!layer && parcels[rc.slice(0,14)] && parcels[rc.slice(0,14)].properties.local){ parcelLayer.eachLayer(function(l){ if(l.feature.properties.rc===rc.slice(0,14)) layer=l; }); if(layer){ map.fitBounds(layer.getBounds().pad(0.8)); if(!lastLL) lastLL=layer.getBounds().getCenter(); } }
   if(!layer){ // fetch geometry by stored query
     wfsFetch(CAT_WFS+'?service=wfs&version=2.0.0&request=getfeature&STOREDQUERIE_ID=GetParcel&refcat='+rc.slice(0,14)+'&srsname=EPSG::25830').then(function(fs){ if(fs.length){ parcels[fs[0].properties.rc]=fs[0]; refresh(); var lyr=null; parcelLayer.eachLayer(function(l){ if(l.feature.properties.rc===fs[0].properties.rc) lyr=l; }); if(lyr){ map.fitBounds(lyr.getBounds().pad(0.8)); if(selected===rc && !planHtml){ planPt=lyr.getBounds().getCenter(); planHtml=siuaHtml(planPt); var insp2=$('insp'); if(insp2.querySelector('.spin')) return; var dv=document.createElement('div'); dv.innerHTML=planHtml; insp2.appendChild(dv); terrAppend(planPt); } } } }).catch(function(){});
   }
   [].forEach.call(document.querySelectorAll('#plist .pi'),function(x){ x.classList.toggle('sel', x.getAttribute('data-rc')===rc); });
   var f=parcels[rc]; var props=f?f.properties:null;
-  var insp=$('insp'); insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m²</dd>':'')+'</dl><div class="hint"><span class="spin"></span>Consultando datos públicos (Consulta_DNPRC)…</div>'+sedeLinks(rc);
+  var insp=$('insp'); var lc=localCard(rc); insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m²</dd>':'')+'</dl>'+lc+'<div class="hint"><span class="spin"></span>Consultando datos públicos (Consulta_DNPRC)…</div>'+sedeLinks(rc);
   $('inspBlock').classList.remove('closed');
-  fetch(OVC_CALLE+'Consulta_DNPRC?RefCat='+encodeURIComponent(rc.slice(0,14))).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){ if(selected!==rc) return; insp.innerHTML=renderDNP(j, rc, props)+planHtml; terrAppend(planPt); })
-  .catch(function(e){ if(selected!==rc) return; insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m² ('+fmt(props.area/10000,3)+' ha)</dd>':'')+(props?'<dt>Clase (por ref.)</dt><dd><span class="tag '+(isRustic(rc)?'ru':'ur')+'">'+(isRustic(rc)?'Rústico':'Urbano')+'</span></dd>':'')+(props&&props.zoning?'<dt>Polígono / parcela</dt><dd>'+esc(props.zoning)+' / '+esc(props.label||'?')+'</dd>':'')+'<dt>Titular</dt><dd><span class="tag na">protegido · art. 51</span></dd><dt>Valor catastral</dt><dd><span class="tag na">protegido · art. 51</span></dd></dl><div class="note">No se pudo consultar el servicio OVC desde el navegador ('+esc(catMsg(e))+'). Usa la ficha en la Sede (enlace abajo): muestra los mismos datos públicos.</div>'+sedeLinks(rc)+planHtml; terrAppend(planPt); });
+  fetch(OVC_CALLE+'Consulta_DNPRC?RefCat='+encodeURIComponent(rc.slice(0,14))).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(j){ if(selected!==rc) return; insp.innerHTML=renderDNP(j, rc, props)+lc+planHtml; terrAppend(planPt); })
+  .catch(function(e){ if(selected!==rc) return; insp.innerHTML='<dl class="kv"><dt>Ref. catastral</dt><dd class="rc">'+esc(rc)+'</dd>'+(props&&props.area?'<dt>Sup. gráfica</dt><dd>'+fmt(props.area)+' m² ('+fmt(props.area/10000,3)+' ha)</dd>':'')+(props?'<dt>Clase (por ref.)</dt><dd><span class="tag '+(isRustic(rc)?'ru':'ur')+'">'+(isRustic(rc)?'Rústico':'Urbano')+'</span></dd>':'')+(props&&props.zoning?'<dt>Polígono / parcela</dt><dd>'+esc(props.zoning)+' / '+esc(props.label||'?')+'</dd>':'')+'<dt>Titular</dt><dd><span class="tag na">protegido · art. 51</span></dd><dt>Valor catastral</dt><dd><span class="tag na">protegido · art. 51</span></dd></dl><div class="note">No se pudo consultar el servicio OVC desde el navegador ('+esc(catMsg(e))+'). Usa la ficha en la Sede (enlace abajo): muestra los mismos datos públicos.</div>'+lc+sedeLinks(rc)+planHtml; terrAppend(planPt); });
 }
 
 // ------------------------------------------------------------------ public documents (BOA/BOPZ/BOE) that name parcels of Biel/Fuencalderas
@@ -1608,6 +1644,9 @@ map.on('click', function(ev){
   if(measuring){ mPts.push(ev.latlng); measureRender(); return; }
   var ll=ev.latlng; lastLL=ll; var insp=$('insp'); $('inspBlock').classList.remove('closed');
   insp.innerHTML='<div class="hint"><span class="spin"></span>Identificando parcela en '+ll.lat.toFixed(5)+', '+ll.lng.toFixed(5)+' (Consulta_RCCOOR)…</div>';
+  if(LOCAL.active){ var pt=[ll.lng,ll.lat]; var hit=null; Object.keys(parcels).some(function(k){ var f=parcels[k]; if(f.properties.local && inGeom(pt,f.geometry)){ hit=f; return true; } return false; });
+    if(hit){ var lyr2=null; parcelLayer.eachLayer(function(l){ if(l.feature.properties.rc===hit.properties.rc) lyr2=l; }); selectParcel(hit.properties.rc, lyr2); return; }
+    insp.innerHTML='<div class="note">Sin parcela catastral en ese punto (parcelario local).</div>'+siuaHtml(ll); terrAppend(ll); return; }
   var uu=toUTM(ll.lng,ll.lat);
   fetch(OVC_ASMX+'Consulta_RCCOOR?SRS=EPSG:25830&Coordenada_X='+uu[0].toFixed(2)+'&Coordenada_Y='+uu[1].toFixed(2)).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); }).then(function(txt){
     var doc=new DOMParser().parseFromString(txt,'text/xml'); var g=function(t){ var e=doc.getElementsByTagName(t)[0]; return e?e.textContent.trim():''; };
@@ -1626,6 +1665,7 @@ function doSearch(){
   var q=$('q').value.trim().toUpperCase().replace(/\s+/g,''); if(!q) return;
   var m=q.match(/^(\d{1,3})[\/\-,.](\d{1,5})$/);
   if(m){ // polígono / parcela in Biel
+    var lrc=localFind(m[1],m[2]); if(lrc){ selectParcel(lrc,null); return; }
     $('insp').innerHTML='<div class="hint"><span class="spin"></span>Buscando polígono '+m[1]+' parcela '+m[2]+' en Biel (Consulta_DNPPP)…</div>'; $('inspBlock').classList.remove('closed');
     fetch(OVC_CALLE+'Consulta_DNPPP?Provincia='+MUN.prov+'&Municipio='+MUN.name+'&Poligono='+m[1]+'&Parcela='+m[2]).then(function(r){ return r.json(); }).then(function(j){ var rc=''; walk(j,function(k,v){ if(k==='rc'&&v&&!rc) rc=[v.pc1,v.pc2,v.car,v.cc1,v.cc2].filter(Boolean).join(''); }); if(!rc){ $('insp').innerHTML='<div class="note">No encontrada. Comprueba polígono/parcela.</div>'; return; } selectParcel(rc,null); }).catch(function(e){ $('insp').innerHTML='<div class="note">Error consultando OVC: '+esc(catMsg(e))+'</div>'; });
     return;
@@ -1638,7 +1678,7 @@ $('goq').onclick=doSearch; $('q').addEventListener('keydown', function(e){ if(e.
 // tile error hints -------------------------------------------------------
 var tileErr=0; [bases.mtn,bases.pnoa,bases.ignbase].forEach(function(l){ l.on('tileerror', function(){ if(++tileErr===6) toast('<b>El mapa no puede descargar los mosaicos del IGN.</b><br>Si estás viendo el archivo en la vista previa de la app de Claude o en Quick Look (iPhone), ese visor bloquea todas las conexiones externas. Guarda el archivo y ábrelo en Chrome, Safari, Firefox o Edge (en móvil: Archivos → compartir → abrir en el navegador). Si ya estás en un navegador, comprueba la conexión o si la red bloquea www.ign.es.', 20000); }); });
 window.__cat = {map:map, parcels:parcels, parseGML:parseGML, renderDNP:renderDNP, toUTM:toUTM, mgrs:mgrs};
-window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg};
+window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg, LOCAL:LOCAL, parcels:function(){return parcels;}, ovParcels:ovParcels, doSearch:doSearch};
 })();
 
 </script>
