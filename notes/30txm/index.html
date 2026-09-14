@@ -914,7 +914,8 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <div class="hint" id="hlsHint" style="margin-top:4px">Mosaico diario de NASA GIBS (Harmonized Landsat–Sentinel, 30 m, revisita 2–3 días, publicado con 2–5 días de retraso). Las nubes no se filtran.</div>
           </div>
           <div class="hint" style="margin:10px 0 4px">Superposiciones</div>
-          <label class="chk"><input type="checkbox" id="ovParcels" checked><span class="sw" style="border-color:#e8b64a;background:rgba(232,182,74,.15)"></span>Catastro · parcelas y edificios (INSPIRE WMS)<span class="k">P</span></label>
+          <div style="display:flex;justify-content:flex-end;margin:-2px 0 4px"><button class="btn" id="ovAllBtn2" title="Ocultar / restaurar todas las capas superpuestas (tecla O)">⊘ ocultar todas</button></div>
+          <label class="chk"><input type="checkbox" id="ovParcels" checked><span class="sw" style="border-color:#e8b64a;background:rgba(232,182,74,.15)"></span>Catastro · parcelas y edificios<span class="k">P</span></label>
           <div class="opac"><span>opacidad</span><input type="range" id="ovParcelsOp" min="0" max="1" step=".05" value=".85"></div>
           <label class="chk"><input type="checkbox" id="ovZoning"><span class="sw" style="border-color:#6fc3c9"></span>Catastro · polígonos rústicos / manzanas<span class="k">Z</span></label>
           <label class="chk"><input type="checkbox" id="ovAdmin" checked><span class="sw" style="border-color:#e0654b"></span>IGN · límites municipales<span class="k">L</span></label>
@@ -1034,6 +1035,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
     <button class="tool" id="zout" title="Alejar">−</button>
     <button class="tool" id="home" title="Centrar en Fuencalderas">⌂</button>
     <button class="tool" id="satBtn" title="Satélite ⇄ mapa (tecla B)">◉</button>
+    <button class="tool" id="ovAllBtn" title="Ocultar / restaurar todas las capas superpuestas (tecla O)">⊘</button>
     <button class="tool" id="loc" title="Mi posición (GPS)">◎</button>
     <button class="tool" id="measure" title="Medir distancia / superficie (doble toque para terminar)">⟷</button>
     <button class="tool" id="fs" title="Pantalla completa">⛶</button>
@@ -1204,6 +1206,25 @@ setBase('mtn'); ovParcels.addTo(map); ovAdmin.addTo(map);
 $('baseSel').addEventListener('change', function(){ setBase(this.value); });
 $('satBtn').onclick=function(){ setBase(SAT_KEYS[currentBase] ? lastMap : lastSat); };
 
+// ------------------------------------------------------------------ hide / restore every overlay
+var OV_IDS=['ovParcels','ovZoning','ovAdmin','ovGrid','ovHill','ovSiua','ovMontes','ovEnp','ovMkt','ovSiuaWms','ovGeo','ovInu','ovCol','ovZar','ovDes','ovFis','ovArc'];
+var ovSaved=null;
+function toggleAllOverlays(){
+  if(ovSaved){
+    ovSaved.forEach(function(id){ var c=$(id); if(c && !c.checked){ c.checked=true; c.dispatchEvent(new Event('change')); } });
+    ovSaved=null; toast('Capas restauradas.');
+  } else {
+    ovSaved=OV_IDS.filter(function(id){ return $(id) && $(id).checked; });
+    if(!ovSaved.length){ ovSaved=null; toast('No hay capas superpuestas activas.'); return; }
+    ovSaved.forEach(function(id){ var c=$(id); c.checked=false; c.dispatchEvent(new Event('change')); });
+    toast('Todas las capas ocultas · pulsa ⊘ (o la tecla O) para restaurarlas.', 4500);
+  }
+  var on=!!ovSaved; $('ovAllBtn').classList.toggle('on', on); $('ovAllBtn2').classList.toggle('on', on); $('ovAllBtn2').textContent = on ? '⊘ restaurar capas' : '⊘ ocultar todas';
+}
+$('ovAllBtn').onclick=toggleAllOverlays; $('ovAllBtn2').onclick=toggleAllOverlays;
+// if the user re-enables layers by hand while hidden, forget the saved set
+OV_IDS.forEach(function(id){ var c=$(id); if(c) c.addEventListener('change', function(ev){ if(ev.isTrusted && ovSaved && this.checked){ ovSaved=null; $('ovAllBtn').classList.remove('on'); $('ovAllBtn2').classList.remove('on'); $('ovAllBtn2').textContent='⊘ ocultar todas'; } }); });
+
 // ------------------------------------------------------------------ time slider (serie histórica de ortofotos)
 var timeT=null;
 function timeSync(key){ var i=-1; HISTO.forEach(function(h,n){ if(h.k===key) i=n; });
@@ -1221,7 +1242,7 @@ $('timePlay').addEventListener('click', function(){
 });
 function bindOv(id, layer){ $(id).addEventListener('change', function(){ if(this.checked){ layer.addTo(map); layer.bringToFront(); if(map.hasLayer(ovParcels)) ovParcels.bringToFront(); } else map.removeLayer(layer); }); }
 bindOv('ovParcels', ovParcels); bindOv('ovZoning', ovZoning); bindOv('ovAdmin', ovAdmin); bindOv('ovHill', ovHill);
-$('ovParcelsOp').addEventListener('input', function(){ ovParcels.setOpacity(+this.value); });
+$('ovParcelsOp').addEventListener('input', function(){ ovParcels.setOpacity(+this.value); pOpK=(+this.value)/0.85; if(typeof parcelLayer!=='undefined'){ parcelLayer.setStyle(pStyle); bldLayer.setStyle(bldLayer.options.style); } });
 $('ovGrid').addEventListener('change', function(){ if(this.checked){ gridLayer.addTo(map); drawGrid(); } else map.removeLayer(gridLayer); });
 
 // SIUa planning overlay --------------------------------------------------
@@ -1335,6 +1356,7 @@ $('loc').onclick=function(){ map.locate({setView:true, maxZoom:17, enableHighAcc
 map.on('locationfound', function(e){ if(locMarker) map.removeLayer(locMarker); locMarker=L.circleMarker(e.latlng,{radius:7,color:'#6fc3c9',fillColor:'#6fc3c9',fillOpacity:.6,weight:2}).addTo(map).bindTooltip('Tu posición ±'+Math.round(e.accuracy)+' m'); });
 map.on('locationerror', function(e){ toast('Sin posición GPS: '+esc(e.message)); });
 document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'};
+  if(k==='O'){ toggleAllOverlays(); return; }
   if(k==='T'){ timeGo((+$('timeSlider').value + (ev.shiftKey?-1:1) + HISTO.length) % HISTO.length); return; } if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
 
 // ------------------------------------------------------------------ measure tool
@@ -1356,10 +1378,11 @@ map.on('dblclick', function(ev){ if(measuring){ stopMeasure(); L.DomEvent.stop(e
 
 // ------------------------------------------------------------------ parcels (WFS vector)
 var parcels = {};           // refcat -> feature
+var pOpK = 1;               // opacity factor for the vector parcel/building layers (slider «opacidad»)
 var parcelLayer = L.geoJSON(null, {style:pStyle, onEachFeature:function(f,l){ l.on('click', function(ev){ L.DomEvent.stop(ev); lastLL=ev.latlng; selectParcel(f.properties.rc, l); }); l.bindTooltip(function(){ return f.properties.label ? ('Parc. '+f.properties.label+' · '+fmt(f.properties.area)+' m²') : f.properties.rc; }, {sticky:true, className:'mlabel'}); }}).addTo(map);
 var filterMode='all', selected=null, selLayer=null, autoLoad=false, lastLL=null;
 function isRustic(rc){ return /^\d{5}[A-Z]/.test(rc); }
-function pStyle(f){ var ru=isRustic(f.properties.rc); var sel=f.properties.rc===selected; return {color: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), weight: sel?2.5:1.2, fillColor: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), fillOpacity: sel?.28:.10, opacity:.95}; }
+function pStyle(f){ var ru=isRustic(f.properties.rc); var sel=f.properties.rc===selected; var k=sel?1:pOpK; return {color: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), weight: sel?2.5:1.2, fillColor: sel?'#6fc3c9':(ru?'#8fbf5a':'#e8b64a'), fillOpacity: Math.min(1,(sel?.28:.10)*k), opacity: Math.min(1,.95*k)}; }
 function passes(f){ var rc=f.properties.rc; if(filterMode==='RU') return isRustic(rc); if(filterMode==='UR') return !isRustic(rc); if(filterMode==='big') return (f.properties.area||0)>=10000; return true; }
 function refresh(){ parcelLayer.clearLayers(); var feats=Object.keys(parcels).map(function(k){return parcels[k];}).filter(passes); parcelLayer.addData({type:'FeatureCollection',features:feats}); var lf=feats; if(feats.length>600){ var v=map.getBounds(); lf=feats.filter(function(f){ var c=f.geometry.type==='Polygon'?f.geometry.coordinates[0][0]:f.geometry.coordinates[0][0][0]; return v.contains([c[1],c[0]]); }); } renderList(lf); $('dlBtn').disabled=!Object.keys(parcels).length; }
 var listT=null; map.on('moveend', function(){ if(Object.keys(parcels).length>600){ clearTimeout(listT); listT=setTimeout(function(){ var feats=Object.keys(parcels).map(function(k){return parcels[k];}).filter(passes); var v=map.getBounds(); renderList(feats.filter(function(f){ var c=f.geometry.type==='Polygon'?f.geometry.coordinates[0][0]:f.geometry.coordinates[0][0][0]; return v.contains([c[1],c[0]]); })); }, 250); } });
@@ -1376,7 +1399,7 @@ $('clearBtn').onclick=function(){ parcels={}; selected=null; LOCAL.loaded={}; bl
 // ------------------------------------------------------------------ local cadastral data (INSPIRE ATOM dumps converted to cat/<code>.json)
 // Parcels, buildings and addresses of Biel and its neighbours are served from this site; the Catastro WMS/WFS is only used outside them.
 var LOCAL={idx:null, loaded:{}, loading:{}, bld:{}, addr:{}, muniOf:{}, active:false, wmsSuspended:false};
-var bldLayer = L.geoJSON(null, {style:function(f){ var b=f.properties; var col = b.c==='ruina'?'#e0654b':(b.u==='Residencial'?'#e8b64a':'#c9a24a'); return {color:col, weight:.8, fillColor:col, fillOpacity:.35, opacity:.9}; }, interactive:false}).addTo(map);
+var bldLayer = L.geoJSON(null, {style:function(f){ var b=f.properties; var col = b.c==='ruina'?'#e0654b':(b.u==='Residencial'?'#e8b64a':'#c9a24a'); return {color:col, weight:.8, fillColor:col, fillOpacity:.35*pOpK, opacity:Math.min(1,.9*pOpK)}; }, interactive:false}).addTo(map);
 fetch('cat/index.json').then(function(r){ return r.ok?r.json():null; }).then(function(j){ if(j){ LOCAL.idx=j.munis; updateCatMode(); } }).catch(function(){});
 function bboxHits(b){ var v=map.getBounds(); return b[0]<v.getEast() && b[2]>v.getWest() && b[1]<v.getNorth() && b[3]>v.getSouth(); }
 function localMunisInView(){ return (LOCAL.idx||[]).filter(function(m){ if(!bboxHits(m.bbox)) return false; if(!m.zones||!m.zones.length) return true; return m.zones.some(bboxHits); }); }
@@ -1389,13 +1412,16 @@ function ensureLocal(m){ var c=m.code; if(LOCAL.loaded[c]||LOCAL.loading[c]) ret
   }).catch(function(e){ LOCAL.loading[c]=false; toast('No se pudo cargar cat/'+c+'.json ('+esc(e.message)+'). Si abres el archivo en local (file://), usa un servidor o la copia publicada.'); });
 }
 function updateCatMode(){ if(!LOCAL.idx) return; var z=map.getZoom(); var inView=localMunisInView(); var local = z>=13 && inView.length>0; LOCAL.active=local;
-  if(local){ inView.forEach(ensureLocal); if(map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } }
+  if(local){ inView.forEach(ensureLocal); if(map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } else if($('ovParcels').checked){ LOCAL.wmsSuspended=true; } }
   else if(LOCAL.wmsSuspended){ LOCAL.wmsSuspended=false; if($('ovParcels').checked) { ovParcels.addTo(map); ovParcels.bringToFront(); } }
   var li=$('localInfo'); if(local){ var names=inView.map(function(m){ return LOCAL.loaded[m.code]?m.name:(m.name+' (cargando…)'); }); li.style.display='block'; li.innerHTML='<b>Parcelario local</b> · '+esc(names.join(', '))+' · Catastro INSPIRE (descarga 2026-02) servido desde esta web: parcelas, edificios y direcciones sin consultar al Catastro. La capa WMS del Catastro queda en pausa aquí; fuera de estos municipios se usa el WMS/WFS en directo.'; }
   else { li.style.display= (z<13 && inView.length) ? 'block':'none'; li.innerHTML='Acerca el zoom (≥ 13) para ver el parcelario local de '+esc(inView.map(function(m){return m.name;}).join(', '))+'.'; }
 }
 map.on('moveend zoomend', updateCatMode);
-$('ovParcels').addEventListener('change', function(){ if(LOCAL.active && this.checked && map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } });
+$('ovParcels').addEventListener('change', function(){
+  if(this.checked){ parcelLayer.addTo(map); bldLayer.addTo(map); if(LOCAL.active && map.hasLayer(ovParcels)){ map.removeLayer(ovParcels); LOCAL.wmsSuspended=true; } }
+  else { map.removeLayer(parcelLayer); map.removeLayer(bldLayer); if(map.hasLayer(ovParcels)) map.removeLayer(ovParcels); LOCAL.wmsSuspended=false; }
+});
 function localCard(rc){ var rc14=rc.slice(0,14); var f=parcels[rc14]||parcels[rc]; var bl=LOCAL.bld[rc14]; var ad=LOCAL.addr[rc14]; if(!(f&&f.properties.local) && !bl && !ad) return '';
   var h='<div class="hint" style="margin:8px 0 4px;color:var(--amber);font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;font-size:10px">Datos locales · Catastro INSPIRE 2026-02</div><dl class="kv">';
   if(f&&f.properties.local){ var pr=f.properties; h+='<dt>Municipio</dt><dd>'+esc(pr.muni||'')+'</dd>'; if(pr.zoning) h+='<dt>Polígono / parcela</dt><dd>'+esc(pr.zoning)+' / '+esc(pr.label||'')+'</dd>'; else if(pr.label) h+='<dt>Parcela (manzana)</dt><dd>'+esc(pr.label)+'</dd>'; if(pr.area) h+='<dt>Superficie</dt><dd>'+fmt(pr.area)+' m²'+(pr.area>=10000?' ('+fmt(pr.area/10000,2)+' ha)':'')+'</dd>'; }
@@ -1732,7 +1758,7 @@ $('goq').onclick=doSearch; $('q').addEventListener('keydown', function(e){ if(e.
 // tile error hints -------------------------------------------------------
 var tileErr=0; [bases.mtn,bases.pnoa,bases.ignbase].forEach(function(l){ l.on('tileerror', function(){ if(++tileErr===6) toast('<b>El mapa no puede descargar los mosaicos del IGN.</b><br>Si estás viendo el archivo en la vista previa de la app de Claude o en Quick Look (iPhone), ese visor bloquea todas las conexiones externas. Guarda el archivo y ábrelo en Chrome, Safari, Firefox o Edge (en móvil: Archivos → compartir → abrir en el navegador). Si ya estás en un navegador, comprueba la conexión o si la red bloquea www.ign.es.', 20000); }); });
 window.__cat = {map:map, parcels:parcels, parseGML:parseGML, renderDNP:renderDNP, toUTM:toUTM, mgrs:mgrs};
-window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg, LOCAL:LOCAL, parcels:function(){return parcels;}, ovParcels:ovParcels, doSearch:doSearch};
+window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg, LOCAL:LOCAL, parcels:function(){return parcels;}, ovParcels:ovParcels, doSearch:doSearch, pStyle:pStyle, parcelLayer:parcelLayer, bldLayer:bldLayer};
 })();
 
 </script>
