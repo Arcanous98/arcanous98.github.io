@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imágenes de Fuencalderas · fuentes de máxima resolución, vídeos y fotos</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{--bg:#0b0f0c;--panel:#11170f;--line:#2b3a25;--line2:#3d5133;--ink:#d9e2cf;--ink2:#9fae8f;--ink3:#6f7f62;--amber:#e8b64a;--amber2:#b98620;--olive:#8fbf5a;--red:#e0654b;--cyan:#6fc3c9;--mono:"JetBrains Mono","Cascadia Mono",Consolas,monospace;--sans:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.55}
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(111,195,201,.5)}
+header{border-bottom:1px solid var(--line);background:var(--panel);padding:16px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:1500}
+header .mark{width:38px;height:38px;border:1.5px solid var(--amber);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--amber)}
+header h1{margin:0;font-size:16px}
+header .sub{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase}
+header nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+header nav a{font-family:var(--mono);font-size:11px;border:1px solid var(--line2);border-radius:4px;padding:6px 10px}
+main{max-width:1080px;margin:0 auto;padding:24px 24px 80px}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);border-bottom:1px solid var(--line);padding:26px 0 6px;margin:22px 0 12px}
+h3{font-size:15px;margin:18px 0 6px}
+p{margin:6px 0 10px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 14px}
+th{text-align:left;font-family:var(--mono);font-size:10.5px;color:var(--ink3);font-weight:500;border-bottom:1px solid var(--line);padding:5px 6px;letter-spacing:.05em;text-transform:uppercase;vertical-align:bottom}
+td{padding:6px 6px;border-bottom:1px solid rgba(43,58,37,.6);vertical-align:top}
+.tag{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.tag.ok{background:rgba(111,195,201,.12);color:var(--cyan);border:1px solid rgba(111,195,201,.4)}
+.tag.ur{background:rgba(232,182,74,.15);color:var(--amber);border:1px solid rgba(232,182,74,.4)}
+.tag.na{background:rgba(224,101,75,.12);color:var(--red);border:1px solid rgba(224,101,75,.4)}
+.note{background:rgba(224,101,75,.06);border:1px solid rgba(224,101,75,.3);border-radius:4px;padding:10px 14px;font-size:13px;margin:10px 0}
+.note.ok{background:rgba(111,195,201,.06);border-color:rgba(111,195,201,.3)}
+.note.amb{background:rgba(232,182,74,.06);border-color:rgba(232,182,74,.35)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}
+.cmp .pane{position:relative}
+.cmp .map{height:460px;border:1px solid var(--line);border-radius:6px;background:#000}
+.cmp select{position:absolute;top:8px;left:8px;z-index:1000;background:rgba(17,23,15,.94);color:var(--ink);border:1px solid var(--line2);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:11px;max-width:calc(100% - 16px)}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:10px 0}
+.vid{border:1px solid var(--line);border-radius:6px;background:rgba(23,31,20,.55);overflow:hidden}
+.vid .ph{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat;cursor:pointer}
+.vid .ph:after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:34px;color:rgba(255,255,255,.85);text-shadow:0 0 8px #000}
+.vid iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.vid .meta{padding:8px 10px;font-size:12.5px}
+.vid .meta b{display:block;font-size:13px;margin-bottom:2px}
+.vid .meta .m{font-family:var(--mono);font-size:10.5px;color:var(--ink3)}
+.small{font-size:12px;color:var(--ink3)}
+figure{margin:10px 0}
+figure img{max-width:100%;border:1px solid var(--line);border-radius:4px}
+figcaption{font-size:12px;color:var(--ink3)}
+@media (max-width:760px){.cmp{grid-template-columns:1fr}.cmp .map{height:320px}main{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">IMG</div>
+  <div><h1>Imágenes de Fuencalderas</h1><div class="sub">máxima resolución · histórico · vídeos · fotos · 3D · 15-9-2026</div></div>
+  <nav><a href="../">Mapa</a><a href="../p3621102/">Parcela C/ Aire 2</a><a href="../manual.html">Manual</a></nav>
+</header>
+<main>
+
+<div class="note amb"><b>Respuesta corta.</b> No existe imagen pública más nítida que <b>25 cm</b> en Fuencalderas: es la ortofoto PNOA (IGN y Gobierno de Aragón, vuelo julio 2024). Aragón sólo voló a 10 cm la ciudad de Zaragoza. La escena de satélite más nítida es un <b>Maxar WorldView de 17-8-2021 a 31 cm</b>, visible en el archivo Esri Wayback (ya está en el mapa). Lo que realmente mejora el conjunto es el <b>LiDAR PNOA de 2023</b>: nube de puntos de 5 puntos/m² con color RGB + infrarrojo, gratuita, con la que se puede construir un 3D del pueblo. No hay vídeos de dron de Fuencalderas publicados; sí recorridos a pie en 1080p y dos reportajes de Aragón TV.</div>
+
+<h2 id="s1">1 · Comparador lado a lado</h2>
+<p>Los dos mapas están sincronizados. Elige una fuente en cada lado para comparar nitidez y cambios. Nivel máximo nativo: 19 (≈ 22 cm/píxel en pantalla).</p>
+<div class="cmp">
+  <div class="pane"><select id="selL"></select><div class="map" id="mapL"></div></div>
+  <div class="pane"><select id="selR"></select><div class="map" id="mapR"></div></div>
+</div>
+<p class="small">Fuentes: IGN (PNOA máxima actualidad y PNOA histórico, CC BY 4.0), Gobierno de Aragón (AragonFotos), Esri World Imagery Wayback (Maxar, sólo visualización).</p>
+
+<h2 id="s2">2 · Fuentes de imagen aérea y satelital, de mejor a peor en este punto</h2>
+<table>
+<tr><th>Fuente</th><th>Resolución aquí</th><th>Fecha</th><th>Acceso y licencia</th><th>Descarga</th></tr>
+<tr><td><b>PNOA máxima actualidad</b> (IGN + IGEAR)</td><td><b>25 cm</b></td><td>julio 2024</td><td><span class="tag ok">abierta</span> CC BY 4.0</td><td>WMTS (en el mapa); ECW por hoja MTN25 <b>0208-4 «Biel»</b> en el Centro de Descargas del CNIG; ≈ 50 MB/km² sin comprimir</td></tr>
+<tr><td>Maxar WorldView «Vivid» (Esri Wayback, versión 2022-04-27)</td><td><b>31 cm</b> (satélite, visión algo oblicua)</td><td>17-8-2021</td><td><span class="tag ur">ver</span> sólo visualización con atribución; Esri no permite descarga masiva</td><td>Compra de archivo a revendedores: ≈ 20–30 $/km²</td></tr>
+<tr><td>PNOA 2021 (IGN + IGEAR)</td><td>25 cm</td><td>2021</td><td><span class="tag ok">abierta</span></td><td>WMS histórico; ECW en CNIG</td></tr>
+<tr><td>Maxar Vivid (Esri World Imagery actual)</td><td>46 cm</td><td>30-9-2023</td><td><span class="tag ur">ver</span></td><td>—</td></tr>
+<tr><td>PNOA 2006–2018, SIGPAC 1997-2003, vuelos de Aragón 1997, 1999 y 2003</td><td>25–100 cm</td><td>según vuelo</td><td><span class="tag ok">abierta</span></td><td>WMS IGN <code>pnoa-historico</code> y <code>icearagon.aragon.es/AragonFotos</code></td></tr>
+<tr><td>Maxar Vivid 2016 y 2019 (Wayback)</td><td>50 cm</td><td>11-7-2016 · 4-7-2019</td><td><span class="tag ur">ver</span></td><td>—</td></tr>
+<tr><td>Vuelo americano 1956-57 (IGN) · vuelo CECAF 1956 (Aragón)</td><td>≈ 1 m</td><td>1956</td><td><span class="tag ok">abierta</span></td><td>WMS IGN y AragonFotos. Hueco de 1957 a 1997: los vuelos interministerial 1973-86 y nacional 1981-86 del IGN no cubren Fuencalderas</td></tr>
+<tr><td>Airbus Pléiades Neo · Planet SkySat · Maxar a pedido</td><td>30–50 cm</td><td>archivo o programación</td><td><span class="tag na">pago</span></td><td>Neo sólo por suscripción; SkySat y similares ≈ 25 $/km², mínimo 1 km². No mejoran la nitidez del PNOA: sólo añaden fechas</td></tr>
+<tr><td>Sentinel-2 (Copernicus)</td><td>10 m</td><td>última escena 14-9-2026, 0 % nubes</td><td><span class="tag ok">abierta</span></td><td>Cuenta gratuita en Copernicus Data Space (tesela T30TXM)</td></tr>
+<tr><td>Google, Bing, Apple</td><td>probablemente PNOA 25 cm</td><td>—</td><td><span class="tag na">no</span> sólo visualización en sus aplicaciones</td><td>Prohibida la descarga</td></tr>
+<tr><td>OpenAerialMap (mosaicos de dron abiertos)</td><td colspan="4">Ningún vuelo en 15 km a la redonda</td></tr>
+</table>
+
+<h3>3D: el salto de calidad está en el LiDAR</h3>
+<table>
+<tr><th>Producto CNIG</th><th>Datos en Fuencalderas</th><th>Formato</th><th>Tamaño</th></tr>
+<tr><td><b>PNOA-LiDAR 3ª cobertura</b></td><td>vuelo junio–septiembre 2023; <b>5 puntos/m²</b>; cada punto con color RGB e infrarrojo tomado de fotos de 25 cm del mismo vuelo; clasificado (suelo, vegetación, edificios)</td><td>LAZ, teselas de 1 × 1 km (probablemente la 673-4692)</td><td>90–210 MB por tesela</td></tr>
+<tr><td>PNOA-LiDAR 2ª cobertura</td><td>2016–2020, 0,5–1 punto/m², RGB</td><td>LAZ 2 × 2 km</td><td>30–60 MB/km²</td></tr>
+<tr><td>MDT02 / MDS02 (terreno y superficie)</td><td>2 m</td><td>GeoTIFF por hoja MTN50 0208</td><td>≈ 1 MB/km²</td></tr>
+<tr><td>MDT y MDS de 50 cm (de la 3ª cobertura)</td><td>anunciados para el segundo semestre de 2026, aún no publicados</td><td>GeoTIFF</td><td>≈ 16 MB/km²</td></tr>
+</table>
+<div class="note">La nube LiDAR de 2023 se descarga desde <a href="https://centrodedescargas.cnig.es/CentroDescargas/lidar-tercera-cobertura" target="_blank" rel="noopener">centrodedescargas.cnig.es</a> buscando «Biel» o las coordenadas UTM 673500 / 4691860. El Centro de Descargas pide aceptar sus condiciones de uso antes de cada descarga, así que queda pendiente de hacerlo manualmente.</div>
+
+<h2 id="s3">3 · Vídeos</h2>
+<p>No se ha encontrado ningún vídeo de dron de Fuencalderas. Los vídeos se muestran incrustados desde YouTube (se cargan al pulsar). Todos tienen derechos de autor: sirven como referencia privada, no para republicar.</p>
+<h3>Recorridos a pie por Fuencalderas</h3>
+<div class="vids" data-group="fuen"></div>
+<h3>Aragón TV</h3>
+<div class="vids" data-group="tv"></div>
+<h3>Vistas aéreas cercanas (Biel y Sierra de Santo Domingo)</h3>
+<div class="vids" data-group="aire"></div>
+<h3>San Miguel de Liso, rutas y Biel</h3>
+<div class="vids" data-group="otros"></div>
+<p class="small">Pendiente: el buscador de Aragón Play (aragontelevision.es, «a la carta») puede tener más programas; no apareció nada de «Aragón en abierto», «Pequeños pueblos», «Tempero» o «Chino Chano» sobre Fuencalderas en búsquedas web.</p>
+
+<h2 id="s4">4 · Fotografías</h2>
+<figure><img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Fuencalderas.jpg" alt="Vista de Fuencalderas, 2010" loading="lazy"><figcaption>Vista de Fuencalderas, 15-8-2010. Autor: <a href="https://commons.wikimedia.org/wiki/User:Deivid" target="_blank" rel="noopener">Deivid</a>, <a href="https://commons.wikimedia.org/wiki/File:Fuencalderas.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0. Es la única foto con licencia libre del pueblo.</figcaption></figure>
+<table>
+<tr><th>Colección</th><th>Contenido</th><th>Licencia</th></tr>
+<tr><td><a href="https://commons.wikimedia.org/wiki/Category:Fuencalderas" target="_blank" rel="noopener">Commons · Category:Fuencalderas</a></td><td>7 archivos: 1 foto del pueblo (2010), escudo, bandera, mapa</td><td><span class="tag ok">CC BY-SA</span></td></tr>
+<tr><td><a href="https://www.flickr.com/photos/yohancreemers/51449928190/" target="_blank" rel="noopener">Flickr · «Biel-Fuencalderas» (yohancreemers, 2021)</a></td><td>1 foto</td><td><span class="tag ur">CC BY-NC</span></td></tr>
+<tr><td><a href="https://www.flickr.com/search/?text=Fuencalderas" target="_blank" rel="noopener">Flickr · búsqueda «Fuencalderas»</a></td><td>98 resultados (2008–2023, incluidas fotos nocturnas de 2016)</td><td><span class="tag na">©</span></td></tr>
+<tr><td><a href="http://www.sipca.es/censo/1-INM-ZAR-005-901-006/Iglesia/de/Nuestra/Se%C3%B1ora/de/la/Esperanza.html" target="_blank" rel="noopener">SIPCA · Iglesia de Nuestra Señora de la Esperanza</a></td><td>18 fotos (Esteban Lahoz, Pedro Callizo) y «Casa 3»</td><td><span class="tag na">© Gobierno de Aragón</span></td></tr>
+<tr><td><a href="https://www.romanicodigital.com/sites/default/files/pdfs/files/zaragoza_Fuencalderas.pdf" target="_blank" rel="noopener">Románico Digital · San Miguel de Liso (PDF)</a></td><td>fotos y planimetría de la ermita</td><td><span class="tag na">©</span></td></tr>
+<tr><td>Google Street View</td><td>cobertura en la A-1202 probable; en el casco sin verificar</td><td><span class="tag na">sólo visualizar</span></td></tr>
+<tr><td>Panoramax · KartaView · Mapillary · OpenAerialMap</td><td>sin imágenes en 1,5–15 km (Mapillary sin comprobar)</td><td>—</td></tr>
+<tr><td>Catastro · foto de fachada por referencia</td><td>el servicio devolvió 403 por la cuota horaria; en solares vacíos no suele haber foto</td><td>—</td></tr>
+</table>
+
+<h2 id="s5">5 · Cómo fusionar todo en un 3D útil</h2>
+<ol>
+<li><b>Base métrica</b>: la nube LiDAR 2023 coloreada (5 puntos/m²) da la geometría real de tejados, calles y taludes con ±15 cm. Se abre directamente en CloudCompare o en el visor web Potree.</li>
+<li><b>Textura</b>: proyectar sobre ella la ortofoto PNOA 2024 de 25 cm (descargada, ver §6) para el plano cenital; la escena Maxar 2021, algo oblicua, sólo como referencia visual.</li>
+<li><b>Fachadas y detalle</b>: el LiDAR aéreo apenas ve fachadas. Se completan con fotogramas de los recorridos a pie de 2021 y 2025 como referencia, pero la opción sólida es un vuelo propio: un dron de menos de 250 g (sin licencia, respetando la ZAR y el LIC) y 200–400 fotos oblicuas del pueblo y la parcela, procesadas con OpenDroneMap, RealityScan o Metashape y encajadas sobre el LiDAR con puntos de control (esquinas de edificios del Catastro).</li>
+<li><b>Nivel de calle</b>: un paseo con el móvil subido a Panoramax cubre el hueco de imágenes libres a pie de calle y queda como registro fechado.</li>
+<li><b>Histórico</b>: el control de tiempo del mapa encadena 16 vuelos y escenas desde 1956; las copias descargadas permiten medir cambios en QGIS.</li>
+</ol>
+
+<h2 id="s6">6 · Copias descargadas (locales, fuera de la web)</h2>
+<p>Se han guardado en el ordenador, fuera del repositorio, las ortofotos abiertas en su máxima resolución para un recorte de ≈ 1,2 × 1,2 km centrado en la parcela de C/ Aire 2, georreferenciadas (.jgw + .prj, EPSG:3857) para abrir en QGIS: PNOA 2024 a resolución nativa y los vuelos de 1956, 1997-2003, 1999, 2003, 2012 y 2018. También la foto libre de Commons. No se han descargado las escenas Maxar (condiciones de Esri), el LiDAR (requiere aceptar la licencia del CNIG) ni los vídeos de YouTube o Aragón TV (condiciones de YouTube y derechos de autor).</p>
+
+<p class="small">Fuentes: IGN/CNIG (PNOA, PNOA histórico, PNOA-LiDAR), IGEAR (AragonFotos), Esri World Imagery Wayback (metadatos de cada versión consultados el 15-9-2026), Copernicus Data Space (STAC), OpenAerialMap, Panoramax y KartaView (API), Wikimedia Commons, Flickr, SIPCA, YouTube.</p>
+</main>
+<script>
+(function(){
+var R='https://wayback.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/WMTS/1.0.0/default028mm/MapServer/tile/';
+function ignW(l){ return L.tileLayer.wms('https://www.ign.es/wms/pnoa-historico',{layers:l,format:'image/jpeg',version:'1.3.0',maxZoom:20,maxNativeZoom:19,attribution:'© IGN'}); }
+function araW(l){ return L.tileLayer.wms('https://icearagon.aragon.es/AragonFotos',{layers:l,format:'image/jpeg',version:'1.3.0',maxZoom:20,maxNativeZoom:19,attribution:'© Gobierno de Aragón'}); }
+function wb(id){ return L.tileLayer(R+id+'/{z}/{y}/{x}',{maxZoom:20,maxNativeZoom:19,attribution:'Esri Wayback · Maxar'}); }
+var SRC=[
+ ['pnoa','PNOA 2024 · 25 cm (IGN)',function(){ return L.tileLayer('https://www.ign.es/wmts/pnoa-ma?service=WMTS&request=GetTile&version=1.0.0&layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&format=image/jpeg&tilematrix={z}&tilerow={y}&tilecol={x}',{maxZoom:20,maxNativeZoom:19,attribution:'© IGN'}); }],
+ ['wb2021','Maxar 2021-08-17 · 31 cm (Wayback)',function(){ return wb(16245); }],
+ ['esri','Maxar 2023-09-30 · 46 cm (Esri)',function(){ return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:20,maxNativeZoom:19,attribution:'Esri · Maxar'}); }],
+ ['p2021','PNOA 2021 (IGN)',function(){ return ignW('PNOA2021'); }],
+ ['wb2019','Maxar 2019-07-04 · 50 cm (Wayback)',function(){ return wb(9181); }],
+ ['p2018','PNOA 2018 (IGN)',function(){ return ignW('PNOA2018'); }],
+ ['wb2016','Maxar 2016-07-11 · 50 cm (Wayback)',function(){ return wb(8249); }],
+ ['p2012','PNOA 2012 (IGN)',function(){ return ignW('PNOA2012'); }],
+ ['p2006','PNOA 2006 (IGN)',function(){ return ignW('PNOA2006'); }],
+ ['a2003','Vuelo FEGA 2003 (Aragón)',function(){ return araW('2003_fega'); }],
+ ['a1999','Vuelo Aragón 1999',function(){ return araW('1999_DGA'); }],
+ ['sigpac','SIGPAC 1997-2003 (IGN)',function(){ return ignW('SIGPAC'); }],
+ ['olistat','OLISTAT 1997-98 (IGN)',function(){ return ignW('OLISTAT'); }],
+ ['ams','Vuelo americano 1956-57 (IGN)',function(){ return ignW('AMS_1956-1957'); }]
+];
+var C=[42.359985,-0.893085];
+function mk(id,selId,def){ var m=L.map(id,{center:C,zoom:18,maxZoom:20,zoomControl:true,attributionControl:true}); var sel=document.getElementById(selId); var cur=null;
+  SRC.forEach(function(s){ var o=document.createElement('option'); o.value=s[0]; o.textContent=s[1]; sel.appendChild(o); });
+  function set(k){ if(cur) m.removeLayer(cur); var s=SRC.filter(function(x){return x[0]===k;})[0]; cur=s[2]().addTo(m); sel.value=k; }
+  sel.addEventListener('change',function(){ set(this.value); }); set(def);
+  L.circleMarker(C,{radius:5,color:'#e0654b',weight:2,fillOpacity:0}).bindTooltip('Parcela 3621102XM7932B').addTo(m);
+  return m; }
+var a=mk('mapL','selL','pnoa'), b=mk('mapR','selR','wb2021'); var lock=false;
+function sync(src,dst){ src.on('move',function(){ if(lock) return; lock=true; dst.setView(src.getCenter(),src.getZoom(),{animate:false}); lock=false; }); }
+sync(a,b); sync(b,a);
+
+var V={
+ fuen:[['kjpB3rkJx4c','Fuencalderas (paseo por el pueblo)','pateandoespana','28-3-2021 · 2:42 · 1080p'],['MwqqvSLWAwk','Llegada a Fuencalderas','pateandoespana','28-3-2021 · 3:24 · 1080p'],['PC_UsH3jGRI','Salida de Fuencalderas','pateandoespana','28-3-2021 · 1:32 · 1080p'],['eUiYmKp0Agw','Fuencalderas','María José Pisa Pérez','14-12-2025 · 3:38 · 1080p · el más reciente'],['JkC7RCn_giY','Fuencalderas','guillegtcs','3-9-2022 · 1:44 · 1080p'],['Uv0h5HUL70g','Fuencalderas (2013)','pateandoespana','14-4-2013 · 2:41 · para comparar con 2021'],['D48BiTLC6nQ','Llegada a Fuencalderas (2013)','pateandoespana','14-4-2013 · 3:54'],['UnFZ9NU61b8','Salida de Fuencalderas (2013)','pateandoespana','14-4-2013 · 1:06'],['PqQoajP0i74','Subida Fuencalderas','—','19-7-2006 · 5:06 · 360p · el más antiguo'],['Di53AByaROk','Evohé · Fuencalderas 2015','—','15-8-2015 · 2:19 · teatro en la calle'],['jZoh7tiHkmI','Fuencalderas Sedubay 2013','—','28-8-2013 · 4:49 · 480p']],
+ tv:[['_8B5IgDQXEk','Todo por mi pueblo · Fuencalderas','Aragón TV · Unidad Móvil','27-3-2017 · 6:32 · Jaime «el Liebre» limpia caminos y arregla fuentes'],['pWFa6yK9F9U','Los gabachos de Fuencalderas','Aragón TV · Aftersun','24-8-2017 · 7:50 · vecinos del pueblo en verano']],
+ aire:[['OYXuS4KwqPo','Paseo por Biel (dron Mavic Mini)','Angel Sancho','15-8-2020 · 1:33 · 1080p'],['CzSIc8BBurs','Biel diciembre 2016 (aéreo)','sergioarbuesgarrido','6-12-2016 · 3:07 · 1080p'],['lET1-6Zeo9E','Sierra de Santo Domingo desde el aire','Ricardo Viñau','14-1-2019 · 1:30 · 1080p'],['2ZmqJGceOSc','Por la troposfera · Sierra de Santo Domingo','Aragón TV · Esta es mi tierra','27-9-2021 · 1:59 · 720p'],['tIqusDVIavU','Recorrido por la Sierra de Santo Domingo','Aragón TV · Esta es mi tierra','29-1-2023 · 2:24 · 720p']],
+ otros:[['H6xGDWp_8rs','San Miguel de Liso','—','2011 · 1:20 · 240p'],['VDCVPOu2Bhc','Villalangua · San Miguel de Liso · Agüero (moto)','—','2015 · 7:27'],['bOnsgowicQU','Agüero – Fuencalderas (ruta de 34 km)','—','8-4-2013 · 7:47'],['sLrxoNplF5k','Biel o Biel-Fuencalderas','pateandoespana','2021 · 5:54 · 1080p'],['j78RM1zKgaQ','Paseo por Biel (Zaragoza)','infolaso','13-3-2025 · 11:23']]
+};
+[].forEach.call(document.querySelectorAll('.vids'), function(box){ (V[box.getAttribute('data-group')]||[]).forEach(function(v){
+  var d=document.createElement('div'); d.className='vid';
+  d.innerHTML='<div class="ph" style="background-image:url(https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg)" title="Reproducir"></div><div class="meta"><b>'+v[1]+'</b>'+v[2]+'<br><span class="m">'+v[3]+'</span> · <a href="https://www.youtube.com/watch?v='+v[0]+'" target="_blank" rel="noopener">YouTube ↗</a></div>';
+  d.querySelector('.ph').addEventListener('click', function(){ var f=document.createElement('iframe'); f.src='https://www.youtube-nocookie.com/embed/'+v[0]+'?autoplay=1&rel=0'; f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen=true; this.replaceWith(f); });
+  box.appendChild(d); }); });
+})();
+</script>
+</body>
+</html>

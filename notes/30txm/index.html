@@ -893,7 +893,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <option value="pnoa">IGN · Ortofoto PNOA máxima actualidad</option>
             <option value="ignbase">IGN · IGN-Base (vectorial)</option>
             <option value="hyb">Ortofoto PNOA + topográfico translúcido</option>
-            <option value="esri">Satélite · Esri World Imagery (Maxar/Vantor, 0,5 m)</option>
+            <option value="esri">Satélite · Esri World Imagery (Maxar/Vantor 2023, 0,46 m)</option>
             <option value="s2">Satélite · Sentinel-2 cloudless 2025 (EOX, 10 m)</option>
             <option value="sentar">Satélite · última pasada Sentinel-2 en Aragón (CISA, 10 m)</option>
             <option value="hls">Satélite · NASA HLS por fecha (Sentinel-2/Landsat, 30 m)</option>
@@ -1022,7 +1022,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <span class="sw" style="background:#d2dc8c"></span><span>SNU-E · otras categorías</span>
             <span class="sw" style="border:2px dashed #fff;background:rgba(255,255,255,.1)"></span><span>Sistema general (SG) · dot. pública</span>
           </div>
-          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS; IGN PNOA histórico (vuelos 1956-2024, control de tiempo bajo los botones del mapa). El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
+          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS; IGN PNOA histórico e IGEAR AragonFotos (vuelos 1956-2024) y archivo Maxar de Esri Wayback (2016, 2019, 2021), en el control de tiempo bajo los botones del mapa. Los vuelos interministerial 1973-86 y nacional 1981-86 del IGN no cubren Fuencalderas. El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
         </div>
       </section>
 
@@ -1041,8 +1041,8 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
     <button class="tool" id="fs" title="Pantalla completa">⛶</button>
     <div id="timeBox">
       <div class="tb-row"><span class="tb-lbl" id="timeLbl">Máx. actualidad</span><button id="timePlay" title="Animar la serie histórica">▶</button></div>
-      <input type="range" id="timeSlider" min="0" max="10" step="1" value="10" title="Vuelo fotogramétrico: 1956 → hoy">
-      <div class="tb-ends"><span>1956</span><span>hoy</span></div>
+      <input type="range" id="timeSlider" min="0" max="15" step="1" value="15" title="Vuelos fotogramétricos y escenas de satélite: 1956 → hoy">
+      <div class="tb-ends"><span>1956</span><span>16 vuelos y escenas</span><span>hoy</span></div>
     </div>
   </div>
 
@@ -1125,19 +1125,28 @@ var hlsLayer = L.tileLayer('', {maxZoom:20, maxNativeZoom:12, attribution:'<a hr
 function hlsUrl(){ return GIBS+hlsState.layer+'/default/'+hlsState.date+'/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'; }
 // IGN PNOA histórico (WMS con CORS): serie de vuelos fotogramétricos sobre el mismo punto
 var HISTO=[
-  {k:'h1956', s:'1956 · americano', y:'1956', n:'Vuelo americano serie B (1956-57)', l:'AMS_1956-1957'},
-  {k:'h1981', s:'1981 · nacional', y:'1981', n:'Vuelo nacional (1981-86)', l:'Nacional_1981-1986'},
-  {k:'h1997', s:'1997 · SIGPAC', y:'1997', n:'SIGPAC (1997-2003)', l:'SIGPAC'},
-  {k:'h2006', s:'2006 · PNOA', y:'2006', n:'PNOA 2006', l:'PNOA2006'},
-  {k:'h2009', s:'2009 · PNOA', y:'2009', n:'PNOA 2009', l:'PNOA2009'},
-  {k:'h2012', s:'2012 · PNOA', y:'2012', n:'PNOA 2012', l:'PNOA2012'},
-  {k:'h2015', s:'2015 · PNOA', y:'2015', n:'PNOA 2015', l:'PNOA2015'},
-  {k:'h2018', s:'2018 · PNOA', y:'2018', n:'PNOA 2018', l:'PNOA2018'},
-  {k:'h2021', s:'2021 · PNOA', y:'2021', n:'PNOA 2021', l:'PNOA2021'},
-  {k:'h2024', s:'2024 · PNOA', y:'2024', n:'PNOA 2024', l:'PNOA2024'},
-  {k:'pnoa',  s:'hoy · PNOA máx.', y:'hoy',  n:'PNOA máxima actualidad', l:null}
+  {k:'h1956', s:'1956 · americano', n:'Vuelo americano serie B (1956-57), IGN', src:'ign', l:'AMS_1956-1957'},
+  {k:'h1997', s:'1997 · SIGPAC', n:'SIGPAC (1997-2003), IGN', src:'ign', l:'SIGPAC'},
+  {k:'a1999', s:'1999 · Aragón', n:'Vuelo del Gobierno de Aragón 1999 (IGEAR)', src:'ara', l:'1999_DGA'},
+  {k:'a2003', s:'2003 · FEGA', n:'Vuelo FEGA 2003 (IGEAR)', src:'ara', l:'2003_fega'},
+  {k:'h2006', s:'2006 · PNOA', n:'PNOA 2006, IGN', src:'ign', l:'PNOA2006'},
+  {k:'h2009', s:'2009 · PNOA', n:'PNOA 2009, IGN', src:'ign', l:'PNOA2009'},
+  {k:'h2012', s:'2012 · PNOA', n:'PNOA 2012, IGN', src:'ign', l:'PNOA2012'},
+  {k:'h2015', s:'2015 · PNOA', n:'PNOA 2015, IGN', src:'ign', l:'PNOA2015'},
+  {k:'w2016', s:'2016 · Maxar', n:'Satélite Maxar Vivid 2016-07-11, 0,5 m (Esri Wayback)', src:'wb', id:8249},
+  {k:'h2018', s:'2018 · PNOA', n:'PNOA 2018, IGN', src:'ign', l:'PNOA2018'},
+  {k:'w2019', s:'2019 · Maxar', n:'Satélite Maxar Vivid 2019-07-04, 0,5 m (Esri Wayback)', src:'wb', id:9181},
+  {k:'h2021', s:'2021 · PNOA', n:'PNOA 2021, IGN', src:'ign', l:'PNOA2021'},
+  {k:'w2021', s:'2021 · Maxar 31 cm', n:'Satélite Maxar Vivid 2021-08-17, 0,31 m: la escena de satélite más nítida disponible (Esri Wayback)', src:'wb', id:16245},
+  {k:'esri',  s:'2023 · Maxar', n:'Satélite Maxar Vivid 2023-09-30, 0,46 m (Esri World Imagery actual)'},
+  {k:'h2024', s:'2024 · PNOA', n:'PNOA 2024, IGN (25 cm)', src:'ign', l:'PNOA2024'},
+  {k:'pnoa',  s:'hoy · PNOA máx.', n:'PNOA máxima actualidad, IGN (en Fuencalderas: vuelo 2024-07, 25 cm)'}
 ];
-function histLayer(l){ return L.tileLayer.wms('https://www.ign.es/wms/pnoa-historico', {layers:l, format:'image/jpeg', version:'1.3.0', maxZoom:20, maxNativeZoom:19, attribution:ATTR_IGN}); }
+function histLayer(h){
+  if(h.src==='ara') return L.tileLayer.wms('https://icearagon.aragon.es/AragonFotos', {layers:h.l, format:'image/jpeg', version:'1.3.0', maxZoom:20, maxNativeZoom:19, attribution:'<a href="https://idearagon.aragon.es" target="_blank">© Gobierno de Aragón · IGEAR</a>'});
+  if(h.src==='wb') return L.tileLayer('https://wayback.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/WMTS/1.0.0/default028mm/MapServer/tile/'+h.id+'/{z}/{y}/{x}', {maxZoom:20, maxNativeZoom:19, attribution:'<a href="https://livingatlas.arcgis.com/wayback/" target="_blank">Esri World Imagery Wayback · Maxar</a>'});
+  return L.tileLayer.wms('https://www.ign.es/wms/pnoa-historico', {layers:h.l, format:'image/jpeg', version:'1.3.0', maxZoom:20, maxNativeZoom:19, attribution:ATTR_IGN});
+}
 var bases = {
   mtn:  wmts('https://www.ign.es/wmts/mapa-raster','MTN','image/jpeg',{maxNativeZoom:18}),
   pnoa: wmts('https://www.ign.es/wmts/pnoa-ma','OI.OrthoimageCoverage','image/jpeg',{maxNativeZoom:19}),
@@ -1147,7 +1156,7 @@ var bases = {
   sentar: L.tileLayer.wms('https://idearagon.aragon.es/geoserver/CISA/wms', {layers:'Sentinel_ultima', format:'image/jpeg', version:'1.3.0', maxZoom:20, attribution:'<a href="https://idearagon.aragon.es" target="_blank">© Gobierno de Aragón · CISA Sentinel-2</a>'}),
   hls: hlsLayer,
 };
-HISTO.forEach(function(h){ if(h.l) bases[h.k]=histLayer(h.l); });
+HISTO.forEach(function(h){ if(h.src) bases[h.k]=histLayer(h); });
 var BASE_INFO = {
   mtn:'MTN25/50 ráster del IGN.', ignbase:'Cartografía vectorial IGN-Base.',
   esri:'Mosaico Esri World Imagery. En Fuencalderas la escena es Maxar/Vantor «Vivid» GE01 de <b>30-09-2023</b>, 0,46 m/píxel (metadatos Esri, sept. 2026).',
@@ -1155,7 +1164,7 @@ var BASE_INFO = {
   sentar:'Última escena Sentinel-2 procesada por el CISA (Gobierno de Aragón). Suele tener ≤ 5 días; el servicio no publica la fecha y no filtra nubes: si se ve blanco, la pasada estaba nublada (prueba «penúltima»).',
   hls:'NASA HLS (Harmonized Landsat–Sentinel), 30 m, un mosaico por día.'
 };
-HISTO.forEach(function(h){ if(h.l) BASE_INFO[h.k]='Ortofoto histórica del IGN: <b>'+h.n+'</b>. Útil para ver si una parcela estuvo edificada, cultivada o arbolada. Resolución y color según el vuelo original.'; });
+HISTO.forEach(function(h){ if(!h.src) return; BASE_INFO[h.k] = (h.src==='wb' ? 'Archivo de satélite: <b>'+h.n+'</b>. Visualización permitida; Esri no autoriza la descarga masiva de estas teselas.' : 'Ortofoto histórica: <b>'+h.n+'</b>. Útil para ver si una parcela estuvo edificada, cultivada o arbolada.'); });
 function baseInfo(key){ var el=$('baseInfo'); el.innerHTML=BASE_INFO[key]||''; $('sentarBox').style.display= key==='sentar'?'block':'none'; $('hlsBox').style.display= key==='hls'?'block':'none';
   if(key==='pnoa'||key==='hyb'){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN). Consultando fecha de vuelo…'; pnoaDate(map.getCenter()).then(function(t){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN). En este punto: vuelo <b>'+esc(t.f)+'</b>, '+esc(t.r)+' m/píxel.'; }).catch(function(){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN); en Aragón, vuelo 2024.'; }); }
 }
@@ -1174,9 +1183,9 @@ var hybTopo = wmts('https://www.ign.es/wmts/mapa-raster','MTN','image/jpeg',{max
 var currentBase = null;
 var SAT_KEYS={pnoa:1,hyb:1,esri:1,s2:1,sentar:1,hls:1}, lastSat='pnoa', lastMap='mtn';
 HISTO.forEach(function(h){ SAT_KEYS[h.k]=1; });
-(function(){ var sel=$('baseSel'); var g=document.createElement('optgroup'); g.label='Ortofotos históricas (IGN)';
-  HISTO.forEach(function(h){ if(!h.l) return; var o=document.createElement('option'); o.value=h.k; o.textContent=h.n; g.appendChild(o); });
-  sel.appendChild(g); })();
+(function(){ var sel=$('baseSel'); var g=document.createElement('optgroup'); g.label='Serie histórica (IGN, Aragón, Maxar)';
+  HISTO.forEach(function(h){ if(!h.src) return; var o=document.createElement('option'); o.value=h.k; o.textContent=h.n; g.appendChild(o); });
+  sel.appendChild(g); $('timeSlider').max=HISTO.length-1; $('timeSlider').value=HISTO.length-1; })();
 function setBase(key){
   if(SAT_KEYS[key]) lastSat=key; else lastMap=key;
   $('satBtn').classList.toggle('on', !!SAT_KEYS[key]); $('satBtn').textContent = SAT_KEYS[key] ? '◎' : '◉';
@@ -1716,7 +1725,7 @@ function estimar(){ if(!MD) return; var B=MD.bandas; var nuc=$('eNuc').value, es
   h+='<dt>ELM · entidad local menor</dt><dd>Fuencalderas tiene junta vecinal propia con patrimonio (montes, solares) y presupuesto, dentro del municipio de Biel, que otorga las licencias urbanísticas.</dd>';
   h+='<dt>Estudio geotécnico</dt><dd>Obligatorio para todo proyecto de edificación (CTE DB-SE-C): sondeos o catas según tipo de edificio (C-0/C-1 para vivienda) y terreno (T-1 a T-3); define la cimentación. En Biel/Fuencalderas el sustrato es arenisca con lutitas: hay que ensayar la expansividad de la arcilla. Coste orientativo 450–1.800 €.</dd><dt>ZAR incendio</dt><dd>Zona de Alto Riesgo de incendio forestal (Orden DRS/1521/2017). Las nuevas edificaciones necesitan plan de autoprotección y una franja perimetral de 25 m con vegetación reducida; condiciona seguros y licencias.</dd><dt>Susceptibilidad (Aragón 2011)</dt><dd>Mapas regionales 1:50.000 de propensión del terreno a deslizamiento, colapso (dolinas) e inundación, por cruce de geología, pendiente y lluvia. No son zonas inundables oficiales (SNCZI, que aquí no existen) ni sustituyen al geotécnico.</dd><dt>Unidades</dt><dd>1 ha = 10.000 m²; 1 a (área) = 100 m²; 1 ca (centiárea) = 1 m². Coordenadas del mapa: ETRS89 / UTM huso 30 (EPSG:25830); MGRS 30T XM.</dd>';
   h+='</dl></div>';
-  h='<div class="links" style="margin:0 0 10px"><a href="manual.html" target="_blank" rel="noopener" style="border-color:var(--amber2);color:var(--amber)">Manual completo: clases de suelo, recalificación, costes, Catastro y Registro ↗</a><a href="p3621102/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Opción A · parcela 3621102XM7932B (C/ Aire 2): estudio 3D de adquisición ↗</a><a href="snu/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Opción B · comprar rústico junto al pueblo, recalificar, urbanizar y construir: pasos, plazos y costes ↗</a></div>'+h;
+  h='<div class="links" style="margin:0 0 10px"><a href="manual.html" target="_blank" rel="noopener" style="border-color:var(--amber2);color:var(--amber)">Manual completo: clases de suelo, recalificación, costes, Catastro y Registro ↗</a><a href="p3621102/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Opción A · parcela 3621102XM7932B (C/ Aire 2): estudio 3D de adquisición ↗</a><a href="snu/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Opción B · comprar rústico junto al pueblo, recalificar, urbanizar y construir: pasos, plazos y costes ↗</a><a href="media/" target="_blank" rel="noopener" style="border-color:var(--cyan);color:var(--cyan)">Imágenes: fuentes de máxima resolución, comparador histórico, vídeos y fotos ↗</a></div>'+h;
   $('manual').innerHTML=h; })();
 
 // click anywhere -> identify by coordinates

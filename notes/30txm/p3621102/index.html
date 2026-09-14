@@ -76,7 +76,7 @@ figcaption{font-size:11.5px;color:var(--ink3);margin-top:4px}
 <header>
   <div class="mark">EXP</div>
   <div><h1>Parcela 3621102XM7932B · C/ Aire 2 · Fuencalderas</h1><div class="sub">Estudio de adquisición · 625 m² · suelo urbano consolidado · 836 m · 7-9-2026</div></div>
-  <nav><a href="#informe">Informe ↓</a><a href="#s8">§8 diseño</a><a href="../snu/">Opción B: rústico</a><a href="../manual.html">Manual</a><a href="../">Mapa catastral</a></nav>
+  <nav><a href="#informe">Informe ↓</a><a href="#s8">§8 diseño</a><a href="../snu/">Opción B: rústico</a><a href="../media/">Imágenes</a><a href="../manual.html">Manual</a><a href="../">Mapa catastral</a></nav>
 </header>
 
 <div id="wrap">
@@ -86,11 +86,12 @@ figcaption{font-size:11.5px;color:var(--ink3);margin-top:4px}
       <div class="content">
         <div class="g1"><label>Mapa base</label><select id="base">
           <option value="pnoa">PNOA ortofoto 2024 (IGN, 25 cm)</option>
+          <option value="wb2021">Maxar 2021-08-17, 31 cm (Esri Wayback)</option>
           <option value="esri">Esri World Imagery (Maxar 2023)</option>
           <option value="mtn">MTN topográfico (IGN)</option>
           <option value="ams56">Vuelo americano 1956-57</option>
-          <option value="inter73">Vuelo interministerial 1973-86</option>
-          <option value="sigpac">SIGPAC 1997-2003</option>
+          <option value="olistat">OLISTAT 1997-98</option>
+          <option value="sigpac">SIGPAC 1997-2003</option><option value="a1999">Vuelo Aragón 1999</option>
           <option value="p2006">PNOA 2006</option><option value="p2012">PNOA 2012</option><option value="p2018">PNOA 2018</option>
           <option value="none">Sin base (sólo relieve)</option>
         </select></div>
@@ -388,7 +389,7 @@ function viaGeo(){ var feats=[]; (D.vias||[]).forEach(function(v){ v.coords.forE
 // ---------- sources
 var WMTS=function(u,l){ return u+'?service=WMTS&request=GetTile&version=1.0.0&layer='+l+'&style=default&tilematrixset=GoogleMapsCompatible&format=image/jpeg&tilematrix={z}&tilerow={y}&tilecol={x}'; };
 var HIST=function(l){ return 'https://www.ign.es/wms/pnoa-historico?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS='+l+'&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/jpeg'; };
-var BASES={pnoa:{tiles:[WMTS('https://www.ign.es/wmts/pnoa-ma','OI.OrthoimageCoverage')],maxzoom:19}, esri:{tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],maxzoom:19}, mtn:{tiles:[WMTS('https://www.ign.es/wmts/mapa-raster','MTN')],maxzoom:18}, ams56:{tiles:[HIST('AMS_1956-1957')],maxzoom:17}, inter73:{tiles:[HIST('Interministerial_1973-1986')],maxzoom:17}, sigpac:{tiles:[HIST('SIGPAC')],maxzoom:18}, p2006:{tiles:[HIST('PNOA2006')],maxzoom:18}, p2012:{tiles:[HIST('PNOA2012')],maxzoom:19}, p2018:{tiles:[HIST('PNOA2018')],maxzoom:19}};
+var BASES={pnoa:{tiles:[WMTS('https://www.ign.es/wmts/pnoa-ma','OI.OrthoimageCoverage')],maxzoom:19}, esri:{tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],maxzoom:19}, wb2021:{tiles:['https://wayback.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/WMTS/1.0.0/default028mm/MapServer/tile/16245/{z}/{y}/{x}'],maxzoom:19}, a1999:{tiles:['https://icearagon.aragon.es/AragonFotos?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=1999_DGA&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/jpeg'],maxzoom:18}, mtn:{tiles:[WMTS('https://www.ign.es/wmts/mapa-raster','MTN')],maxzoom:18}, ams56:{tiles:[HIST('AMS_1956-1957')],maxzoom:17}, olistat:{tiles:[HIST('OLISTAT')],maxzoom:18}, sigpac:{tiles:[HIST('SIGPAC')],maxzoom:18}, p2006:{tiles:[HIST('PNOA2006')],maxzoom:18}, p2012:{tiles:[HIST('PNOA2012')],maxzoom:19}, p2018:{tiles:[HIST('PNOA2018')],maxzoom:19}};
 var sources={dem:{type:'raster-dem',tiles:['https://xyz-mdt.idee.es/1.0.0/raster-dem/{z}/{x}/{y}.png'],tileSize:512,encoding:'mapbox',maxzoom:15,attribution:'© IGN MDT'},
   geo:{type:'raster',tiles:['https://mapas.igme.es/gis/rest/services/Cartografia_Geologica/IGME_MAGNA_50/MapServer/export?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=256,256&layers=show:11,9,3&format=png32&transparent=true&dpi=96&f=image'],tileSize:256,attribution:'© IGME'},
   contour:{type:'raster',tiles:['https://servicios.idee.es/wms-inspire/mdt?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=EL.ContourLine&STYLES=&CRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&TRANSPARENT=true'],tileSize:256},
