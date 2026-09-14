@@ -779,7 +779,15 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
 .tool{background:rgba(17,23,15,.92);border:1px solid var(--line2);color:var(--ink);width:36px;height:36px;border-radius:6px;display:grid;place-items:center;cursor:pointer;font-family:var(--mono);font-size:13px;backdrop-filter:blur(4px)}
 .tool:hover{border-color:var(--amber2);color:var(--amber)}
 .tool.on{border-color:var(--olive);color:var(--olive)}
-#tools{position:absolute;top:12px;right:12px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+#tools{position:absolute;top:12px;right:12px;z-index:1000;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+#timeBox{width:158px;background:rgba(17,23,15,.92);border:1px solid var(--line2);border-radius:6px;padding:6px 8px 4px;backdrop-filter:blur(4px)}
+#timeBox.sat{border-color:var(--amber2)}
+#timeBox .tb-row{display:flex;align-items:center;gap:6px}
+#timeBox .tb-lbl{flex:1;font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#timeBox button{background:none;border:1px solid var(--line2);color:var(--ink2);border-radius:3px;width:20px;height:18px;font-size:9px;cursor:pointer;padding:0;flex:none}
+#timeBox button:hover{border-color:var(--amber2);color:var(--amber)}
+#timeBox input[type=range]{width:100%;margin:4px 0 0;accent-color:var(--amber);height:14px}
+#timeBox .tb-ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8.5px;color:var(--ink3)}
 #compass{position:absolute;right:12px;bottom:64px;z-index:1000;width:64px;height:64px;pointer-events:none;opacity:.9}
 
 /* ------- status bar ------- */
@@ -1013,7 +1021,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <span class="sw" style="background:#d2dc8c"></span><span>SNU-E · otras categorías</span>
             <span class="sw" style="border:2px dashed #fff;background:rgba(255,255,255,.1)"></span><span>Sistema general (SG) · dot. pública</span>
           </div>
-          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS. El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
+          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS; IGN PNOA histórico (vuelos 1956-2024, control de tiempo bajo los botones del mapa). El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
         </div>
       </section>
 
@@ -1029,6 +1037,11 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
     <button class="tool" id="loc" title="Mi posición (GPS)">◎</button>
     <button class="tool" id="measure" title="Medir distancia / superficie (doble toque para terminar)">⟷</button>
     <button class="tool" id="fs" title="Pantalla completa">⛶</button>
+    <div id="timeBox">
+      <div class="tb-row"><span class="tb-lbl" id="timeLbl">Máx. actualidad</span><button id="timePlay" title="Animar la serie histórica">▶</button></div>
+      <input type="range" id="timeSlider" min="0" max="10" step="1" value="10" title="Vuelo fotogramétrico: 1956 → hoy">
+      <div class="tb-ends"><span>1956</span><span>hoy</span></div>
+    </div>
   </div>
 
   <svg id="compass" viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="rgba(11,15,12,.75)" stroke="#e8b64a" stroke-width="1"/><circle cx="32" cy="32" r="22" fill="none" stroke="rgba(232,182,74,.35)" stroke-width=".7" stroke-dasharray="2 3"/><polygon points="32,6 36,32 32,28 28,32" fill="#e8b64a"/><polygon points="32,58 36,32 32,36 28,32" fill="#6f7f62"/><text x="32" y="17" text-anchor="middle" font-family="monospace" font-size="8" fill="#0b0f0c" font-weight="700">N</text></svg>
@@ -1108,6 +1121,21 @@ var GIBS='https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/';
 var hlsState={date:null, layer:'HLS_S30_Nadir_BRDF_Adjusted_Reflectance'};
 var hlsLayer = L.tileLayer('', {maxZoom:20, maxNativeZoom:12, attribution:'<a href="https://earthdata.nasa.gov/gibs" target="_blank">NASA GIBS · HLS</a>', errorTileUrl:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'});
 function hlsUrl(){ return GIBS+hlsState.layer+'/default/'+hlsState.date+'/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'; }
+// IGN PNOA histórico (WMS con CORS): serie de vuelos fotogramétricos sobre el mismo punto
+var HISTO=[
+  {k:'h1956', s:'1956 · americano', y:'1956', n:'Vuelo americano serie B (1956-57)', l:'AMS_1956-1957'},
+  {k:'h1981', s:'1981 · nacional', y:'1981', n:'Vuelo nacional (1981-86)', l:'Nacional_1981-1986'},
+  {k:'h1997', s:'1997 · SIGPAC', y:'1997', n:'SIGPAC (1997-2003)', l:'SIGPAC'},
+  {k:'h2006', s:'2006 · PNOA', y:'2006', n:'PNOA 2006', l:'PNOA2006'},
+  {k:'h2009', s:'2009 · PNOA', y:'2009', n:'PNOA 2009', l:'PNOA2009'},
+  {k:'h2012', s:'2012 · PNOA', y:'2012', n:'PNOA 2012', l:'PNOA2012'},
+  {k:'h2015', s:'2015 · PNOA', y:'2015', n:'PNOA 2015', l:'PNOA2015'},
+  {k:'h2018', s:'2018 · PNOA', y:'2018', n:'PNOA 2018', l:'PNOA2018'},
+  {k:'h2021', s:'2021 · PNOA', y:'2021', n:'PNOA 2021', l:'PNOA2021'},
+  {k:'h2024', s:'2024 · PNOA', y:'2024', n:'PNOA 2024', l:'PNOA2024'},
+  {k:'pnoa',  s:'hoy · PNOA máx.', y:'hoy',  n:'PNOA máxima actualidad', l:null}
+];
+function histLayer(l){ return L.tileLayer.wms('https://www.ign.es/wms/pnoa-historico', {layers:l, format:'image/jpeg', version:'1.3.0', maxZoom:20, maxNativeZoom:19, attribution:ATTR_IGN}); }
 var bases = {
   mtn:  wmts('https://www.ign.es/wmts/mapa-raster','MTN','image/jpeg',{maxNativeZoom:18}),
   pnoa: wmts('https://www.ign.es/wmts/pnoa-ma','OI.OrthoimageCoverage','image/jpeg',{maxNativeZoom:19}),
@@ -1117,6 +1145,7 @@ var bases = {
   sentar: L.tileLayer.wms('https://idearagon.aragon.es/geoserver/CISA/wms', {layers:'Sentinel_ultima', format:'image/jpeg', version:'1.3.0', maxZoom:20, attribution:'<a href="https://idearagon.aragon.es" target="_blank">© Gobierno de Aragón · CISA Sentinel-2</a>'}),
   hls: hlsLayer,
 };
+HISTO.forEach(function(h){ if(h.l) bases[h.k]=histLayer(h.l); });
 var BASE_INFO = {
   mtn:'MTN25/50 ráster del IGN.', ignbase:'Cartografía vectorial IGN-Base.',
   esri:'Mosaico Esri World Imagery. En Fuencalderas la escena es Maxar/Vantor «Vivid» GE01 de <b>30-09-2023</b>, 0,46 m/píxel (metadatos Esri, sept. 2026).',
@@ -1124,6 +1153,7 @@ var BASE_INFO = {
   sentar:'Última escena Sentinel-2 procesada por el CISA (Gobierno de Aragón). Suele tener ≤ 5 días; el servicio no publica la fecha y no filtra nubes: si se ve blanco, la pasada estaba nublada (prueba «penúltima»).',
   hls:'NASA HLS (Harmonized Landsat–Sentinel), 30 m, un mosaico por día.'
 };
+HISTO.forEach(function(h){ if(h.l) BASE_INFO[h.k]='Ortofoto histórica del IGN: <b>'+h.n+'</b>. Útil para ver si una parcela estuvo edificada, cultivada o arbolada. Resolución y color según el vuelo original.'; });
 function baseInfo(key){ var el=$('baseInfo'); el.innerHTML=BASE_INFO[key]||''; $('sentarBox').style.display= key==='sentar'?'block':'none'; $('hlsBox').style.display= key==='hls'?'block':'none';
   if(key==='pnoa'||key==='hyb'){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN). Consultando fecha de vuelo…'; pnoaDate(map.getCenter()).then(function(t){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN). En este punto: vuelo <b>'+esc(t.f)+'</b>, '+esc(t.r)+' m/píxel.'; }).catch(function(){ el.innerHTML='Ortofoto PNOA de máxima actualidad (IGN); en Aragón, vuelo 2024.'; }); }
 }
@@ -1141,9 +1171,14 @@ $('sentarSel').addEventListener('change', function(){ bases.sentar.setParams({la
 var hybTopo = wmts('https://www.ign.es/wmts/mapa-raster','MTN','image/jpeg',{maxNativeZoom:18, opacity:.45, className:'hybtopo'});
 var currentBase = null;
 var SAT_KEYS={pnoa:1,hyb:1,esri:1,s2:1,sentar:1,hls:1}, lastSat='pnoa', lastMap='mtn';
+HISTO.forEach(function(h){ SAT_KEYS[h.k]=1; });
+(function(){ var sel=$('baseSel'); var g=document.createElement('optgroup'); g.label='Ortofotos históricas (IGN)';
+  HISTO.forEach(function(h){ if(!h.l) return; var o=document.createElement('option'); o.value=h.k; o.textContent=h.n; g.appendChild(o); });
+  sel.appendChild(g); })();
 function setBase(key){
   if(SAT_KEYS[key]) lastSat=key; else lastMap=key;
   $('satBtn').classList.toggle('on', !!SAT_KEYS[key]); $('satBtn').textContent = SAT_KEYS[key] ? '◎' : '◉';
+  timeSync(key);
   if($('baseSel').value!==key) $('baseSel').value=key;
   Object.keys(bases).forEach(function(k){ if(map.hasLayer(bases[k])) map.removeLayer(bases[k]); });
   if(map.hasLayer(hybTopo)) map.removeLayer(hybTopo);
@@ -1168,6 +1203,22 @@ var ovSiuaWms = L.tileLayer.wms(SIUA_WMS, {layers:'clasificacion_idearagon', for
 setBase('mtn'); ovParcels.addTo(map); ovAdmin.addTo(map);
 $('baseSel').addEventListener('change', function(){ setBase(this.value); });
 $('satBtn').onclick=function(){ setBase(SAT_KEYS[currentBase] ? lastMap : lastSat); };
+
+// ------------------------------------------------------------------ time slider (serie histórica de ortofotos)
+var timeT=null;
+function timeSync(key){ var i=-1; HISTO.forEach(function(h,n){ if(h.k===key) i=n; });
+  var box=$('timeBox'), lbl=$('timeLbl');
+  box.classList.toggle('sat', i>=0);
+  if(i>=0){ $('timeSlider').value=i; lbl.textContent=HISTO[i].s; lbl.title=HISTO[i].n; }
+  else { lbl.textContent='— '+(({mtn:'MTN topográfico',ignbase:'IGN-Base',hyb:'Ortofoto + topo',esri:'Esri satélite',s2:'Sentinel-2 2025',sentar:'Sentinel-2 Aragón',hls:'NASA HLS'})[key]||'otro mapa'); lbl.title='Mueve el control para ir a la serie histórica de ortofotos'; }
+}
+function timeGo(i){ i=Math.max(0,Math.min(HISTO.length-1,i)); setBase(HISTO[i].k); }
+$('timeSlider').addEventListener('input', function(){ timeGo(+this.value); });
+$('timePlay').addEventListener('click', function(){
+  if(timeT){ clearInterval(timeT); timeT=null; this.textContent='▶'; return; }
+  this.textContent='■'; var i=+$('timeSlider').value; if(i>=HISTO.length-1) i=-1;
+  timeT=setInterval(function(){ i++; if(i>=HISTO.length){ clearInterval(timeT); timeT=null; $('timePlay').textContent='▶'; return; } timeGo(i); }, 1400);
+});
 function bindOv(id, layer){ $(id).addEventListener('change', function(){ if(this.checked){ layer.addTo(map); layer.bringToFront(); if(map.hasLayer(ovParcels)) ovParcels.bringToFront(); } else map.removeLayer(layer); }); }
 bindOv('ovParcels', ovParcels); bindOv('ovZoning', ovZoning); bindOv('ovAdmin', ovAdmin); bindOv('ovHill', ovHill);
 $('ovParcelsOp').addEventListener('input', function(){ ovParcels.setOpacity(+this.value); });
@@ -1283,7 +1334,8 @@ var locMarker=null;
 $('loc').onclick=function(){ map.locate({setView:true, maxZoom:17, enableHighAccuracy:true}); };
 map.on('locationfound', function(e){ if(locMarker) map.removeLayer(locMarker); locMarker=L.circleMarker(e.latlng,{radius:7,color:'#6fc3c9',fillColor:'#6fc3c9',fillOpacity:.6,weight:2}).addTo(map).bindTooltip('Tu posición ±'+Math.round(e.accuracy)+' m'); });
 map.on('locationerror', function(e){ toast('Sin posición GPS: '+esc(e.message)); });
-document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'}; if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
+document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'};
+  if(k==='T'){ timeGo((+$('timeSlider').value + (ev.shiftKey?-1:1) + HISTO.length) % HISTO.length); return; } if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
 
 // ------------------------------------------------------------------ measure tool
 var measuring=false, mPts=[], mLine=null, mPoly=null, mLabel=null, mDots=L.layerGroup().addTo(map);
