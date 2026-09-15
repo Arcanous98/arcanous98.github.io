@@ -952,6 +952,13 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
           <label class="chk"><input type="checkbox" id="ovFis"><span class="sw" style="border-color:#8fbf5a;background:linear-gradient(90deg,#d9e2cf,#8fbf5a,#3f5f2f)"></span>Aragón · unidades fisiográficas / clases de pendiente (WMS)<span class="k">6</span></label>
           <label class="chk"><input type="checkbox" id="ovArc"><span class="sw" style="border-color:#c96a6a;background:rgba(201,106,106,.3)"></span>IGME · peligrosidad por arcillas expansivas 1:1M (WMS)<span class="k">7</span></label>
           <div id="terrLeg" style="display:none;margin:4px 0 6px 22px"></div>
+          <div class="hint" style="margin:10px 0 4px">Terreno · LiDAR del CNIG procesado aquí (3 × 3 km, descarga 16-9-2026)</div>
+          <label class="chk"><input type="checkbox" id="ovCnHill"><span class="sw" style="border-color:#bbb;background:linear-gradient(135deg,#222,#ddd)"></span>CNIG · sombreado MDT02 (2 m, LiDAR 2ª cobertura)<span class="k">8</span></label>
+          <div class="opac"><span>opacidad</span><input type="range" id="ovCnHillOp" min="0" max="1" step=".05" value=".55"></div>
+          <label class="chk"><input type="checkbox" id="ovCnSlope"><span class="sw" style="border-color:#e6503c;background:linear-gradient(90deg,#fff078,#ffaa3c,#e6502a,#8c143c)"></span>CNIG · pendiente del terreno (10 / 20 / 30 / 45 %)<span class="k">9</span></label>
+          <label class="chk"><input type="checkbox" id="ovCnVeg"><span class="sw" style="border-color:#2f8f3f;background:linear-gradient(90deg,#c8eb96,#78c85a,#288c3c,#0a5028)"></span>CNIG · altura de la vegetación (nDSM, 2,5 m)<span class="k">0</span></label>
+          <label class="chk"><input type="checkbox" id="ovCnBld"><span class="sw" style="border-color:#be1e3c;background:linear-gradient(90deg,#fffac8,#ffc85a,#f06e28,#be1e3c,#6e0050)"></span>CNIG · altura de los edificios (MDS02 − MDT02, m)<span class="k">X</span></label>
+          <div id="cnigLeg" style="display:none;margin:4px 0 6px 22px"></div>
         </div>
       </section>
 
@@ -1022,7 +1029,7 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
             <span class="sw" style="background:#d2dc8c"></span><span>SNU-E · otras categorías</span>
             <span class="sw" style="border:2px dashed #fff;background:rgba(255,255,255,.1)"></span><span>Sistema general (SG) · dot. pública</span>
           </div>
-          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS; IGN PNOA histórico e IGEAR AragonFotos (vuelos 1956-2024) y archivo Maxar de Esri Wayback (2016, 2019, 2021), en el control de tiempo bajo los botones del mapa. Los vuelos interministerial 1973-86 y nacional 1981-86 del IGN no cubren Fuencalderas. El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Nada se almacena en servidores intermedios.</div>
+          <div class="hint">Fuentes: Dirección General del Catastro (servicios INSPIRE WMS/WFS y OVC, uso libre con cita «© DGC»); Instituto Geográfico Nacional (MTN, PNOA, IGN-Base, CC BY 4.0 scne.es); Gobierno de Aragón (SIUa/IDEAragon: clasificación del PGOU de Biel, montes, ENP, última imagen Sentinel-2 del CISA); Esri World Imagery (Maxar/Vantor); EOX Sentinel-2 cloudless (CC BY 4.0, datos Copernicus); NASA GIBS HLS; IGN PNOA histórico e IGEAR AragonFotos (vuelos 1956-2024) y archivo Maxar de Esri Wayback (2016, 2019, 2021), en el control de tiempo bajo los botones del mapa. Los vuelos interministerial 1973-86 y nacional 1981-86 del IGN no cubren Fuencalderas. El parcelario, los edificios y las direcciones de Biel, Luesia, Longás, El Frago, Orés, Murillo de Gállego, Santa Eulalia de Gállego, Agüero y Las Peñas de Riglos se sirven desde esta web (<code>cat/*.json</code>, descarga INSPIRE ATOM del Catastro, actualización 2026-02); fuera de ellos se consulta el Catastro en directo. La clasificación urbanística y los riesgos están incrustados (<code>siua_biel.js</code>, <code>riesgos_biel.js</code>). Las capas «CNIG» (sombreado, pendiente, vegetación y altura de edificios) se han calculado a partir del MDT02, MDS02 y nDSM de la 2ª cobertura LiDAR del IGN descargados del Centro de Descargas del CNIG (CC BY 4.0) y se sirven como imágenes desde <code>cnig/</code>. Nada se almacena en servidores intermedios.</div>
         </div>
       </section>
 
@@ -1216,7 +1223,21 @@ $('baseSel').addEventListener('change', function(){ setBase(this.value); });
 $('satBtn').onclick=function(){ setBase(SAT_KEYS[currentBase] ? lastMap : lastSat); };
 
 // ------------------------------------------------------------------ hide / restore every overlay
-var OV_IDS=['ovParcels','ovZoning','ovAdmin','ovGrid','ovHill','ovSiua','ovMontes','ovEnp','ovMkt','ovSiuaWms','ovGeo','ovInu','ovCol','ovZar','ovDes','ovFis','ovArc'];
+// CNIG LiDAR products clipped and rendered locally (cnig/*.png, see fdb_procesar_elevacion.py in the private archive)
+var CN_B3=[[42.34582480063636,-0.9118240734965355],[42.37349404901074,-0.87451633355925]];
+var CN_B12=[[42.35412667065193,-0.900635019831125],[42.36519437045084,-0.8857119243979499]];
+var ATTR_CNIG='<a href="https://centrodedescargas.cnig.es/" target="_blank">© IGN-CNIG (MDT02/MDS02/nDSM, CC BY 4.0)</a>';
+var ovCnHill=L.imageOverlay('cnig/sombreado_mdt02.png', CN_B3, {opacity:.55, attribution:ATTR_CNIG, zIndex:250});
+var ovCnSlope=L.imageOverlay('cnig/pendiente_mdt02.png', CN_B3, {opacity:.85, attribution:ATTR_CNIG, zIndex:251});
+var ovCnVeg=L.imageOverlay('cnig/vegetacion_ndsm.png', CN_B3, {opacity:.85, attribution:ATTR_CNIG, zIndex:252});
+var ovCnBld=L.imageOverlay('cnig/edificios_altura.png', CN_B12, {opacity:.95, attribution:ATTR_CNIG, zIndex:253});
+var CN_LEG={ovCnSlope:['Pendiente (MDT02, 2 m)',[['< 10 %','rgba(255,255,255,.15)'],['10–20 %','rgb(255,240,120)'],['20–30 %','rgb(255,170,60)'],['30–45 %','rgb(230,80,40)'],['> 45 %','rgb(140,20,60)']]],
+  ovCnVeg:['Altura de la vegetación (nDSM 2ª cobertura)',[['0,5–3 m','rgb(200,235,150)'],['3–8 m','rgb(120,200,90)'],['8–15 m','rgb(40,140,60)'],['> 15 m','rgb(10,80,40)']]],
+  ovCnBld:['Altura de los edificios sobre el suelo (MDS02 − MDT02)',[['< 2 m','rgb(255,250,200)'],['2–4 m','rgb(255,200,90)'],['4–7 m','rgb(240,110,40)'],['7–10 m','rgb(190,30,60)'],['> 10 m','rgb(110,0,80)']]]};
+function cnigLegend(){ var h=''; Object.keys(CN_LEG).forEach(function(id){ if($(id).checked){ h+='<div style="font-size:11px;margin:2px 0"><b>'+CN_LEG[id][0]+'</b><br>'+CN_LEG[id][1].map(function(e){ return '<span style="display:inline-block;width:11px;height:11px;background:'+e[1]+';border:1px solid #777;vertical-align:-2px;margin-right:3px"></span>'+e[0]; }).join(' &nbsp; ')+'</div>'; } });
+  if($('ovCnBld').checked && window.CN_BLD) h+='<div style="font-size:11px;margin:2px 0;color:#bbb">Fuencalderas: '+CN_BLD.n+' edificios medidos · mediana de altura de cubierta '+CN_BLD.p90+' m · <a href="cnig/alturas_edificios.json" target="_blank">tabla</a></div>';
+  $('cnigLeg').innerHTML=h; $('cnigLeg').style.display=h?'block':'none'; }
+var OV_IDS=['ovParcels','ovZoning','ovAdmin','ovGrid','ovHill','ovSiua','ovMontes','ovEnp','ovMkt','ovSiuaWms','ovGeo','ovInu','ovCol','ovZar','ovDes','ovFis','ovArc','ovCnHill','ovCnSlope','ovCnVeg','ovCnBld'];
 var ovSaved=null;
 function toggleAllOverlays(){
   if(ovSaved){
@@ -1251,6 +1272,10 @@ $('timePlay').addEventListener('click', function(){
 });
 function bindOv(id, layer){ $(id).addEventListener('change', function(){ if(this.checked){ layer.addTo(map); layer.bringToFront(); if(map.hasLayer(ovParcels)) ovParcels.bringToFront(); } else map.removeLayer(layer); }); }
 bindOv('ovParcels', ovParcels); bindOv('ovZoning', ovZoning); bindOv('ovAdmin', ovAdmin); bindOv('ovHill', ovHill);
+bindOv('ovCnHill', ovCnHill); bindOv('ovCnSlope', ovCnSlope); bindOv('ovCnVeg', ovCnVeg); bindOv('ovCnBld', ovCnBld);
+['ovCnSlope','ovCnVeg','ovCnBld'].forEach(function(id){ $(id).addEventListener('change', cnigLegend); });
+$('ovCnHillOp').addEventListener('input', function(){ ovCnHill.setOpacity(+this.value); });
+fetch('cnig/cnig_capas.json').then(function(r){ return r.json(); }).then(function(j){ window.CN_BLD={n:j.resumen_edificios.n, p90:j.resumen_edificios.h_p90_mediana}; window.CN_PARCELA=j.parcela; cnigLegend(); }).catch(function(){});
 $('ovParcelsOp').addEventListener('input', function(){ ovParcels.setOpacity(+this.value); pOpK=(+this.value)/0.85; if(typeof parcelLayer!=='undefined'){ parcelLayer.setStyle(pStyle); bldLayer.setStyle(bldLayer.options.style); } });
 $('ovGrid').addEventListener('change', function(){ if(this.checked){ gridLayer.addTo(map); drawGrid(); } else map.removeLayer(gridLayer); });
 
@@ -1364,7 +1389,7 @@ var locMarker=null;
 $('loc').onclick=function(){ map.locate({setView:true, maxZoom:17, enableHighAccuracy:true}); };
 map.on('locationfound', function(e){ if(locMarker) map.removeLayer(locMarker); locMarker=L.circleMarker(e.latlng,{radius:7,color:'#6fc3c9',fillColor:'#6fc3c9',fillOpacity:.6,weight:2}).addTo(map).bindTooltip('Tu posición ±'+Math.round(e.accuracy)+' m'); });
 map.on('locationerror', function(e){ toast('Sin posición GPS: '+esc(e.message)); });
-document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc'};
+document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc','8':'ovCnHill','9':'ovCnSlope','0':'ovCnVeg',X:'ovCnBld'};
   if(k==='O'){ toggleAllOverlays(); return; }
   if(k==='T'){ timeGo((+$('timeSlider').value + (ev.shiftKey?-1:1) + HISTO.length) % HISTO.length); return; } if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
 
@@ -1767,7 +1792,7 @@ $('goq').onclick=doSearch; $('q').addEventListener('keydown', function(e){ if(e.
 // tile error hints -------------------------------------------------------
 var tileErr=0; [bases.mtn,bases.pnoa,bases.ignbase].forEach(function(l){ l.on('tileerror', function(){ if(++tileErr===6) toast('<b>El mapa no puede descargar los mosaicos del IGN.</b><br>Si estás viendo el archivo en la vista previa de la app de Claude o en Quick Look (iPhone), ese visor bloquea todas las conexiones externas. Guarda el archivo y ábrelo en Chrome, Safari, Firefox o Edge (en móvil: Archivos → compartir → abrir en el navegador). Si ya estás en un navegador, comprueba la conexión o si la red bloquea www.ign.es.', 20000); }); });
 window.__cat = {map:map, parcels:parcels, parseGML:parseGML, renderDNP:renderDNP, toUTM:toUTM, mgrs:mgrs};
-window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg, LOCAL:LOCAL, parcels:function(){return parcels;}, ovParcels:ovParcels, doSearch:doSearch, pStyle:pStyle, parcelLayer:parcelLayer, bldLayer:bldLayer};
+window._fc={map:map, siuaAt:siuaAt, hlsLayer:hlsLayer, bases:bases, selectParcel:selectParcel, docsFor:docsFor, catMsg:catMsg, LOCAL:LOCAL, parcels:function(){return parcels;}, ovParcels:ovParcels, doSearch:doSearch, pStyle:pStyle, parcelLayer:parcelLayer, bldLayer:bldLayer, OV_IDS:OV_IDS, toggleAllOverlays:toggleAllOverlays, ovCnBld:ovCnBld, ovCnHill:ovCnHill, cnigLegend:cnigLegend};
 })();
 
 </script>

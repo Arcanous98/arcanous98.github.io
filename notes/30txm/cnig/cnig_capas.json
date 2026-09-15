@@ -1,0 +1,148 @@
+{
+ "fecha": "2026-09-16",
+ "centro": [
+  673500,
+  4691860
+ ],
+ "capas": {
+  "sombreado_mdt02": {
+   "file": "sombreado_mdt02.png",
+   "bounds": [
+    [
+     42.34582480063636,
+     -0.9118240734965355
+    ],
+    [
+     42.37349404901074,
+     -0.87451633355925
+    ]
+   ],
+   "kb": 264,
+   "titulo": "CNIG · sombreado del MDT02 (2 m, LiDAR 2ª cobertura)",
+   "tipo": "gris"
+  },
+  "pendiente_mdt02": {
+   "file": "pendiente_mdt02.png",
+   "bounds": [
+    [
+     42.34582480063636,
+     -0.9118240734965355
+    ],
+    [
+     42.37349404901074,
+     -0.87451633355925
+    ]
+   ],
+   "kb": 967,
+   "titulo": "CNIG · pendiente del terreno (MDT02, %)",
+   "leyenda": [
+    [
+     "< 10 %",
+     "rgba(255,255,255,0)"
+    ],
+    [
+     "10–20 %",
+     "rgb(255,240,120)"
+    ],
+    [
+     "20–30 %",
+     "rgb(255,170,60)"
+    ],
+    [
+     "30–45 %",
+     "rgb(230,80,40)"
+    ],
+    [
+     "> 45 %",
+     "rgb(140,20,60)"
+    ]
+   ]
+  },
+  "vegetacion_ndsm": {
+   "file": "vegetacion_ndsm.png",
+   "bounds": [
+    [
+     42.34582480063636,
+     -0.9118240734965355
+    ],
+    [
+     42.37349404901074,
+     -0.87451633355925
+    ]
+   ],
+   "kb": 92,
+   "titulo": "CNIG · altura de la vegetación (nDSM 2ª cobertura, 2,5 m)",
+   "leyenda": [
+    [
+     "0,5–3 m",
+     "rgb(200,235,150)"
+    ],
+    [
+     "3–8 m",
+     "rgb(120,200,90)"
+    ],
+    [
+     "8–15 m",
+     "rgb(40,140,60)"
+    ],
+    [
+     "> 15 m",
+     "rgb(10,80,40)"
+    ]
+   ]
+  },
+  "edificios_altura": {
+   "file": "edificios_altura.png",
+   "bounds": [
+    [
+     42.35412667065193,
+     -0.900635019831125
+    ],
+    [
+     42.36519437045084,
+     -0.8857119243979499
+    ]
+   ],
+   "kb": 7,
+   "titulo": "CNIG · altura de los edificios (MDS02 − MDT02, m)",
+   "leyenda": [
+    [
+     "< 2 m",
+     "rgb(255,250,200)"
+    ],
+    [
+     "2–4 m",
+     "rgb(255,200,90)"
+    ],
+    [
+     "4–7 m",
+     "rgb(240,110,40)"
+    ],
+    [
+     "7–10 m",
+     "rgb(190,30,60)"
+    ],
+    [
+     "> 10 m",
+     "rgb(110,0,80)"
+    ]
+   ]
+  }
+ },
+ "parcela": {
+  "rc": "3621102XM7932B",
+  "cota_min": 833.89,
+  "cota_max": 836.97,
+  "cota_media": 836.16,
+  "desnivel": 3.08,
+  "pendiente_media_pct": 13.0,
+  "pendiente_max_pct": 50.3,
+  "n_pix": 190,
+  "fuente": "MDT02 COB2 (2 m)"
+ },
+ "resumen_edificios": {
+  "n": 105,
+  "h_max_mediana": 9.0,
+  "h_p90_mediana": 8.2
+ }
+}
