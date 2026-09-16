@@ -963,6 +963,8 @@ details.raw pre{max-height:220px;overflow:auto;background:#0a0e09;border:1px sol
           <div class="opac"><span>opacidad</span><input type="range" id="ovLiHillOp" min="0" max="1" step=".05" value=".6"></div>
           <label class="chk"><input type="checkbox" id="ovLiBld"><span class="sw" style="border-color:#be1e3c;background:linear-gradient(90deg,#fffac8,#ffc85a,#f06e28,#be1e3c,#6e0050)"></span>LiDAR 2023 · altura de los edificios (m)<span class="k">K</span></label>
           <label class="chk"><input type="checkbox" id="ovLiVeg"><span class="sw" style="border-color:#2f8f3f;background:linear-gradient(90deg,#c8eb96,#78c85a,#288c3c,#0a5028)"></span>LiDAR 2023 · altura de la vegetación (1 m)<span class="k">Q</span></label>
+          <label class="chk"><input type="checkbox" id="ovLiC10"><span class="sw" style="border-color:#c86432;background:linear-gradient(90deg,#5090e6,#fff 45%,#fff 55%,#f07832)"></span>LiDAR · cambio de superficie 2010 → 2023 (obras, derribos, arbolado)<span class="k">C</span></label>
+          <label class="chk"><input type="checkbox" id="ovLiC20"><span class="sw" style="border-color:#c86432;background:linear-gradient(90deg,#5090e6,#fff 45%,#fff 55%,#f07832)"></span>LiDAR · cambio de superficie 2020 → 2023<span class="k">D</span></label>
           <div id="cnigLeg" style="display:none;margin:4px 0 6px 22px"></div>
         </div>
       </section>
@@ -1264,7 +1266,12 @@ var ovLiBld=L.imageOverlay('cnig/edificios_altura_2023.png', CN_B12, {opacity:.9
 var ovLiVeg=L.imageOverlay('cnig/vegetacion_2023.png', CN_B3, {opacity:.85, attribution:ATTR_CNIG, zIndex:256});
 CN_LEG.ovLiBld=['Altura de los edificios 2023 (LiDAR 3ª cobertura, 0,5 m)', CN_LEG.ovCnBld[1]];
 CN_LEG.ovLiVeg=['Altura de la vegetación 2023 (LiDAR)', CN_LEG.ovCnVeg[1]];
-var OV_IDS=['ovParcels','ovZoning','ovAdmin','ovGrid','ovHill','ovSiua','ovMontes','ovEnp','ovMkt','ovSiuaWms','ovGeo','ovInu','ovCol','ovZar','ovDes','ovFis','ovArc','ovCnHill','ovCnSlope','ovCnVeg','ovCnBld','ovLiHill','ovLiBld','ovLiVeg'];
+var ovLiC10=L.imageOverlay('cnig/cambios_2010_2023.png', CN_B12, {opacity:.85, attribution:ATTR_CNIG, zIndex:257});
+var ovLiC20=L.imageOverlay('cnig/cambios_2020_2023.png', CN_B12, {opacity:.85, attribution:ATTR_CNIG, zIndex:258});
+var CN_LEG_CAMB=[['bajó > 5 m (derribo, tala)','rgb(80,140,230)'],['bajó 2–5 m','rgb(170,210,255)'],['subió 2–5 m','rgb(255,210,150)'],['subió > 5 m (obra nueva, arbolado)','rgb(240,120,50)']];
+CN_LEG.ovLiC10=['Cambio de la superficie 2010 → 2023 (MDS 2023 − MDS 2010, 1 m). El vuelo de 2010 tiene 1 pt/m², así que en arbolado el «subió» mezcla crecimiento real con copas que 2010 no llegó a medir; en el casco, blanco = sin cambio', CN_LEG_CAMB];
+CN_LEG.ovLiC20=['Cambio de la superficie 2020-21 → 2023 (1 m)', CN_LEG_CAMB];
+var OV_IDS=['ovParcels','ovZoning','ovAdmin','ovGrid','ovHill','ovSiua','ovMontes','ovEnp','ovMkt','ovSiuaWms','ovGeo','ovInu','ovCol','ovZar','ovDes','ovFis','ovArc','ovCnHill','ovCnSlope','ovCnVeg','ovCnBld','ovLiHill','ovLiBld','ovLiVeg','ovLiC10','ovLiC20'];
 var ovSaved=null;
 function toggleAllOverlays(){
   if(ovSaved){
@@ -1300,8 +1307,8 @@ $('timePlay').addEventListener('click', function(){
 function bindOv(id, layer){ $(id).addEventListener('change', function(){ if(this.checked){ layer.addTo(map); layer.bringToFront(); if(map.hasLayer(ovParcels)) ovParcels.bringToFront(); } else map.removeLayer(layer); }); }
 bindOv('ovParcels', ovParcels); bindOv('ovZoning', ovZoning); bindOv('ovAdmin', ovAdmin); bindOv('ovHill', ovHill);
 bindOv('ovCnHill', ovCnHill); bindOv('ovCnSlope', ovCnSlope); bindOv('ovCnVeg', ovCnVeg); bindOv('ovCnBld', ovCnBld);
-bindOv('ovLiHill', ovLiHill); bindOv('ovLiBld', ovLiBld); bindOv('ovLiVeg', ovLiVeg);
-['ovCnSlope','ovCnVeg','ovCnBld','ovLiBld','ovLiVeg'].forEach(function(id){ $(id).addEventListener('change', cnigLegend); });
+bindOv('ovLiHill', ovLiHill); bindOv('ovLiBld', ovLiBld); bindOv('ovLiVeg', ovLiVeg); bindOv('ovLiC10', ovLiC10); bindOv('ovLiC20', ovLiC20);
+['ovCnSlope','ovCnVeg','ovCnBld','ovLiBld','ovLiVeg','ovLiC10','ovLiC20'].forEach(function(id){ $(id).addEventListener('change', cnigLegend); });
 $('ovCnHillOp').addEventListener('input', function(){ ovCnHill.setOpacity(+this.value); });
 $('ovLiHillOp').addEventListener('input', function(){ ovLiHill.setOpacity(+this.value); });
 fetch('cnig/cnig_capas.json').then(function(r){ return r.json(); }).then(function(j){ window.CN_BLD={n:j.resumen_edificios.n, p90:j.resumen_edificios.h_p90_mediana}; window.CN_PARCELA=j.parcela; cnigLegend(); }).catch(function(){});
@@ -1418,7 +1425,7 @@ var locMarker=null;
 $('loc').onclick=function(){ map.locate({setView:true, maxZoom:17, enableHighAccuracy:true}); };
 map.on('locationfound', function(e){ if(locMarker) map.removeLayer(locMarker); locMarker=L.circleMarker(e.latlng,{radius:7,color:'#6fc3c9',fillColor:'#6fc3c9',fillOpacity:.6,weight:2}).addTo(map).bindTooltip('Tu posición ±'+Math.round(e.accuracy)+' m'); });
 map.on('locationerror', function(e){ toast('Sin posición GPS: '+esc(e.message)); });
-document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc','8':'ovCnHill','9':'ovCnSlope','0':'ovCnVeg',X:'ovCnBld',J:'ovLiHill',K:'ovLiBld',Q:'ovLiVeg'};
+document.addEventListener('keydown', function(ev){ if(ev.target.tagName==='INPUT'||ev.target.tagName==='SELECT') return; var k=ev.key.toUpperCase(); var m={P:'ovParcels',Z:'ovZoning',L:'ovAdmin',G:'ovGrid',H:'ovHill',S:'ovSiua',M:'ovMontes',E:'ovEnp',W:'ovSiuaWms',V:'ovMkt','1':'ovGeo','2':'ovInu','3':'ovCol','4':'ovZar','5':'ovDes','6':'ovFis','7':'ovArc','8':'ovCnHill','9':'ovCnSlope','0':'ovCnVeg',X:'ovCnBld',J:'ovLiHill',K:'ovLiBld',Q:'ovLiVeg',C:'ovLiC10',D:'ovLiC20'};
   if(k==='O'){ toggleAllOverlays(); return; }
   if(k==='T'){ timeGo((+$('timeSlider').value + (ev.shiftKey?-1:1) + HISTO.length) % HISTO.length); return; } if(m[k]){ var c=$(m[k]); c.checked=!c.checked; c.dispatchEvent(new Event('change')); } if(k==='B') $('satBtn').onclick(); if(k==='ESCAPE') stopMeasure(); });
 

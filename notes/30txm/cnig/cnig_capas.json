@@ -172,6 +172,72 @@
    ],
    "kb": 3059,
    "titulo": "CNIG · altura de la vegetación 2023 (LiDAR)"
+  },
+  "cambios_2010_2023": {
+   "file": "cambios_2010_2023.png",
+   "bounds": [
+    [
+     42.35412667065193,
+     -0.900635019831125
+    ],
+    [
+     42.36519437045084,
+     -0.8857119243979499
+    ]
+   ],
+   "kb": 620,
+   "titulo": "LiDAR · cambio de la superficie 2010 → 2023 (m)",
+   "leyenda": [
+    [
+     "bajó > 5 m (derribo, tala)",
+     "rgb(80,140,230)"
+    ],
+    [
+     "bajó 2–5 m",
+     "rgb(170,210,255)"
+    ],
+    [
+     "subió 2–5 m",
+     "rgb(255,210,150)"
+    ],
+    [
+     "subió > 5 m (obra nueva, arbolado)",
+     "rgb(240,120,50)"
+    ]
+   ]
+  },
+  "cambios_2020_2023": {
+   "file": "cambios_2020_2023.png",
+   "bounds": [
+    [
+     42.35412667065193,
+     -0.900635019831125
+    ],
+    [
+     42.36519437045084,
+     -0.8857119243979499
+    ]
+   ],
+   "kb": 409,
+   "titulo": "LiDAR · cambio de la superficie 2020 → 2023 (m)",
+   "leyenda": [
+    [
+     "bajó > 5 m (derribo, tala)",
+     "rgb(80,140,230)"
+    ],
+    [
+     "bajó 2–5 m",
+     "rgb(170,210,255)"
+    ],
+    [
+     "subió 2–5 m",
+     "rgb(255,210,150)"
+    ],
+    [
+     "subió > 5 m (obra nueva, arbolado)",
+     "rgb(240,120,50)"
+    ]
+   ]
   }
  },
  "parcela": {
@@ -198,5 +264,46 @@
  "resumen_edificios_2023": {
   "n": 105,
   "h_p90_mediana": 7.8
+ },
+ "cambios_lidar": {
+  "2010": {
+   "n_edificios": 105,
+   "cambios": [
+    {
+     "rc": "3620515XM7932B",
+     "parte": 0,
+     "uso": "Residencial",
+     "antes": 2.5,
+     "ahora": 6.5,
+     "dif": 4.0,
+     "lat": 42.359611,
+     "lon": -0.892369
+    },
+    {
+     "rc": "50049A11200182",
+     "parte": 0,
+     "uso": "Agrario",
+     "antes": 1.0,
+     "ahora": 4.5,
+     "dif": 3.5,
+     "lat": 42.359715,
+     "lon": -0.894705
+    },
+    {
+     "rc": "3620108XM7932B",
+     "parte": 0,
+     "uso": "Residencial",
+     "antes": 0.8,
+     "ahora": 3.9,
+     "dif": 3.1,
+     "lat": 42.358896,
+     "lon": -0.892875
+    }
+   ]
+  },
+  "2020": {
+   "n_edificios": 105,
+   "cambios": []
+  }
  }
 }
