@@ -238,6 +238,21 @@
      "rgb(240,120,50)"
     ]
    ]
+  },
+  "minutas_1927": {
+   "file": "minutas_1927.png",
+   "bounds": [
+    [
+     42.34582480063636,
+     -0.9118240734965355
+    ],
+    [
+     42.37349404901074,
+     -0.87451633355925
+    ]
+   ],
+   "kb": 863,
+   "titulo": "IGN · planimetría del término de Fuencalderas, 1927 (minutas cartográficas, WMS georreferenciado)"
   }
  },
  "parcela": {
