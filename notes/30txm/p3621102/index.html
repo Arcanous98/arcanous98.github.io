@@ -190,6 +190,9 @@ figcaption{font-size:11.5px;color:var(--ink3);margin-top:4px}
 <tr><td>Riesgos</td><td>Inundación BAJA (no hay cauce; la más próxima ALTA está a 3,5 km); colapso y deslizamiento MUY BAJA; ZAR incendio tipo 1 ALTO</td><td>Gobierno de Aragón 2011 / 2017</td></tr>
 <tr><td>Colindantes</td><td>N: 3621101 (C/ San Miguel 1, casa 1960, 101 m², 1 planta). A &lt; 6 m: C/ Aire 1 (1970, 2 pl.), C/ Arrabal 1, 3 y 7, C/ San Miguel 2, el edificio público de C/ Iglesia 4-6 (1910/1970). W: rústica 112/58 (7.674 ha… 7.674 m², matorral, sin edificios)</td><td>Catastro</td></tr>
 </table>
+<h3>Perfil del terreno por el centro de la parcela (LiDAR 2023, modelo de 0,5 m)</h3>
+<p>Calculado sobre la nube de puntos PNOA-LiDAR 2023 (15 puntos/m²) descargada del CNIG: la parcela es prácticamente llana (cotas 834,6–837,3 m, desnivel 2,6 m, pendiente media 15 % por las irregularidades de medio metro), y el <b>talud del camino oeste</b> cae 5,3 m en los 15 m siguientes al lindero. Línea gris: superficie (tejados y árboles); línea ámbar: suelo; franja: interior de la parcela.</p>
+<div id="perfilBox" style="display:grid;gap:10px;grid-template-columns:1fr 1fr"></div>
 <p><b>Contexto del pueblo</b> (radio 450 m): 113 parcelas urbanas, 95 edificios, 91 viviendas, 18 solares sin edificar, 11 edificios en ruina o deteriorados, año mediano de construcción 1970; parcela mediana 94 m² (esta es 6,6 veces mayor; sólo hay una parcela urbana más grande). 26 habitantes empadronados (2025). Servicios: red de agua de la ELM (tasa anual), electricidad (línea 15 kV Fuencalderas–Agüero renovada 2023), recogida de residuos (60 €/año); fibra: verificar (Biel la tiene). Distancias: Biel 8 km, Ayerbe 22 km, Ejea 45 km, Huesca 75 km, Zaragoza 100 km.</p>
 <div class="note">Sobre el título: la ELM de Fuencalderas vendió en subasta (BOPZ 9-10-2004) el «solar urbano pol. 112 parc. 401, zona periférica, para una vivienda» (tipo 600 €). Esa parcela existe todavía con referencia rústica (50049A11200401, 229 m²) y está justo al norte de esta, junto a la casa de C/ San Miguel 1; <b>no es esta parcela</b>. El origen del título de 3621102 hay que averiguarlo con la nota simple; si no está inscrita, descontar 1.500–4.000 € y 6–12 meses de inmatriculación. El precedente de 2004 sirve como referencia de precio de solar periférico en el pueblo (2,6 €/m² de tipo de subasta).</div>
 
@@ -480,6 +483,20 @@ $('ficha').innerHTML='<dl class="kv"><dt>Ref.</dt><dd style="font-family:var(--m
 [].forEach.call(document.querySelectorAll('section.block>h2'), function(h){ h.addEventListener('click', function(){ h.parentNode.classList.toggle('closed'); }); });
 window._p={map:map, sketch:sketch, yieldFor:yieldFor};
 })();
+// Perfiles del terreno (LiDAR 2023) desde ../cnig/perfil_parcela.json
+fetch('../cnig/perfil_parcela.json').then(function(r){ return r.json(); }).then(function(P){
+  var box=document.getElementById('perfilBox'); if(!box) return;
+  function svg(pts, titulo, eje){
+    var W=520,H=220,ml=44,mr=10,mt=22,mb=26; var zs=pts.map(function(p){return p.z;}).concat(pts.map(function(p){return p.zs;}));
+    var z0=Math.floor(Math.min.apply(null,zs))-1, z1=Math.ceil(Math.max.apply(null,zs))+1; var d1=pts[pts.length-1].d;
+    var X=function(d){return ml+(W-ml-mr)*d/d1;}, Y=function(z){return mt+(H-mt-mb)*(1-(z-z0)/(z1-z0));};
+    var ins=pts.filter(function(p){return p.dentro;}); var band=ins.length?'<rect x="'+X(ins[0].d)+'" y="'+mt+'" width="'+(X(ins[ins.length-1].d)-X(ins[0].d))+'" height="'+(H-mt-mb)+'" fill="rgba(111,195,201,.18)"/>':'';
+    var path=function(k){return pts.map(function(p,i){return (i?'L':'M')+X(p.d).toFixed(1)+' '+Y(p[k]).toFixed(1);}).join(' ');};
+    var grid=''; for(var z=z0;z<=z1;z+=2){ grid+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+Y(z)+'" y2="'+Y(z)+'" stroke="rgba(255,255,255,.08)"/><text x="'+(ml-4)+'" y="'+(Y(z)+3)+'" font-size="9" text-anchor="end" fill="#9aa">'+z+'</text>'; }
+    return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;background:#111;border-radius:6px"><text x="'+ml+'" y="14" font-size="11" fill="#ddd">'+titulo+'</text>'+band+grid+'<path d="'+path('zs')+'" fill="none" stroke="#888" stroke-width="1"/><path d="'+path('z')+'" fill="none" stroke="#e8b64a" stroke-width="1.6"/><text x="'+(W/2)+'" y="'+(H-6)+'" font-size="9" text-anchor="middle" fill="#9aa">'+eje+' (m) · cota en m s.n.m.</text></svg>';
+  }
+  box.innerHTML=svg(P.perfil_EW,'Perfil O → E (120 m)','← oeste · camino y talud | este →')+svg(P.perfil_NS,'Perfil S → N (120 m)','← sur · C/ Aire | norte →');
+}).catch(function(){});
 </script>
 </body>
 </html>

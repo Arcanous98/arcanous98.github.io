@@ -127,6 +127,51 @@
      "rgb(110,0,80)"
     ]
    ]
+  },
+  "sombreado_lidar2023": {
+   "file": "sombreado_lidar2023.png",
+   "bounds": [
+    [
+     42.35412667065193,
+     -0.900635019831125
+    ],
+    [
+     42.36519437045084,
+     -0.8857119243979499
+    ]
+   ],
+   "kb": 1299,
+   "titulo": "CNIG · sombreado del MDT de 0,5 m (LiDAR 2023, calculado aquí)"
+  },
+  "edificios_altura_2023": {
+   "file": "edificios_altura_2023.png",
+   "bounds": [
+    [
+     42.35412667065193,
+     -0.900635019831125
+    ],
+    [
+     42.36519437045084,
+     -0.8857119243979499
+    ]
+   ],
+   "kb": 27,
+   "titulo": "CNIG · altura de los edificios 2023 (LiDAR 0,5 m)"
+  },
+  "vegetacion_2023": {
+   "file": "vegetacion_2023.png",
+   "bounds": [
+    [
+     42.34582480063636,
+     -0.9118240734965355
+    ],
+    [
+     42.37349404901074,
+     -0.87451633355925
+    ]
+   ],
+   "kb": 3059,
+   "titulo": "CNIG · altura de la vegetación 2023 (LiDAR)"
   }
  },
  "parcela": {
@@ -144,5 +189,14 @@
   "n": 105,
   "h_max_mediana": 9.0,
   "h_p90_mediana": 8.2
+ },
+ "parcela_lidar2023": {
+  "cota_min": 834.62,
+  "cota_max": 837.26,
+  "pendiente_media_pct": 15.3
+ },
+ "resumen_edificios_2023": {
+  "n": 105,
+  "h_p90_mediana": 7.8
  }
 }

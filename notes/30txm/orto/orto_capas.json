@@ -94,5 +94,128 @@
   "hojas": [
    "PNOA_ANUAL_2015_OF_ETRS89_HU30_h25_0208-4.tif"
   ]
+ },
+ "h2018": {
+  "file": "orto/h2018.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 7306,
+  "desc": "PNOA 2018, 25 cm (vuelo a 22 cm)",
+  "hojas": [
+   "PNOA_ANUAL_2018_OF_ETRS89_HU30_h25_0208-4.tif"
+  ]
+ },
+ "h2021": {
+  "file": "orto/h2021.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 5410,
+  "desc": "PNOA 2021, 25 cm",
+  "hojas": [
+   "PNOA_ANUAL_2021_OF_ETRS89_HU30_h25_0208-4.tif"
+  ]
+ },
+ "h2024": {
+  "file": "orto/h2024.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 4130,
+  "desc": "PNOA 2024, 25 cm",
+  "hojas": [
+   "PNOA_ANUAL_2024_OF_ETRS89_HU30_h25_0208-4.tif"
+  ]
+ },
+ "irg": {
+  "file": "orto/irg.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 4122,
+  "desc": "PNOA infrarrojo (IRG), 25 cm",
+  "hojas": [
+   "PNOA_MA_IRG_OF_ETRS89_HU30_h25_0208_4.tif"
+  ]
+ },
+ "lidar23": {
+  "file": "orto/lidar23.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 7186,
+  "desc": "Ortofoto «OF-Exp» del vuelo PNOA-LiDAR 2023, 25 cm (imagen tomada durante el vuelo LiDAR)",
+  "hojas": [
+   "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_7-7.tif",
+   "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_7-8.tif",
+   "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_8-7.tif",
+   "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_8-8.tif"
+  ]
  }
 }
