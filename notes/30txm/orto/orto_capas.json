@@ -217,5 +217,29 @@
    "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_8-7.tif",
    "PNOA_LiDAR_2023_OF-Exp_ETRS89_HU30_h05_0208_8-8.tif"
   ]
+ },
+ "pnoa": {
+  "file": "orto/pnoa.jpg",
+  "bounds": [
+   [
+    42.35412667065193,
+    -0.900635019831125
+   ],
+   [
+    42.36519437045084,
+    -0.8857119243979499
+   ]
+  ],
+  "px": [
+   4910,
+   4928
+  ],
+  "res_m": 0.25,
+  "res_nativa_m": 0.25,
+  "kb": 5029,
+  "desc": "PNOA máxima actualidad, 25 cm",
+  "hojas": [
+   "PNOA_MA_OF_ETRS89_HU30_h25_0208_4.tif"
+  ]
  }
 }
